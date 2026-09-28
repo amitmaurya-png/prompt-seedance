@@ -29,25 +29,20 @@ Return JSON only:
 {"clips": [{"id": "short-id", "act": "ACT ONE", "scene": "the slugline", "source_shots": [1, 2], "beats": [{"action": "one visible action", "dialogue": [{"character": "NAME", "line": "one spoken line"}]}]}]}
 """
 
-COMPONENT_SYSTEM = """You write a detailed Seedance 2.0 basic prompt for one new clip.
+COMPONENT_SYSTEM = """You write a Seedance 2.0 basic prompt for one new clip, following the guide's omni-reference example.
 
-Use only the basic reference-based formula. Do not add advanced formula fields
-such as lighting, color palette, visual style, image quality, or a separate constraints paragraph.
+Use the basic formula, not the advanced formula. Write image_reference as one concise sentence in this pattern:
+"Reference <the clip's subjects> in Image 1 to generate <the new scene and action>."
+Include the place, the essential actions in story order, one suitable camera movement, and the supplied dialogue. Keep the sentence direct; do not turn it into a numbered Shot 1 / Shot 2 storyboard or add separate lighting, color, visual style, image quality, or constraints fields.
 
-Write the image_reference as a concise ordered storyboard inside the reference sentence:
-1. Identify the characters and props, and establish the place and time from the clip.
-2. Describe each supplied beat in order as Shot 1, Shot 2, and so on. For each shot, include one camera framing or movement, the specific visible action and expression, and relevant spatial relationships.
-3. Include every supplied dialogue line exactly once, with its supplied speaker, in curly braces. Do not paraphrase, omit, reorder, or invent dialogue. Do not add events or character details absent from the clip.
-4. Keep action physically clear and naturally continuous. Use only one camera movement per shot and do not add timestamps.
-
-Nim is a small fox, not a dog. If Jesus appears, his face is not shown.
+Preserve every dialogue line supplied in the clip exactly, use curly braces, and identify the speaker when needed to make turns clear. Do not invent or paraphrase dialogue or add events. Describe only details supported by the clip. Nim is a small fox, not a dog. If Jesus appears, his face is not shown.
 
 Return JSON only:
-{"image_reference": "Reference <who> in Image 1 to generate <place and ordered Shot 1 / Shot 2 storyboard, with one camera move per shot and all supplied spoken lines>.", "video_reference": "", "audio_reference": "Reference the timbre in Audio 1 to generate <whose voice>."}
+{"image_reference": "Reference <who> in Image 1 to generate <the action, place, one camera move, and spoken lines>.", "video_reference": "", "audio_reference": "Reference the timbre in Audio 1 to generate <whose voice>."}
 
-image_reference is required. Keep the reference-based basic prompt structure.
-Leave video_reference empty when this clip is not copying a move from an existing video.
-Leave audio_reference empty when no voice timbre is needed.
+image_reference is required.
+Leave video_reference empty unless the clip explicitly needs to copy an action, camera movement, style, or sound effect from a supplied video.
+Leave audio_reference empty unless a supplied audio reference is needed for voice timbre.
 """
 
 FIELDS = ("image_reference",)
