@@ -69,6 +69,11 @@ def ask(client, model: str, system: str, user: str, max_tokens: int) -> tuple[st
                 if not response.text:
                     raise RuntimeError("Gemini returned no text.")
                 return candidate, parse_json(response.text)
+            except json.JSONDecodeError as error:
+                last_error = error
+                wait = 2 ** attempt
+                print(f"Invalid JSON from {candidate}. Retrying in {wait}s.", file=sys.stderr)
+                time.sleep(wait)
             except Exception as error:
                 if not busy(error):
                     raise
@@ -93,18 +98,27 @@ def render_prompt(components: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
-def group_act(client, model: str, act: dict) -> list[dict]:
+def group_payload(client, model: str, label: str, payload: dict, max_tokens: int = 16384) -> list[dict]:
     _, data = ask(
         client,
         model,
         GROUP_SYSTEM,
-        "SCREENPLAY ACT:\n\n" + json.dumps(act, ensure_ascii=False),
-        16384,
+        label + "\n\n" + json.dumps(payload, ensure_ascii=False),
+        max_tokens,
     )
     clips = data.get("clips")
     if not isinstance(clips, list) or not clips:
-        raise RuntimeError(f"Gemini returned no clips for {act.get('act')}")
+        raise RuntimeError(f"Gemini returned no clips for {label}")
     return clips
+
+
+def group_act(client, model: str, act: dict) -> list[dict]:
+    return group_payload(client, model, "SCREENPLAY ACT:", act)
+
+
+def group_scene(client, model: str, act_name: str, scene: dict) -> list[dict]:
+    payload = {"act": act_name, "scenes": [scene]}
+    return group_payload(client, model, f"SCREENPLAY SCENE ({act_name}):", payload, 8192)
 
 
 def fill_components(client, model: str, clip: dict) -> dict:
@@ -146,13 +160,29 @@ def main() -> None:
     prompts = []
     used_model = args.model
     for act in breakdown.get("acts") or []:
-        print(f"Grouping {act.get('act')}", file=sys.stderr)
-        for clip in group_act(client, args.model, act):
+        act_name = act.get("act") or "ACT"
+        scenes = act.get("scenes") or []
+        if args.max_clips:
+            scene_iter = scenes
+        else:
+            scene_iter = [None]
+
+        for scene in scene_iter:
+            if scene is None:
+                print(f"Grouping {act_name}", file=sys.stderr)
+                clips = group_act(client, args.model, act)
+            else:
+                print(f"Grouping {act_name} — {scene.get('scene')}", file=sys.stderr)
+                clips = group_scene(client, args.model, act_name, scene)
+
+            for clip in clips:
+                if args.max_clips and len(prompts) >= args.max_clips:
+                    break
+                print(f"Filling {clip.get('id') or clip.get('scene')}", file=sys.stderr)
+                filled = fill_components(client, args.model, clip)
+                prompts.append(filled)
             if args.max_clips and len(prompts) >= args.max_clips:
                 break
-            print(f"Filling {clip.get('id') or clip.get('scene')}", file=sys.stderr)
-            filled = fill_components(client, args.model, clip)
-            prompts.append(filled)
         if args.max_clips and len(prompts) >= args.max_clips:
             break
 

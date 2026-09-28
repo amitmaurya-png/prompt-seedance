@@ -1,0 +1,96 @@
+{
+  "formula": "basic",
+  "guide": "https://docs.byteplus.com/en/docs/ModelArk/2222480",
+  "notes": "Detailed basic prompts: one or more reference sentences only (image, optional video, optional audio). Upload assets in slot order. Filenames on disk do not appear in the text.",
+  "clips": [
+    {
+      "id": "act1-village-run",
+      "act": "ACT ONE",
+      "scene": "EXT. MIRI’S VILLAGE — MORNING",
+      "source_shots": [1],
+      "duration_hint": "4–8s",
+      "asset_preparation": {
+        "Image 1": "Miri and Nim the small fox together — character identity and costumes for the lane run",
+        "Audio 1": "Nim — voice timbre (optional)",
+        "Audio 2": "Miri — voice timbre (optional)"
+      },
+      "image_reference": "Reference Miri and Nim the small fox in Image 1 to generate Miri running through a dusty village lane in morning light, clutching a small cloth bundle to her chest while Nim trots at her heels and questions her, with a tracking camera move at child height following them forward, keeping Miri and Nim’s features consistent with Image 1, and the spoken lines {Is it bread?}, {No.}, {Is it meat?}, {No.}, and {Is it bread pretending not to be bread?}.",
+      "video_reference": "",
+      "audio_reference": "Reference the timbre in Audio 1 to generate Nim the small fox’s voice. Reference the timbre in Audio 2 to generate Miri’s voice.",
+      "prompt": "Reference Miri and Nim the small fox in Image 1 to generate Miri running through a dusty village lane in morning light, clutching a small cloth bundle to her chest while Nim trots at her heels and questions her, with a tracking camera move at child height following them forward, keeping Miri and Nim’s features consistent with Image 1, and the spoken lines {Is it bread?}, {No.}, {Is it meat?}, {No.}, and {Is it bread pretending not to be bread?}.\nReference the timbre in Audio 1 to generate Nim the small fox’s voice. Reference the timbre in Audio 2 to generate Miri’s voice.\n"
+    },
+    {
+      "id": "act1-honey-cakes",
+      "act": "ACT ONE",
+      "scene": "EXT. MIRI’S VILLAGE — MORNING",
+      "source_shots": [2],
+      "duration_hint": "6–10s",
+      "asset_preparation": {
+        "Image 1": "Miri — listener, bundle in hands",
+        "Image 2": "Nim the small fox — supporting",
+        "Audio 1": "Nim — voice timbre",
+        "Audio 2": "Miri — voice timbre"
+      },
+      "image_reference": "Reference Miri in Image 1 and Nim the small fox in Image 2 to generate Miri stopping beside a low village wall, opening the cloth bundle to reveal three small honey-date cakes while Nim reacts beside her, in the same morning lane, with a slow push-in on the bundle and their faces, keeping each character’s appearance consistent with their reference image, and the spoken lines {It is better than bread.}, {Ima made them for after chores.}, {How many chores?}, {One.}, {And how many cakes?}, {Three.}, and {A perfect arrangement. Let no one disturb it.}.",
+      "video_reference": "",
+      "audio_reference": "Reference the timbre in Audio 1 to generate Nim the small fox’s voice. Reference the timbre in Audio 2 to generate Miri’s voice.",
+      "prompt": "Reference Miri in Image 1 and Nim the small fox in Image 2 to generate Miri stopping beside a low village wall, opening the cloth bundle to reveal three small honey-date cakes while Nim reacts beside her, in the same morning lane, with a slow push-in on the bundle and their faces, keeping each character’s appearance consistent with their reference image, and the spoken lines {It is better than bread.}, {Ima made them for after chores.}, {How many chores?}, {One.}, {And how many cakes?}, {Three.}, and {A perfect arrangement. Let no one disturb it.}.\nReference the timbre in Audio 1 to generate Nim the small fox’s voice. Reference the timbre in Audio 2 to generate Miri’s voice.\n"
+    },
+    {
+      "id": "act1-ima-errand",
+      "act": "ACT ONE",
+      "scene": "EXT. MIRI’S VILLAGE — MORNING",
+      "source_shots": [3, 4, 5],
+      "duration_hint": "8–12s",
+      "asset_preparation": {
+        "Image 1": "Miri — primary",
+        "Image 2": "Ima — supporting",
+        "Image 3": "Nim the small fox — supporting",
+        "Audio 1": "Ima — voice timbre",
+        "Audio 2": "Miri — voice timbre",
+        "Audio 3": "Nim — voice timbre"
+      },
+      "image_reference": "Reference Miri in Image 1 as the primary subject, Ima in Image 2 and Nim the small fox in Image 3 as supporting characters, to generate Ima stepping from a doorway with folded linen while Miri holds her cake bundle and Nim watches, in the village dooryard, with a slow pan across the three, keeping each person’s features consistent with their reference image, and the spoken lines {Miri, take these to Saba Elior, please. His old sleeves are more patch than sleeve.}, {Again?}, {Again. And if you pass Tav on the way, give him one of the honey cakes.}, {Perhaps there are two Tavs. We should confirm before making decisions.}, {But if I give one away, I will only have two.}, and {That is usually how giving works.}.",
+      "video_reference": "",
+      "audio_reference": "Reference the timbre in Audio 1 to generate Ima’s voice. Reference the timbre in Audio 2 to generate Miri’s voice. Reference the timbre in Audio 3 to generate Nim the small fox’s voice.",
+      "prompt": "Reference Miri in Image 1 as the primary subject, Ima in Image 2 and Nim the small fox in Image 3 as supporting characters, to generate Ima stepping from a doorway with folded linen while Miri holds her cake bundle and Nim watches, in the village dooryard, with a slow pan across the three, keeping each person’s features consistent with their reference image, and the spoken lines {Miri, take these to Saba Elior, please. His old sleeves are more patch than sleeve.}, {Again?}, {Again. And if you pass Tav on the way, give him one of the honey cakes.}, {Perhaps there are two Tavs. We should confirm before making decisions.}, {But if I give one away, I will only have two.}, and {That is usually how giving works.}.\nReference the timbre in Audio 1 to generate Ima’s voice. Reference the timbre in Audio 2 to generate Miri’s voice. Reference the timbre in Audio 3 to generate Nim the small fox’s voice.\n"
+    },
+    {
+      "id": "act1-courtyard-one-listener",
+      "act": "ACT ONE",
+      "scene": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING",
+      "source_shots": [3, 4],
+      "duration_hint": "6–11s",
+      "asset_preparation": {
+        "Image 1": "Miri — the listener, primary subject",
+        "Image 2": "Saba Elior — the storyteller, supporting",
+        "Image 3": "Nim the small fox — supporting",
+        "Image 4": "Last frame of the previous shot — fixed starting composition, environment, and character positions",
+        "Audio 1": "Saba — voice timbre",
+        "Audio 2": "Miri — voice timbre"
+      },
+      "image_reference": "Reference the listener in Image 1 as the primary subject, the storyteller in Image 2 and the fox in Image 3 as supporting characters, and Image 4 as the fixed starting composition and courtyard environment under the fig tree, to generate a locked-off child-height two-shot where Miri stands in the open earth with the linen basket in both hands, Saba seated beneath the fig turns from the lane gap back toward her and speaks, and Nim stays low by the fig roots with ears toward the voices, in warm late-morning light, opening exactly on Image 4 and keeping character appearance from Images 1 through 3 and layout from Image 4 consistent throughout, with a single camera hold and no environment change, and the spoken lines {Ah. One listener left. Either my story improved, or your feet forgot to follow the others.} and {What happened to the sparrow?}.",
+      "video_reference": "",
+      "audio_reference": "Reference the timbre in Audio 1 to generate Saba’s voice. Reference the timbre in Audio 2 to generate Miri’s voice.",
+      "prompt": "Reference the listener in Image 1 as the primary subject, the storyteller in Image 2 and the fox in Image 3 as supporting characters, and Image 4 as the fixed starting composition and courtyard environment under the fig tree, to generate a locked-off child-height two-shot where Miri stands in the open earth with the linen basket in both hands, Saba seated beneath the fig turns from the lane gap back toward her and speaks, and Nim stays low by the fig roots with ears toward the voices, in warm late-morning light, opening exactly on Image 4 and keeping character appearance from Images 1 through 3 and layout from Image 4 consistent throughout, with a single camera hold and no environment change, and the spoken lines {Ah. One listener left. Either my story improved, or your feet forgot to follow the others.} and {What happened to the sparrow?}.\nReference the timbre in Audio 1 to generate Saba’s voice. Reference the timbre in Audio 2 to generate Miri’s voice.\n"
+    },
+    {
+      "id": "act1-sparrow-story-beat",
+      "act": "ACT ONE",
+      "scene": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING",
+      "source_shots": [5, 6],
+      "duration_hint": "8–14s",
+      "asset_preparation": {
+        "Image 1": "Miri — seated or settling near Saba",
+        "Image 2": "Saba Elior — storyteller",
+        "Image 3": "Nim the small fox — at fig roots",
+        "Audio 1": "Saba — voice timbre",
+        "Audio 2": "Miri — voice timbre"
+      },
+      "image_reference": "Reference Miri in Image 1, Saba Elior in Image 2, and Nim the small fox in Image 3 to generate Saba patting the ground beside him as Miri sits and Nim noses around the fig tree roots in Saba’s courtyard, with a gentle slow pan from Saba’s face to Miri and the fox at ground level, keeping all three characters consistent with their reference images, and the spoken lines {The right question.}, {The sparrow flew where the camel could not see and found water hidden under stones.}, {Because it was small?}, and {Because it was willing to look where large eyes had stopped looking.}.",
+      "video_reference": "",
+      "audio_reference": "Reference the timbre in Audio 1 to generate Saba’s voice. Reference the timbre in Audio 2 to generate Miri’s voice.",
+      "prompt": "Reference Miri in Image 1, Saba Elior in Image 2, and Nim the small fox in Image 3 to generate Saba patting the ground beside him as Miri sits and Nim noses around the fig tree roots in Saba’s courtyard, with a gentle slow pan from Saba’s face to Miri and the fox at ground level, keeping all three characters consistent with their reference images, and the spoken lines {The right question.}, {The sparrow flew where the camel could not see and found water hidden under stones.}, {Because it was small?}, and {Because it was willing to look where large eyes had stopped looking.}.\nReference the timbre in Audio 1 to generate Saba’s voice. Reference the timbre in Audio 2 to generate Miri’s voice.\n"
+    }
+  ]
+}
