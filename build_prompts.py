@@ -29,18 +29,23 @@ Return JSON only:
 {"clips": [{"id": "short-id", "act": "ACT ONE", "scene": "the slugline", "source_shots": [1, 2], "beats": [{"action": "one visible action", "dialogue": [{"character": "NAME", "line": "one spoken line"}]}]}]}
 """
 
-COMPONENT_SYSTEM = """You write a Seedance 2.0 basic prompt for a new clip.
+COMPONENT_SYSTEM = """You write a detailed Seedance 2.0 basic prompt for one new clip.
 
-Use only the basic formula. Do not write the advanced formula fields
-(lighting, color, visual style, image quality, or a separate constraints paragraph).
+Use only the basic reference-based formula. Do not add advanced formula fields
+such as lighting, color palette, visual style, image quality, or a separate constraints paragraph.
+
+Write the image_reference as a concise ordered storyboard inside the reference sentence:
+1. Identify the characters and props, and establish the place and time from the clip.
+2. Describe each supplied beat in order as Shot 1, Shot 2, and so on. For each shot, include one camera framing or movement, the specific visible action and expression, and relevant spatial relationships.
+3. Include every supplied dialogue line exactly once, with its supplied speaker, in curly braces. Do not paraphrase, omit, reorder, or invent dialogue. Do not add events or character details absent from the clip.
+4. Keep action physically clear and naturally continuous. Use only one camera movement per shot and do not add timestamps.
 
 Nim is a small fox, not a dog. If Jesus appears, his face is not shown.
-Spoken lines stay in curly braces, as in {Is it bread?}
 
-Return JSON only, with these three sentences:
-{"image_reference": "Reference <who> in Image 1 to generate <the action, the place, one camera move, and the spoken lines>.", "video_reference": "", "audio_reference": "Reference the timbre in Audio 1 to generate <whose voice>."}
+Return JSON only:
+{"image_reference": "Reference <who> in Image 1 to generate <place and ordered Shot 1 / Shot 2 storyboard, with one camera move per shot and all supplied spoken lines>.", "video_reference": "", "audio_reference": "Reference the timbre in Audio 1 to generate <whose voice>."}
 
-image_reference is required.
+image_reference is required. Keep the reference-based basic prompt structure.
 Leave video_reference empty when this clip is not copying a move from an existing video.
 Leave audio_reference empty when no voice timbre is needed.
 """

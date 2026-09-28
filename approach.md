@@ -41,7 +41,7 @@ A change of place, a chase, or the hillside miracle is rendered as separate clip
 `build_prompts.py` reads `breakdown.json` and uses GPT-6 Astra, falling back to GPT-6 Sol if it is busy. Prompt generation uses OpenAI only; select another GPT model with `--model` or set `OPENAI_MODEL`.
 
 1. GPT groups the script shots into clips. Shots stay together when the place, the people, and the feeling stay the same. A new clip starts when one of those changes. A clip holds about two or three shots, short enough for 4 to 15 seconds. A script shot with too many spoken lines is split.
-2. GPT writes the basic formula: an image reference sentence, and an audio reference sentence when a voice is needed. The script joins those sentences into one text prompt.
+2. GPT writes the basic reference formula with a detailed, ordered mini-storyboard: concrete action and expression, place, one camera move per shot, and every supplied dialogue line verbatim. It does not add the advanced lighting, color, style, quality, or constraints fields. An audio reference sentence is included when a voice is needed.
 
 The result is `prompts.json`. Each clip stores the basic-formula sentences, the model that wrote them, and a finished `prompt` string. The file records both the requested model and the models actually used if the generator falls back. Re-run `build_prompts.py` to replace prompts that were written with the advanced formula.
 
