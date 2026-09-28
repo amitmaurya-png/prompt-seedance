@@ -7,7 +7,7 @@ The goal is a set of text prompts that can be pasted into Seedance 2.0, one shor
 
 ## Step 1. Read the screenplay as acts, scenes, and shots
 
-`extract_breakdown.py` sends the PDF text to Google Gemini (`gemini-3.1-pro-preview`, falling back to `gemini-3.8-flash`, `gemini-3.7-flash`, and `gemini-3.6-flash` if it is busy). Set `GEMINI_MODEL` or pass `--model` to choose a different model.
+`extract_breakdown.py` sends the PDF text to OpenAI GPT-6 Astra, falling back to GPT-6 Sol if it is busy. Set `OPENAI_MODEL` or pass `--model` to choose a different model.
 The model returns JSON, saved as `breakdown.json`.
 
 - An **act** is a heading such as `ACT ONE`. Text before the first act is the cold open.
@@ -38,10 +38,10 @@ A change of place, a chase, or the hillside miracle is rendered as separate clip
 
 ## Step 3. Turn script shots into Seedance clips
 
-`build_prompts.py` reads `breakdown.json` and uses Claude Opus 5.5, falling back to Claude Sonnet 5 if it is busy. Pass `--provider gemini` to use Gemini instead. The model can be selected with `--model`; provider-specific defaults can be set with `CLAUDE_MODEL` or `GEMINI_MODEL`.
+`build_prompts.py` reads `breakdown.json` and uses GPT-6 Astra, falling back to GPT-6 Sol if it is busy. Prompt generation uses OpenAI only; select another GPT model with `--model` or set `OPENAI_MODEL`.
 
-1. Gemini groups the script shots into clips. Shots stay together when the place, the people, and the feeling stay the same. A new clip starts when one of those changes. A clip holds about two or three shots, short enough for 4 to 15 seconds. A script shot with too many spoken lines is split.
-2. Gemini writes the basic formula: an image reference sentence, and an audio reference sentence when a voice is needed. The script joins those sentences into one text prompt.
+1. GPT groups the script shots into clips. Shots stay together when the place, the people, and the feeling stay the same. A new clip starts when one of those changes. A clip holds about two or three shots, short enough for 4 to 15 seconds. A script shot with too many spoken lines is split.
+2. GPT writes the basic formula: an image reference sentence, and an audio reference sentence when a voice is needed. The script joins those sentences into one text prompt.
 
 The result is `prompts.json`. Each clip stores the basic-formula sentences, the model that wrote them, and a finished `prompt` string. The file records both the requested model and the models actually used if the generator falls back. Re-run `build_prompts.py` to replace prompts that were written with the advanced formula.
 
@@ -61,4 +61,4 @@ Generate one village clip first. If the look holds, reuse the same style line fo
 | `breakdown.json` | Acts, scenes, and shots |
 | `build_prompts.py` | `breakdown.json` to `prompts.json` |
 | `prompts.json` | Formula fields and the text prompt for each clip |
-| `.env` | `ANTHROPIC_API_KEY` for Claude or `GEMINI_API_KEY` for Gemini, not committed |
+| `.env` | `OPENAI_API_KEY` for breakdown extraction and prompt generation, not committed |

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Extract acts, scenes, and shots from a screenplay PDF with Google Gemini."""
+"""Extract acts, scenes, and shots from a screenplay PDF with OpenAI GPT."""
 
 import argparse
 import json
@@ -10,8 +10,8 @@ from pathlib import Path
 
 from pypdf import PdfReader
 
-DEFAULT_MODEL = "gemini-3.1-pro-preview"
-FALLBACK_MODELS = ("gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.6-flash")
+DEFAULT_MODEL = "gpt-6-astra"
+FALLBACK_MODELS = ("gpt-6-sol",)
 ENV_PATH = Path(__file__).resolve().parent / ".env"
 
 SYSTEM = """You extract a screenplay into acts, scenes, and shots.
@@ -60,16 +60,14 @@ def parse_json(text: str) -> dict:
 
 
 def generate(client, model: str, script: str, max_tokens: int):
-    from google.genai import types
-
-    return client.models.generate_content(
+    return client.responses.create(
         model=model,
-        contents=f"SCREENPLAY:\n\n{script}",
-        config=types.GenerateContentConfig(
-            system_instruction=SYSTEM,
-            response_mime_type="application/json",
-            max_output_tokens=max_tokens,
-        ),
+        input=[
+            {"role": "system", "content": SYSTEM},
+            {"role": "user", "content": f"SCREENPLAY:\n\n{script}"},
+        ],
+        text={"format": {"type": "json_object"}},
+        max_output_tokens=max_tokens,
     )
 
 
@@ -86,9 +84,9 @@ def ask_model(client, model: str, script: str, max_tokens: int) -> tuple[str, di
             try:
                 print(f"Calling {candidate}", file=sys.stderr)
                 response = generate(client, candidate, script, max_tokens)
-                if not response.text:
-                    raise RuntimeError("Gemini returned no text. Check the API key and model name.")
-                return candidate, parse_json(response.text)
+                if not response.output_text:
+                    raise RuntimeError("OpenAI returned no text. Check the API key and model name.")
+                return candidate, parse_json(response.output_text)
             except Exception as error:
                 if not busy(error):
                     raise
@@ -97,28 +95,28 @@ def ask_model(client, model: str, script: str, max_tokens: int) -> tuple[str, di
                 print(f"{candidate} is busy. Retrying in {wait}s.", file=sys.stderr)
                 time.sleep(wait)
         print(f"{candidate} stayed unavailable. Trying another model.", file=sys.stderr)
-    raise RuntimeError("Gemini is busy on every model. Wait a minute and run the command again.") from last_error
+    raise RuntimeError("All OpenAI models are busy. Wait a minute and run the command again.") from last_error
 
 
 def main() -> None:
     load_dotenv(ENV_PATH)
-    parser = argparse.ArgumentParser(description="Extract acts, scenes, and shots with Google Gemini.")
+    parser = argparse.ArgumentParser(description="Extract acts, scenes, and shots with OpenAI GPT.")
     parser.add_argument("pdf", type=Path)
     parser.add_argument("-o", "--output", type=Path, default=Path("breakdown.json"))
-    parser.add_argument("--model", default=os.environ.get("GEMINI_MODEL", DEFAULT_MODEL))
+    parser.add_argument("--model", default=os.environ.get("OPENAI_MODEL", DEFAULT_MODEL))
     parser.add_argument("--max-tokens", type=int, default=65536)
     args = parser.parse_args()
 
     if not args.pdf.is_file():
         raise SystemExit(f"PDF not found: {args.pdf}")
-    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
+    api_key = os.environ.get("OPENAI_API_KEY", "").strip()
     if not api_key:
-        raise SystemExit(f"Put GEMINI_API_KEY in {ENV_PATH}")
+        raise SystemExit(f"Put OPENAI_API_KEY in {ENV_PATH}")
 
-    from google import genai
+    from openai import OpenAI
 
     script = extract_text(args.pdf)
-    used_model, breakdown = ask_model(genai.Client(api_key=api_key), args.model, script, args.max_tokens)
+    used_model, breakdown = ask_model(OpenAI(api_key=api_key), args.model, script, args.max_tokens)
     breakdown = {"source": str(args.pdf), "model": used_model, "acts": breakdown.get("acts", [])}
     args.output.write_text(json.dumps(breakdown, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     scenes = sum(len(act.get("scenes", [])) for act in breakdown["acts"])

@@ -46,46 +46,25 @@ Leave audio_reference empty when no voice timbre is needed.
 """
 
 FIELDS = ("image_reference",)
-CLAUDE_DEFAULT_MODEL = "claude-opus-5-5"
-CLAUDE_FALLBACK_MODELS = ("claude-sonnet-5",)
-
-
-def ask(client, provider: str, model: str, system: str, user: str, max_tokens: int) -> tuple[str, dict]:
-    models_for_provider = {
-        "anthropic": CLAUDE_FALLBACK_MODELS,
-        "gemini": FALLBACK_MODELS,
-    }
-    models = [model] + [item for item in models_for_provider[provider] if item != model]
+def ask(client, model: str, system: str, user: str, max_tokens: int) -> tuple[str, dict]:
+    models = [model] + [item for item in FALLBACK_MODELS if item != model]
     last_error = None
     for candidate in models:
         for attempt in range(3):
             try:
                 print(f"Calling {candidate}", file=sys.stderr)
-                if provider == "anthropic":
-                    response = client.messages.create(
-                        model=candidate,
-                        max_tokens=max_tokens,
-                        system=system,
-                        messages=[{"role": "user", "content": user}],
-                    )
-                    text = "\n".join(
-                        block.text for block in response.content if getattr(block, "type", None) == "text"
-                    )
-                else:
-                    from google.genai import types
-
-                    response = client.models.generate_content(
-                        model=candidate,
-                        contents=user,
-                        config=types.GenerateContentConfig(
-                            system_instruction=system,
-                            response_mime_type="application/json",
-                            max_output_tokens=max_tokens,
-                        ),
-                    )
-                    text = response.text or ""
+                response = client.responses.create(
+                    model=candidate,
+                    input=[
+                        {"role": "system", "content": system},
+                        {"role": "user", "content": user},
+                    ],
+                    max_output_tokens=max_tokens,
+                    text={"format": {"type": "json_object"}},
+                )
+                text = response.output_text or ""
                 if not text.strip():
-                    raise RuntimeError(f"{provider} returned no text.")
+                    raise RuntimeError("OpenAI returned no text.")
                 return candidate, parse_json(text)
             except json.JSONDecodeError as error:
                 last_error = error
@@ -100,13 +79,13 @@ def ask(client, provider: str, model: str, system: str, user: str, max_tokens: i
                 print(f"{candidate} is busy. Retrying in {wait}s.", file=sys.stderr)
                 time.sleep(wait)
         print(f"{candidate} stayed unavailable. Trying another model.", file=sys.stderr)
-    raise RuntimeError(f"All {provider} models are busy. Wait a minute and run the command again.") from last_error
+    raise RuntimeError("All OpenAI models are busy. Wait a minute and run the command again.") from last_error
 
 
 def render_prompt(components: dict) -> str:
     missing = [field for field in FIELDS if not str(components.get(field) or "").strip()]
     if missing:
-        raise RuntimeError(f"Gemini left these components empty: {', '.join(missing)}")
+        raise RuntimeError(f"The model left these components empty: {', '.join(missing)}")
 
     lines = [components["image_reference"].strip()]
     for field in ("video_reference", "audio_reference"):
@@ -116,12 +95,9 @@ def render_prompt(components: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
-def group_payload(
-    client, provider: str, model: str, label: str, payload: dict, max_tokens: int = 16384
-) -> tuple[str, list[dict]]:
+def group_payload(client, model: str, label: str, payload: dict, max_tokens: int = 16384) -> tuple[str, list[dict]]:
     used_model, data = ask(
         client,
-        provider,
         model,
         GROUP_SYSTEM,
         label + "\n\n" + json.dumps(payload, ensure_ascii=False),
@@ -133,19 +109,18 @@ def group_payload(
     return used_model, clips
 
 
-def group_act(client, provider: str, model: str, act: dict) -> tuple[str, list[dict]]:
-    return group_payload(client, provider, model, "SCREENPLAY ACT:", act)
+def group_act(client, model: str, act: dict) -> tuple[str, list[dict]]:
+    return group_payload(client, model, "SCREENPLAY ACT:", act)
 
 
-def group_scene(client, provider: str, model: str, act_name: str, scene: dict) -> tuple[str, list[dict]]:
+def group_scene(client, model: str, act_name: str, scene: dict) -> tuple[str, list[dict]]:
     payload = {"act": act_name, "scenes": [scene]}
-    return group_payload(client, provider, model, f"SCREENPLAY SCENE ({act_name}):", payload, 8192)
+    return group_payload(client, model, f"SCREENPLAY SCENE ({act_name}):", payload, 8192)
 
 
-def fill_components(client, provider: str, model: str, clip: dict) -> tuple[str, dict]:
+def fill_components(client, model: str, clip: dict) -> tuple[str, dict]:
     used_model, data = ask(
         client,
-        provider,
         model,
         COMPONENT_SYSTEM,
         "CLIP:\n\n" + json.dumps(clip, ensure_ascii=False),
@@ -163,33 +138,21 @@ def fill_components(client, provider: str, model: str, clip: dict) -> tuple[str,
 
 def main() -> None:
     load_dotenv(ENV_PATH)
-    parser = argparse.ArgumentParser(description="Build Seedance prompts with Claude or Gemini.")
+    parser = argparse.ArgumentParser(description="Build Seedance prompts with OpenAI GPT.")
     parser.add_argument("breakdown", type=Path, nargs="?", default=Path("breakdown.json"))
     parser.add_argument("-o", "--output", type=Path, default=Path("prompts.json"))
-    parser.add_argument("--provider", choices=("anthropic", "gemini"), default=os.environ.get("PROMPT_PROVIDER", "anthropic"))
-    parser.add_argument("--model")
+    parser.add_argument("--model", default=os.environ.get("OPENAI_MODEL", DEFAULT_MODEL))
     parser.add_argument("--max-clips", type=int, default=0, help="Stop after this many clips. 0 means all.")
     args = parser.parse_args()
-    model_env = "CLAUDE_MODEL" if args.provider == "anthropic" else "GEMINI_MODEL"
-    default_model = CLAUDE_DEFAULT_MODEL if args.provider == "anthropic" else DEFAULT_MODEL
-    model = args.model or os.environ.get(model_env, default_model)
 
     if not args.breakdown.is_file():
         raise SystemExit(f"Breakdown not found: {args.breakdown}")
-    if args.provider == "anthropic":
-        api_key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
-        if not api_key:
-            raise SystemExit(f"Put ANTHROPIC_API_KEY in {ENV_PATH}")
-        from anthropic import Anthropic
+    api_key = os.environ.get("OPENAI_API_KEY", "").strip()
+    if not api_key:
+        raise SystemExit(f"Put OPENAI_API_KEY in {ENV_PATH}")
+    from openai import OpenAI
 
-        client = Anthropic(api_key=api_key)
-    else:
-        api_key = os.environ.get("GEMINI_API_KEY", "").strip()
-        if not api_key:
-            raise SystemExit(f"Put GEMINI_API_KEY in {ENV_PATH}")
-        from google import genai
-
-        client = genai.Client(api_key=api_key)
+    client = OpenAI(api_key=api_key)
 
     breakdown = json.loads(args.breakdown.read_text(encoding="utf-8"))
     prompts = []
@@ -205,17 +168,17 @@ def main() -> None:
         for scene in scene_iter:
             if scene is None:
                 print(f"Grouping {act_name}", file=sys.stderr)
-                grouping_model, clips = group_act(client, args.provider, model, act)
+                grouping_model, clips = group_act(client, args.model, act)
             else:
                 print(f"Grouping {act_name} — {scene.get('scene')}", file=sys.stderr)
-                grouping_model, clips = group_scene(client, args.provider, model, act_name, scene)
+                grouping_model, clips = group_scene(client, args.model, act_name, scene)
             models_used.add(grouping_model)
 
             for clip in clips:
                 if args.max_clips and len(prompts) >= args.max_clips:
                     break
                 print(f"Filling {clip.get('id') or clip.get('scene')}", file=sys.stderr)
-                _, filled = fill_components(client, args.provider, model, clip)
+                _, filled = fill_components(client, args.model, clip)
                 models_used.add(filled["model"])
                 prompts.append(filled)
             if args.max_clips and len(prompts) >= args.max_clips:
@@ -225,9 +188,9 @@ def main() -> None:
 
     result = {
         "source": str(args.breakdown),
-        "provider": args.provider,
-        "requested_model": model,
-        "model": next(iter(models_used)) if len(models_used) == 1 else "mixed" if models_used else model,
+        "provider": "openai",
+        "requested_model": args.model,
+        "model": next(iter(models_used)) if len(models_used) == 1 else "mixed" if models_used else args.model,
         "models_used": sorted(models_used),
         "clips": prompts,
     }
