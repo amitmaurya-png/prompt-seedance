@@ -11,7 +11,6 @@ from pathlib import Path
 from extract_breakdown import (
     DEFAULT_MODEL,
     ENV_PATH,
-    FALLBACK_MODELS,
     busy,
     load_dotenv,
     parse_json,
@@ -46,40 +45,37 @@ Leave audio_reference empty unless a supplied audio reference is needed for voic
 """
 
 FIELDS = ("image_reference",)
-def ask(client, model: str, system: str, user: str, max_tokens: int) -> tuple[str, dict]:
-    models = [model] + [item for item in FALLBACK_MODELS if item != model]
+def ask(client, system: str, user: str, max_tokens: int) -> tuple[str, dict]:
     last_error = None
-    for candidate in models:
-        for attempt in range(3):
-            try:
-                print(f"Calling {candidate}", file=sys.stderr)
-                response = client.responses.create(
-                    model=candidate,
-                    input=[
-                        {"role": "system", "content": system},
-                        {"role": "user", "content": user},
-                    ],
-                    max_output_tokens=max_tokens,
-                    text={"format": {"type": "json_object"}},
-                )
-                text = response.output_text or ""
-                if not text.strip():
-                    raise RuntimeError("OpenAI returned no text.")
-                return candidate, parse_json(text)
-            except json.JSONDecodeError as error:
-                last_error = error
-                wait = 2 ** attempt
-                print(f"Invalid JSON from {candidate}. Retrying in {wait}s.", file=sys.stderr)
-                time.sleep(wait)
-            except Exception as error:
-                if not busy(error):
-                    raise
-                last_error = error
-                wait = 2 ** attempt
-                print(f"{candidate} is busy. Retrying in {wait}s.", file=sys.stderr)
-                time.sleep(wait)
-        print(f"{candidate} stayed unavailable. Trying another model.", file=sys.stderr)
-    raise RuntimeError("All OpenAI models are busy. Wait a minute and run the command again.") from last_error
+    for attempt in range(3):
+        try:
+            print(f"Calling {DEFAULT_MODEL}", file=sys.stderr)
+            response = client.responses.create(
+                model=DEFAULT_MODEL,
+                input=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user},
+                ],
+                max_output_tokens=max_tokens,
+                text={"format": {"type": "json_object"}},
+            )
+            text = response.output_text or ""
+            if not text.strip():
+                raise RuntimeError("OpenAI returned no text.")
+            return DEFAULT_MODEL, parse_json(text)
+        except json.JSONDecodeError as error:
+            last_error = error
+            wait = 2 ** attempt
+            print(f"Invalid JSON from {DEFAULT_MODEL}. Retrying in {wait}s.", file=sys.stderr)
+            time.sleep(wait)
+        except Exception as error:
+            if not busy(error):
+                raise
+            last_error = error
+            wait = 2 ** attempt
+            print(f"{DEFAULT_MODEL} is busy. Retrying in {wait}s.", file=sys.stderr)
+            time.sleep(wait)
+    raise RuntimeError(f"{DEFAULT_MODEL} is busy. Wait a minute and run the command again.") from last_error
 
 
 def render_prompt(components: dict) -> str:
@@ -95,10 +91,9 @@ def render_prompt(components: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
-def group_payload(client, model: str, label: str, payload: dict, max_tokens: int = 16384) -> tuple[str, list[dict]]:
+def group_payload(client, label: str, payload: dict, max_tokens: int = 16384) -> tuple[str, list[dict]]:
     used_model, data = ask(
         client,
-        model,
         GROUP_SYSTEM,
         label + "\n\n" + json.dumps(payload, ensure_ascii=False),
         max_tokens,
@@ -109,19 +104,18 @@ def group_payload(client, model: str, label: str, payload: dict, max_tokens: int
     return used_model, clips
 
 
-def group_act(client, model: str, act: dict) -> tuple[str, list[dict]]:
-    return group_payload(client, model, "SCREENPLAY ACT:", act)
+def group_act(client, act: dict) -> tuple[str, list[dict]]:
+    return group_payload(client, "SCREENPLAY ACT:", act)
 
 
-def group_scene(client, model: str, act_name: str, scene: dict) -> tuple[str, list[dict]]:
+def group_scene(client, act_name: str, scene: dict) -> tuple[str, list[dict]]:
     payload = {"act": act_name, "scenes": [scene]}
-    return group_payload(client, model, f"SCREENPLAY SCENE ({act_name}):", payload, 8192)
+    return group_payload(client, f"SCREENPLAY SCENE ({act_name}):", payload, 8192)
 
 
-def fill_components(client, model: str, clip: dict) -> tuple[str, dict]:
+def fill_components(client, clip: dict) -> tuple[str, dict]:
     used_model, data = ask(
         client,
-        model,
         COMPONENT_SYSTEM,
         "CLIP:\n\n" + json.dumps(clip, ensure_ascii=False),
         8192,
@@ -141,7 +135,6 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Build Seedance prompts with OpenAI GPT.")
     parser.add_argument("breakdown", type=Path, nargs="?", default=Path("breakdown.json"))
     parser.add_argument("-o", "--output", type=Path, default=Path("prompts.json"))
-    parser.add_argument("--model", default=os.environ.get("OPENAI_MODEL", DEFAULT_MODEL))
     parser.add_argument("--max-clips", type=int, default=0, help="Stop after this many clips. 0 means all.")
     args = parser.parse_args()
 
@@ -168,17 +161,17 @@ def main() -> None:
         for scene in scene_iter:
             if scene is None:
                 print(f"Grouping {act_name}", file=sys.stderr)
-                grouping_model, clips = group_act(client, args.model, act)
+                grouping_model, clips = group_act(client, act)
             else:
                 print(f"Grouping {act_name} — {scene.get('scene')}", file=sys.stderr)
-                grouping_model, clips = group_scene(client, args.model, act_name, scene)
+                grouping_model, clips = group_scene(client, act_name, scene)
             models_used.add(grouping_model)
 
             for clip in clips:
                 if args.max_clips and len(prompts) >= args.max_clips:
                     break
                 print(f"Filling {clip.get('id') or clip.get('scene')}", file=sys.stderr)
-                _, filled = fill_components(client, args.model, clip)
+                _, filled = fill_components(client, clip)
                 models_used.add(filled["model"])
                 prompts.append(filled)
             if args.max_clips and len(prompts) >= args.max_clips:
@@ -189,8 +182,8 @@ def main() -> None:
     result = {
         "source": str(args.breakdown),
         "provider": "openai",
-        "requested_model": args.model,
-        "model": next(iter(models_used)) if len(models_used) == 1 else "mixed" if models_used else args.model,
+        "requested_model": DEFAULT_MODEL,
+        "model": next(iter(models_used)) if len(models_used) == 1 else "mixed" if models_used else DEFAULT_MODEL,
         "models_used": sorted(models_used),
         "clips": prompts,
     }

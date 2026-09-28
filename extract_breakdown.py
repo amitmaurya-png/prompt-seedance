@@ -10,8 +10,7 @@ from pathlib import Path
 
 from pypdf import PdfReader
 
-DEFAULT_MODEL = "gpt-6-astra"
-FALLBACK_MODELS = ("gpt-6-sol",)
+DEFAULT_MODEL = "gpt-6-sol"
 ENV_PATH = Path(__file__).resolve().parent / ".env"
 
 SYSTEM = """You extract a screenplay into acts, scenes, and shots.
@@ -76,26 +75,23 @@ def busy(error: Exception) -> bool:
     return status in (429, 503) or "503" in str(error) or "429" in str(error)
 
 
-def ask_model(client, model: str, script: str, max_tokens: int) -> tuple[str, dict]:
-    models = [model] + [item for item in FALLBACK_MODELS if item != model]
+def ask_model(client, script: str, max_tokens: int) -> tuple[str, dict]:
     last_error = None
-    for candidate in models:
-        for attempt in range(3):
-            try:
-                print(f"Calling {candidate}", file=sys.stderr)
-                response = generate(client, candidate, script, max_tokens)
-                if not response.output_text:
-                    raise RuntimeError("OpenAI returned no text. Check the API key and model name.")
-                return candidate, parse_json(response.output_text)
-            except Exception as error:
-                if not busy(error):
-                    raise
-                last_error = error
-                wait = 2 ** attempt
-                print(f"{candidate} is busy. Retrying in {wait}s.", file=sys.stderr)
-                time.sleep(wait)
-        print(f"{candidate} stayed unavailable. Trying another model.", file=sys.stderr)
-    raise RuntimeError("All OpenAI models are busy. Wait a minute and run the command again.") from last_error
+    for attempt in range(3):
+        try:
+            print(f"Calling {DEFAULT_MODEL}", file=sys.stderr)
+            response = generate(client, DEFAULT_MODEL, script, max_tokens)
+            if not response.output_text:
+                raise RuntimeError("OpenAI returned no text. Check the API key and model name.")
+            return DEFAULT_MODEL, parse_json(response.output_text)
+        except Exception as error:
+            if not busy(error):
+                raise
+            last_error = error
+            wait = 2 ** attempt
+            print(f"{DEFAULT_MODEL} is busy. Retrying in {wait}s.", file=sys.stderr)
+            time.sleep(wait)
+    raise RuntimeError(f"{DEFAULT_MODEL} is busy. Wait a minute and run the command again.") from last_error
 
 
 def main() -> None:
@@ -103,7 +99,6 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Extract acts, scenes, and shots with OpenAI GPT.")
     parser.add_argument("pdf", type=Path)
     parser.add_argument("-o", "--output", type=Path, default=Path("breakdown.json"))
-    parser.add_argument("--model", default=os.environ.get("OPENAI_MODEL", DEFAULT_MODEL))
     parser.add_argument("--max-tokens", type=int, default=65536)
     args = parser.parse_args()
 
@@ -116,7 +111,7 @@ def main() -> None:
     from openai import OpenAI
 
     script = extract_text(args.pdf)
-    used_model, breakdown = ask_model(OpenAI(api_key=api_key), args.model, script, args.max_tokens)
+    used_model, breakdown = ask_model(OpenAI(api_key=api_key), script, args.max_tokens)
     breakdown = {"source": str(args.pdf), "model": used_model, "acts": breakdown.get("acts", [])}
     args.output.write_text(json.dumps(breakdown, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     scenes = sum(len(act.get("scenes", [])) for act in breakdown["acts"])
