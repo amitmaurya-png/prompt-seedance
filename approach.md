@@ -26,9 +26,12 @@ Each shot has no fixed length. The model sets the pace. Times such as `0-3 secon
 Each shot gets one camera move, the action, the place, and the sound.
 Spoken lines go in `{curly braces}`.
 
-The advanced formula for a text prompt is:
+The basic formula for a new clip is a short reference sentence:
 
-> precise subject + action details + scene/environment + lighting and color + camera movement + visual style + image quality + constraints
+> Reference the subject in Image 1 to generate the action, the place, one camera move, and the spoken lines.
+
+A voice, when needed, is a second sentence: Reference the timbre in Audio 1 to generate that voice.
+A video reference is used only when the clip copies a move from an existing video.
 
 A longer film is assembled afterward. A conversation that stays in one place can be extended.
 A change of place, a chase, or the hillside miracle is rendered as separate clips and cut together.
@@ -38,9 +41,9 @@ A change of place, a chase, or the hillside miracle is rendered as separate clip
 `build_prompts.py` reads `breakdown.json` and calls Gemini twice.
 
 1. Gemini groups the script shots into clips. Shots stay together when the place, the people, and the feeling stay the same. A new clip starts when one of those changes. A clip holds about two or three shots, short enough for 4 to 15 seconds. A script shot with too many spoken lines is split.
-2. Gemini fills each formula field on its own, then writes the Shot lines. The script joins those fields into one text prompt.
+2. Gemini writes the basic formula: an image reference sentence, and an audio reference sentence when a voice is needed. The script joins those sentences into one text prompt.
 
-The result is `prompts.json`: 39 clips. Each clip stores the eight formula fields and a finished `prompt` string.
+The result is `prompts.json`. Each clip stores the basic-formula sentences and a finished `prompt` string. Re-run `build_prompts.py` to replace prompts that were written with the advanced formula.
 
 ## Step 4. Use the text prompt
 
