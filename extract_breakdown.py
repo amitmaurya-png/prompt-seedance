@@ -10,8 +10,8 @@ from pathlib import Path
 
 from pypdf import PdfReader
 
-DEFAULT_MODEL = "gemini-3.5-flash"
-FALLBACK_MODELS = ("gemini-3.5-flash-lite", "gemini-3.1-flash-lite")
+DEFAULT_MODEL = "gemini-3.1-pro-preview"
+FALLBACK_MODELS = ("gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.6-flash")
 ENV_PATH = Path(__file__).resolve().parent / ".env"
 
 SYSTEM = """You extract a screenplay into acts, scenes, and shots.
