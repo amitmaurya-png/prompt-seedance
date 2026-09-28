@@ -41,9 +41,9 @@ A change of place, a chase, or the hillside miracle is rendered as separate clip
 `build_prompts.py` reads `breakdown.json` and uses OpenAI GPT-6 Sol only. It retries the same model if the API is temporarily busy.
 
 1. GPT groups the script shots into clips. Shots stay together when the place, the people, and the feeling stay the same. A new clip starts when one of those changes. A clip holds about two or three shots, short enough for 4 to 15 seconds. A script shot with too many spoken lines is split.
-2. GPT follows the guide's basic omni-reference example: one concise sentence beginning `Reference <who> in Image 1 to generate...`, covering the scene/action, place, one camera move, and supplied dialogue. Dialogue is kept verbatim in curly braces. A separate audio-reference sentence is included only when a supplied audio asset is needed for voice timbre. The basic prompt does not add the advanced lighting, color, visual-style, image-quality, or constraints fields.
+2. GPT writes prompts in the supplied storyboard-example format: asset preparation, a short instruction binding characters and scene to their image references, optional camera-motion and audio references, numbered shots with actions and dialogue, then a global visual-style, continuity, motion, and audio direction. Dialogue is preserved verbatim in curly braces.
 
-The result is `prompts.json`. Each clip stores the basic-formula sentences and a finished `prompt` string. The file records the model used. Re-run `build_prompts.py` to replace prompts that were written with the advanced formula.
+The result is `prompts.json`. Each clip stores the asset-preparation and prompt sections plus a finished `prompt` string. The formula is recorded as `advanced`. Re-run `build_prompts.py` to regenerate clips in this format.
 
 ## Step 4. Use the text prompt
 

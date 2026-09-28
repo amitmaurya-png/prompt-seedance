@@ -28,23 +28,23 @@ Return JSON only:
 {"clips": [{"id": "short-id", "act": "ACT ONE", "scene": "the slugline", "source_shots": [1, 2], "beats": [{"action": "one visible action", "dialogue": [{"character": "NAME", "line": "one spoken line"}]}]}]}
 """
 
-COMPONENT_SYSTEM = """You write a Seedance 2.0 basic prompt for one new clip, following the guide's omni-reference example.
+COMPONENT_SYSTEM = """You write a Seedance 2.0 prompt matching this project's successful reference-based storyboard example.
 
-Use the basic formula, not the advanced formula. Write image_reference as one concise sentence in this pattern:
-"Reference <the clip's subjects> in Image 1 to generate <the new scene and action>."
-Include the place, the essential actions in story order, one suitable camera movement, and the supplied dialogue. Keep the sentence direct; do not turn it into a numbered Shot 1 / Shot 2 storyboard or add separate lighting, color, visual style, image quality, or constraints fields.
+Return a complete prompt with these sections:
+1. Asset preparation: list only the useful reference assets for this clip, using @Image 1, @Image 2, and so on. Describe each asset's role, such as a character reference, scene reference, camera-motion video, or ambient/voice audio. Keep asset roles consistent with how they are named later. Do not claim assets are already supplied; these are preparation instructions.
+2. Prompt: one short instruction identifying which image references define the characters and scene, and which video/audio references guide motion or sound when applicable.
+3. Shot sequence: write the supplied beats as **Shot 1**, **Shot 2**, and so on, in order. For each, describe the setting/time, concrete visible action and expression, framing or camera movement, and spatial changes. Keep movement natural and use no timestamps.
+4. Global direction: close with a concise project-consistent visual style, character-continuity, motion-quality, and audio direction. Include practical constraints such as no subtitles, logos, or watermarks when appropriate.
 
-Preserve every dialogue line supplied in the clip exactly, use curly braces, and identify the speaker when needed to make turns clear. Do not invent or paraphrase dialogue or add events. Describe only details supported by the clip. Nim is a small fox, not a dog. If Jesus appears, his face is not shown.
+Preserve every supplied dialogue line exactly once, with its original speaker, in curly braces. Do not invent, omit, reorder, or paraphrase dialogue or events. Do not add unsupported character appearance details. Nim is a small fox, not a dog. If Jesus appears, his face is not shown. Keep the overall look consistent with a warm, painterly storybook animation.
 
 Return JSON only:
-{"image_reference": "Reference <who> in Image 1 to generate <the action, place, one camera move, and spoken lines>.", "video_reference": "", "audio_reference": "Reference the timbre in Audio 1 to generate <whose voice>."}
+{"asset_preparation": ["@Image 1: ..."], "image_reference": "Use ...", "video_reference": "Refer to the camera movement in @Video 1...", "audio_reference": "Use @Audio 1 for ...", "shots": ["Shot content, including any dialogue"], "global_direction": "The entire video should ..."}
 
-image_reference is required.
-Leave video_reference empty unless the clip explicitly needs to copy an action, camera movement, style, or sound effect from a supplied video.
-Leave audio_reference empty unless a supplied audio reference is needed for voice timbre.
+asset_preparation, image_reference, shots, and global_direction are required. Set video_reference or audio_reference to an empty string if not applicable.
 """
 
-FIELDS = ("image_reference",)
+FIELDS = ("image_reference", "global_direction")
 def ask(client, system: str, user: str, max_tokens: int) -> tuple[str, dict]:
     last_error = None
     for attempt in range(3):
@@ -83,11 +83,23 @@ def render_prompt(components: dict) -> str:
     if missing:
         raise RuntimeError(f"The model left these components empty: {', '.join(missing)}")
 
-    lines = [components["image_reference"].strip()]
+    assets = components.get("asset_preparation")
+    shots = components.get("shots")
+    if not isinstance(assets, list) or not assets:
+        raise RuntimeError("The model must return at least one asset-preparation item.")
+    if not isinstance(shots, list) or not shots:
+        raise RuntimeError("The model must return at least one shot.")
+
+    lines = ["Asset preparation:"]
+    lines.extend(f"- {str(asset).strip()}" for asset in assets if str(asset).strip())
+    lines.extend(["", "Prompt:", components["image_reference"].strip()])
     for field in ("video_reference", "audio_reference"):
         value = str(components.get(field) or "").strip()
         if value:
             lines.append(value)
+    lines.append("")
+    lines.extend(f"**Shot {index}:** {str(shot).strip()}" for index, shot in enumerate(shots, 1))
+    lines.extend(["", components["global_direction"].strip()])
     return "\n".join(lines) + "\n"
 
 
@@ -121,7 +133,7 @@ def fill_components(client, clip: dict) -> tuple[str, dict]:
         8192,
     )
     data["model"] = used_model
-    data["formula"] = "basic"
+    data["formula"] = "advanced"
     data["prompt"] = render_prompt(data)
     data["id"] = clip.get("id")
     data["act"] = clip.get("act")
