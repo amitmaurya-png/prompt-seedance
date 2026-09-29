@@ -1,0 +1,179 @@
+Seedance Prompt Labels
+======================
+Labels that appear at the start of lines in prompt_examples.txt.
+Numbers in parentheses = occurrences across all examples (only shown when > 1).
+Formats seen: "Label:", "【Label】:", "[Label]", "- Label:", and timecode prefixes.
+
+
+1. FORMAT / SETUP
+-----------------
+Duration (11) / 【Duration】 / [Duration] / 【时长】 (2)
+FORMAT (5)
+Basic Settings: [Basic Settings] (2)
+Recommended Settings: [Recommended Settings] Mode:
+Input
+Title
+Name (2)
+Quality (2)
+Highest image quality (2)
+Core Focus: 【Core Focus】
+Core theme
+Core content
+Positive Prompt
+Prompt Body: [Prompt Body] (2)
+Enhancement Keywords: [Enhancement Keywords] (2)
+
+
+2. STYLE / LOOK
+---------------
+Style (5) / STYLE (2) / 【Style】 / [Style] (3) / [STYLE] / 【风格】 (3) / 【スタイル / Style】
+Core Style (2)
+Overall style
+Visual Style
+Design language
+CINEMATIC: [CINEMATIC]
+Tone (4)
+Mood (2) / MOOD (2)
+Atmosphere (2)
+Atmosphere and image quality: [Atmosphere and image quality]
+Lighting (4) / LIGHTING
+Lighting/Color
+Color and tonality
+COLOR GRADE
+COLOR LOGIC
+Physical Texture Enhancement: 【Physical Texture Enhancement】 (2)
+
+
+3. SUBJECT / CHARACTER
+----------------------
+Character (4) / CHARACTER / [Character] / 【角色】 (2)
+Characters: [Characters]
+Character and basic setup: [Character and basic setup]
+CHARACTER INTRO: [CHARACTER INTRO]
+Main Character: 【Main Character】 (2)
+Protagonist
+Subject (2) / SUBJECT / SUBJECTS (6) / 【主体 / Subject】
+Main Subject
+Subject 1 (3) / Subject 2
+A (3) / B (3)                       -- character tags, e.g. "A: ...", "B: ..."
+Wardrobe / WARDROBE
+Base outfit
+Weapon (2)
+Product (2)
+Actions and Expression
+Reaction
+
+
+4. SCENE / ENVIRONMENT
+----------------------
+Scene (7) / 【Scene】 / [Scene] (2) / 【场景】 (2)
+SCENE SETUP: [SCENE SETUP]
+Scene Environment: 【Scene Environment】 (2)
+Environment (3) / ENVIRONMENT (2)
+Location / LOCATION
+
+
+5. CAMERA
+---------
+Camera (18) / CAMERA / 【カメラ / Camera】
+Camera Movement
+Camera Movement Trajectory (2)
+Camera Language (2)
+Camera Behavior (Important): [Camera Behavior (Important)] (2)
+Simulated equipment
+Opening shot
+Aerial shot
+Cut to aerial
+Close-up
+Extreme close-up (2)
+Final hero frame
+Freeze Frame (2)
+
+
+6. ACTION / MOVEMENT
+--------------------
+Action (26) / 【アクション / Action】
+Movement (8)
+Movement style
+Movement Rule
+Movement Core
+Velocity Ramp choreography (2)
+Ship motion
+At the peak of motion
+Visual (15)
+Visual Content (2)
+Visuals                              -- inside timed shots
+Effect (2)
+Special Effects Detail(s) (2)
+Special Effects Spectacle
+Detail (2)
+
+
+7. SHOT STRUCTURE / TIMELINE
+----------------------------
+Shot Script (2)
+Shot Details: [Shot Details]
+Shot sequence
+Shot list sequence
+Shot Breakdown (15 shots in 15 seconds)
+SEQUENCE
+TIMELINE (2) / Timeline
+Shot N / SHOT N / Shot N (1s) / Shot N (3s) / 镜头N
+Cut N / - Cut: (10)
+Quick cut
+Rapid micro-cut
+Beauty beat-sync sequence
+Chapter N (0-15 seconds)
+Section N: <name>   e.g. [Section 1: Gentle beauty appears]
+Jump N              e.g. Jump 3 (The Slip)
+Start / START
+First Stage / Middle Stage / Final Stage
+End / End moment / FINAL
+The Ending: [The Ending]
+Loop
+Pacing
+Tempo (2)
+Named beats: [THE CROUCH] [THE TAKEOFF] [ENERGY BUILD] [The Initial Freefall]
+             [The Rhythmic Jumps & The Near-Death Slip] [Entrance 0–5s] [Fight 5–15s]
+Frame anchors: 【起始帧 - 图1场景】 (start frame)  【过渡段】 (transition)  【结束帧 - 图2场景】 (end frame)
+
+Timecode prefixes (placed before a shot label or description):
+  [00:00-00:05]      [00:01.5-00:03]      [00:00–00:03] — <name>
+  00:00-00:03:       0:00-0:03:
+  [0.0 seconds to 0.5 seconds]:
+  [0-1.5s]
+  0-3 seconds:       4-9 seconds:         13-15 seconds:
+  0.0-1.3 seconds:   5.0-12.0 seconds:
+  0-3s:              6-10s:               10-15s:
+  (8-10s) <name>:
+
+
+8. AUDIO / DIALOGUE
+-------------------
+Audio (3) / AUDIO
+Sound Design: 【Sound Design】 (2)
+Ambient Sound: 【Ambient Sound】 (2)
+Sound Effect (2)
+Overall Sound Effect (2)
+Background music
+MUSIC
+Dialogue
+Dialogue (overlapping)
+Say
+Lyric
+[Rap Lyrics] / [Reality Lyrics]      -- inline, before quoted lyrics
+Add minimal tagline below (optional)
+
+
+9. RULES / CONSTRAINTS
+----------------------
+Requirement (3)
+Special requirement
+Note (3)
+IMPORTANT
+RULE
+LOGIC RULE
+TRIGGER
+Constraints (Important): [Constraints (Important)] (2)
+- Allowed: (2)
+- Prohibited: (2)
