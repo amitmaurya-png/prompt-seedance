@@ -1,7 +1,7 @@
 # Universal Seedance Prompt Syntax
 
-A single, general structure distilled from the patterns in [prompt_examples.txt](./prompt_examples.txt).
-Every example in the corpus, whether a one-paragraph prompt or a 15-shot timeline, fits this skeleton.
+A single, general structure distilled from community Seedance prompts.
+Every prompt style, from a one-paragraph prompt to a 15-shot timeline, fits this skeleton.
 Label vocabulary and variants are listed in [prompt_labels.txt](./prompt_labels.txt).
 
 ---
@@ -23,7 +23,7 @@ LABEL: content
 
 ## 2. Canonical block order
 
-| # | Block | Required | Purpose | Common aliases in corpus |
+| # | Block | Required | Purpose | Common aliases |
 |---|-------|----------|---------|--------------------------|
 | 1 | `FORMAT` | yes | Duration, aspect ratio, shot count, cut style, tempo | Duration, Basic Settings, Quality |
 | 2 | `STYLE` | yes | Visual genre, rendering look, color, lighting, mood | Tone, Mood, Atmosphere, Lighting, Color Grade |
@@ -88,18 +88,19 @@ CAMERA: <lens/feel>, <default movement>, <stabilization>, <depth of field>
 ```
 
 ### SHOTS
-One entry per shot or beat. The time range comes first, then the shot label, then fixed sub-fields:
+One entry per shot or beat: an optional time range, then the shot label, then fixed sub-fields:
 
 ```
-[<start>-<end>s] Shot <n>: <short title>
+[<start>-<end>s] Shot <n>: <short title>     (time range optional)
   Camera: <framing> + <one primary move>
   Action: <concrete visible action by subject tag>
   Visual: <environment response, effects, light changes>
   Audio: <sound tied to this beat>            (optional)
 ```
 
-Timecode forms. Pick one and use it for the whole prompt:
-- `[0-3s]` (recommended), `[00:00-00:03]`, or `0-3 seconds:`
+Timecodes are optional. Add them only when exact timing is needed; otherwise number the shots and let the model set the pace.
+If used, pick one form for the whole prompt:
+- `[0-3s]`, `[00:00-00:03]`, or `0-3 seconds:`
 - Ranges must be continuous and must add up to the `FORMAT` duration.
 - Single continuous shot: use beats (`Start:`, `Middle:`, `End:`) instead of shots.
 
@@ -111,7 +112,7 @@ AUDIO:
 - Ambience: <background bed>
 - Dialogue: A: "<exact line>" (<delivery>)
 ```
-Dialogue and lyrics go in double quotes, exactly once, with the speaker tag.
+Dialogue and lyrics go in double quotes (or `{curly braces}` if the workflow requires it), exactly once, with the speaker tag.
 
 ### CONSTRAINTS
 ```
@@ -192,7 +193,7 @@ CONSTRAINTS:
 
 ## 6. Compact (paragraph) form
 
-For short clips the same order can be written as one paragraph, as in Cases 1 and 2 of the corpus:
+For short clips the same order can be written as one paragraph, as in many short community prompts:
 
 ```
 <FORMAT>, <STYLE>. <SUBJECT> in <SCENE>. <0-3s: camera + action>. <3-7s: camera + action>. ... <AUDIO>. <CONSTRAINTS>.
@@ -205,7 +206,7 @@ The order and content are the same. Only the labels are left out.
 ## 7. Validation checklist
 
 - [ ] Blocks appear in canonical order; no empty labels
-- [ ] Shot time ranges are continuous and add up to the `FORMAT` duration
+- [ ] If timecodes are used, ranges are continuous and add up to the `FORMAT` duration
 - [ ] Each shot has one primary camera move and one concrete visible action
 - [ ] Subject tags (`A`, `B`, names) and asset tokens (`@image1`) are consistent throughout
 - [ ] Dialogue is quoted exactly, attributed, and appears once
