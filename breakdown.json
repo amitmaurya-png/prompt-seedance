@@ -3,7 +3,7 @@
   "model": "gemini-3.5-flash-lite",
   "acts": [
     {
-      "act": "ACT ONE",
+      "act": "TEASER",
       "scenes": [
         {
           "scene": "EXT. MIRI’S VILLAGE — MORNING",
@@ -175,7 +175,7 @@
               "dialogue": []
             },
             {
-              "order": 1,
+              "order": 2,
               "action": "Tav sits beside a broken toy cart with one wooden wheel popped off.",
               "dialogue": [
                 {
@@ -185,7 +185,7 @@
               ]
             },
             {
-              "order": 2,
+              "order": 3,
               "action": "Miri instinctively shields the basket.",
               "dialogue": [
                 {
@@ -203,7 +203,7 @@
               ]
             },
             {
-              "order": 3,
+              "order": 4,
               "action": "Tav looks hopeful.",
               "dialogue": [
                 {
@@ -213,7 +213,7 @@
               ]
             },
             {
-              "order": 4,
+              "order": 5,
               "action": "Miri hesitates, imagining the three cakes becoming none.",
               "dialogue": [
                 {
@@ -239,7 +239,7 @@
               ]
             },
             {
-              "order": 5,
+              "order": 6,
               "action": "Tav nods, disappointed, and Miri hurries away with Nim.",
               "dialogue": [
                 {
@@ -255,9 +255,29 @@
                   "line": "I intended you to. I am supporting the mission."
                 }
               ]
+            },
+            {
+              "order": 7,
+              "action": "Miri glances back at Tav, whose little cart wobbles with its wheel still off, and she keeps walking.",
+              "dialogue": []
             }
           ]
         },
+        {
+          "scene": "MAIN TITLES",
+          "shots": [
+            {
+              "order": 1,
+              "action": "A warm, painted title card unfurls like parchment: LITTLE WITNESSES “THE SMALLEST LUNCH”.",
+              "dialogue": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "act": "ACT ONE",
+      "scenes": [
         {
           "scene": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING",
           "shots": [
