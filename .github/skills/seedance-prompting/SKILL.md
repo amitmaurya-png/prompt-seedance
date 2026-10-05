@@ -15,6 +15,19 @@ One Seedance 2.0 generation is a single clip of 4 to 15 seconds. Longer pieces a
 |---|---|
 | [prompt_syntax.md](./references/prompt_syntax.md) | The default prompt structure: block order, block grammar, template, worked example, validation checklist |
 | [prompt_labels.txt](./references/prompt_labels.txt) | Label vocabulary from community Seedance prompts, grouped by category, with aliases and frequency |
+| [seedance_2_0_prompt_guide.md](./references/seedance_2_0_prompt_guide.md) | Official BytePlus Seedance 2.0 prompt guide notes: task patterns (reference, edit, extend), subject binding, shot and action rules, special symbols, asset limits, troubleshooting. Source: [Seedance 2.0 prompt guide](https://ai.byteplus.com/ark/region:ap-southeast-1/docs/ModelArk/seedance-2-0-prompt-guide) |
+
+### Official Seedance 2.0 guide
+
+Read `seedance_2_0_prompt_guide.md` when targeting Seedance 2.0, 2.0 Fast, or 2.0 Mini, and when writing reference, edit, or extend prompts. Where it is more specific than `prompt_syntax.md`, follow the official guide. Key rules:
+
+- Bind every subject to its asset (`Miri (@Image 1)`) and reuse the same label in every mention.
+- Put the most important assets and content first.
+- Write shots as `Shot 1 / Shot 2 / Shot 3`, with no per-shot durations.
+- Use one camera move per shot and slow, specific, body-part-level actions.
+- Use the official symbols: dialogue `{ }`, music `（ ）`, sound effects `< >`. The `【 】` brackets render on-screen text in Seedance 2.0, so never use them as section labels.
+- Keep a clip to about 4-5 assets and 4 or fewer reference characters.
+- In edit and extend tasks, name the video directly (`Video 1`), not "reference Video 1".
 
 ### Prompt syntax
 
@@ -35,7 +48,7 @@ Use the canonical labels from `prompt_syntax.md`. Consult `prompt_labels.txt` wh
 - interpret or review a user's prompt that uses alias labels (for example `Visual`, `Tone`, `【Scene】`, `[Constraints (Important)]`), mapping each to its canonical block;
 - add a specialised sub-label that is already listed (for example `Velocity Ramp choreography`, `Freeze Frame`, `Final hero frame`).
 
-Do not invent new label styles when a listed one fits. Use one bracket style throughout a prompt.
+Do not invent new label styles when a listed one fits. Use one bracket style throughout a prompt, and do not use `【 】` labels in Seedance 2.0 prompts (see the official guide).
 
 ## Workflow
 
