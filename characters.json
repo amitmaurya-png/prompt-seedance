@@ -1,0 +1,74 @@
+{
+  "Miri": {
+    "role": "Lead; a young village girl who has three honey cakes",
+    "from_script": "Young girl; carries a small cloth bundle of three honey-date cakes; later the linen basket.",
+    "design": "About 8 years old, warm brown skin, dark curly hair tied back loosely with an ochre tie, brown eyes, sand-coloured tunic with an ochre sash, holding a small cloth bundle.",
+    "image_prompt": "Character reference of Miri: About 8 years old, warm brown skin, dark curly hair tied back loosely with an ochre tie, brown eyes, sand-coloured tunic with an ochre sash, holding a small cloth bundle. full body, front view, neutral standing pose, plain warm parchment background, warm, painterly 2D storybook animation style, soft textured brushwork, gentle natural light, ancient Galilee setting, simple handwoven clothing, no text, no logo, no watermark.",
+    "full": "assets/characters/miri_full.png",
+    "head": "assets/characters/miri_head.png"
+  },
+  "Nim": {
+    "role": "Miri's small fox companion",
+    "from_script": "A small fox (never a dog); oversized ears, twitching nose, tail, whiskers.",
+    "design": "Small orange fox with oversized ears, cream chest and muzzle, big dark eyes, bushy tail with a cream tip, sitting upright.",
+    "image_prompt": "Character reference of Nim: Small orange fox with oversized ears, cream chest and muzzle, big dark eyes, bushy tail with a cream tip, sitting upright. full body, front view, neutral standing pose, plain warm parchment background, warm, painterly 2D storybook animation style, soft textured brushwork, gentle natural light, ancient Galilee setting, simple handwoven clothing, no text, no logo, no watermark.",
+    "full": "assets/characters/nim_full.png",
+    "head": "assets/characters/nim_head.png"
+  },
+  "Ima": {
+    "role": "Miri's mother",
+    "from_script": "Comes from the doorway with a basket of folded linen; warm but firm.",
+    "design": "Woman in her thirties, warm brown skin, dark hair under a muted blue head covering, terracotta dress with a golden sash, holding a basket of folded linen on her hip.",
+    "image_prompt": "Character reference of Ima: Woman in her thirties, warm brown skin, dark hair under a muted blue head covering, terracotta dress with a golden sash, holding a basket of folded linen on her hip. full body, front view, neutral standing pose, plain warm parchment background, warm, painterly 2D storybook animation style, soft textured brushwork, gentle natural light, ancient Galilee setting, simple handwoven clothing, no text, no logo, no watermark.",
+    "full": "assets/characters/ima_full.png",
+    "head": "assets/characters/ima_head.png"
+  },
+  "Tav": {
+    "role": "Village boy with a broken toy cart",
+    "from_script": "A small boy with dust on his cheeks; his toy cart has one wooden wheel off.",
+    "design": "About 6 years old, warm brown skin, short dark hair, dust on his cheeks, olive-green tunic, holding a small wooden cart wheel.",
+    "image_prompt": "Character reference of Tav: About 6 years old, warm brown skin, short dark hair, dust on his cheeks, olive-green tunic, holding a small wooden cart wheel. full body, front view, neutral standing pose, plain warm parchment background, warm, painterly 2D storybook animation style, soft textured brushwork, gentle natural light, ancient Galilee setting, simple handwoven clothing, no text, no logo, no watermark.",
+    "full": "assets/characters/tav_full.png",
+    "head": "assets/characters/tav_head.png"
+  },
+  "Saba": {
+    "role": "Saba Elior, the elderly storyteller",
+    "from_script": "Old; sleeves patched ('more patch than sleeve'); repairs a sandal; eyes twinkle; sits under a fig tree.",
+    "design": "Elderly man, white beard, white hair at the sides, bushy white brows, kind smile, brown robe with a darker mantle and a visibly patched sleeve, holding a sandal.",
+    "image_prompt": "Character reference of Saba: Elderly man, white beard, white hair at the sides, bushy white brows, kind smile, brown robe with a darker mantle and a visibly patched sleeve, holding a sandal. full body, front view, neutral standing pose, plain warm parchment background, warm, painterly 2D storybook animation style, soft textured brushwork, gentle natural light, ancient Galilee setting, simple handwoven clothing, no text, no logo, no watermark.",
+    "full": "assets/characters/saba_full.png",
+    "head": "assets/characters/saba_head.png"
+  },
+  "Yonah": {
+    "role": "The boy with five barley loaves and two fish",
+    "from_script": "A boy about Miri's age; careful, bright-eyed, slightly nervous; small bundle tucked under his arm.",
+    "design": "About 8 years old, warm brown skin, short dark hair, bright slightly nervous eyes, pale blue-grey tunic, small cloth lunch bundle tucked under one arm.",
+    "image_prompt": "Character reference of Yonah: About 8 years old, warm brown skin, short dark hair, bright slightly nervous eyes, pale blue-grey tunic, small cloth lunch bundle tucked under one arm. full body, front view, neutral standing pose, plain warm parchment background, warm, painterly 2D storybook animation style, soft textured brushwork, gentle natural light, ancient Galilee setting, simple handwoven clothing, no text, no logo, no watermark.",
+    "full": "assets/characters/yonah_full.png",
+    "head": "assets/characters/yonah_head.png"
+  },
+  "Andrew": {
+    "role": "Disciple",
+    "from_script": "A disciple; gentle and steady with the children.",
+    "design": "Man in his thirties, short dark hair and beard, kind expression, undyed tunic with a brown mantle, hands open.",
+    "image_prompt": "Character reference of Andrew: Man in his thirties, short dark hair and beard, kind expression, undyed tunic with a brown mantle, hands open. full body, front view, neutral standing pose, plain warm parchment background, warm, painterly 2D storybook animation style, soft textured brushwork, gentle natural light, ancient Galilee setting, simple handwoven clothing, no text, no logo, no watermark.",
+    "full": "assets/characters/andrew_full.png",
+    "head": "assets/characters/andrew_head.png"
+  },
+  "Philip": {
+    "role": "Disciple",
+    "from_script": "A disciple; worried and practical about feeding the crowd.",
+    "design": "Lean man in his late thirties, short dark hair greying at the temples, short beard, worried brows, cream tunic with a deep red mantle.",
+    "image_prompt": "Character reference of Philip: Lean man in his late thirties, short dark hair greying at the temples, short beard, worried brows, cream tunic with a deep red mantle. full body, front view, neutral standing pose, plain warm parchment background, warm, painterly 2D storybook animation style, soft textured brushwork, gentle natural light, ancient Galilee setting, simple handwoven clothing, no text, no logo, no watermark.",
+    "full": "assets/characters/philip_full.png",
+    "head": "assets/characters/philip_head.png"
+  },
+  "Jesus": {
+    "role": "Shown only as hands, robe, and silhouette",
+    "from_script": "Seen from behind and to the side: robe moving in the wind, hands open, hand on a staff. His face is never shown.",
+    "design": "Seen from behind only: shoulder-length dark hair, off-white robe, blue-grey mantle over one shoulder, open hands, wooden staff. No face visible.",
+    "image_prompt": "Character reference of Jesus: Seen from behind only: shoulder-length dark hair, off-white robe, blue-grey mantle over one shoulder, open hands, wooden staff. No face visible. full body seen from behind, face not visible, plain warm parchment background, warm, painterly 2D storybook animation style, soft textured brushwork, gentle natural light, ancient Galilee setting, simple handwoven clothing, no text, no logo, no watermark.",
+    "full": "assets/characters/jesus_full.png",
+    "head": "assets/characters/jesus_head.png"
+  }
+}
