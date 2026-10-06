@@ -294,7 +294,9 @@ def analyse(prompt_path, roster=()):
             cast = shot_cast(s, clip_chars, roster)
             shots.append({"n": i, "title": s["title"], "camera": s["camera"], "matches": matches,
                           "by_category": by_cat, "warnings": warnings, "notes": notes,
-                          "cast": cast, "targets": camera_targets(cast)})
+                          "cast": cast, "targets": camera_targets(cast),
+                          "dialogue": [{"speaker": d["character"].title(), "line": d["line"]}
+                                       for d in s.get("dialogue", [])]})
         results.append({"id": c["id"], "act": c["act"], "scene": c["scene"],
                         "mode": "new scene" if new_scene else f"continues {c['continuity'].get('previous_clip')}",
                         "shots": shots})
@@ -344,6 +346,15 @@ background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1
 .castcell{min-width:170px}.who{display:flex;align-items:center;font-size:12px;margin-bottom:6px;line-height:1.3}
 .who.r-subject .face{box-shadow:0 0 0 2px var(--note)}.who.r-voice{opacity:.7}.who.r-pov .face,.who.r-foreground .face{opacity:.75}
 .applies{font-size:12px;color:var(--muted);margin-top:6px}
+.convo h3{margin:18px 0 8px}.scene{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:8px 0}
+.scene summary{cursor:pointer;padding:10px 14px}.lines{padding:4px 14px 12px;border-top:1px solid var(--line)}
+.line{display:flex;align-items:flex-start;gap:4px;padding:6px 0;font-size:14px}.line .face{margin-top:2px}
+.line.me{background:var(--note-bg);border-radius:8px;padding:6px}.say{margin-top:1px}
+.line.extra .face{opacity:.6}.ref{font-size:12px;color:var(--note);margin-left:6px;text-decoration:none}
+tr.talk td{border-top:0;padding-top:0}.dlg{background:var(--chip);border-radius:10px;padding:6px 12px;
+display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));column-gap:16px}
+.shots tbody tr:first-child td{border-bottom:0}.shots tbody{border-bottom:1px solid var(--line)}
+.shots tbody:last-child{border-bottom:0}
 .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 select{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text)}
 @media (max-width:700px){td,th{padding:8px}.m{width:104px}.shots thead{display:none}.shots td{display:block;border:0}
@@ -382,6 +393,25 @@ def head_img(name, people, out_dir, cls="face"):
     return f'<img class="{cls}" src="{html.escape(image_src(src, out_dir))}" alt="{html.escape(name)}" loading="lazy">'
 
 
+def speaker_key(name, people):
+    """'Saba' for 'Saba', 'Small Girl' stays 'Small Girl'."""
+    first = name.split()[0]
+    return first if first in people else name
+
+
+def dialogue_html(lines, people, out_dir, link=None):
+    out = []
+    for d in lines:
+        who = speaker_key(d["speaker"], people)
+        named = who in people
+        out.append(f'<div class="line{"" if named else " extra"}" data-speaker="{html.escape(who.lower())}">'
+                   f'{head_img(who, people, out_dir) if named else head_img(who, {}, out_dir)}'
+                   f'<div><b>{html.escape(d["speaker"])}</b>'
+                   + (f' <a class="ref" href="#{link[0]}">{link[0]} · shot {link[1]}</a>' if link else "")
+                   + f'<div class="say">{html.escape(d["line"])}</div></div></div>')
+    return "".join(out)
+
+
 def render(results, images, people, out_path):
     out_dir = Path(out_path).resolve().parent
     shots = [s for c in results for s in c["shots"]]
@@ -394,6 +424,8 @@ def render(results, images, people, out_path):
     roster = [n for n in people] or sorted({c["name"] for s in shots for c in s["cast"]})
     matrix = {n: Counter() for n in roster}
     appear, camera_on = Counter(), Counter()
+    lines_by = Counter(speaker_key(d["speaker"], people) for s in shots for d in s["dialogue"])
+    n_lines = sum(lines_by.values())
     for s in shots:
         for c in s["cast"]:
             appear[c["name"]] += 1
@@ -410,6 +442,7 @@ def render(results, images, people, out_path):
 <p class="muted">Camera direction and characters for every shot in prompt.json, matched to camera_angles.json and characters.json.</p>
 <div class="stats"><div class="stat"><b>{len(results)}</b>clips</div><div class="stat"><b>{len(shots)}</b>shots</div>
 <div class="stat"><b>{len([n for n in roster if appear[n]])}</b>characters</div>
+<div class="stat"><b>{n_lines}</b>dialogue lines</div>
 <div class="stat"><b>{n_warn}</b>shots with warnings</div><div class="stat"><b>{n_note}</b>shots with notes</div>
 <div class="stat"><b>{n_similar}</b>similarity matches</div></div>
 <h2>Characters</h2><p class="muted">Select a character to list every shot they appear in. "Camera on" counts shots
@@ -421,7 +454,7 @@ whose camera line names them, or that show them when the camera line names no on
         role = html.escape((people.get(n) or {}).get("role", ""))
         parts.append(f'<button class="person" data-name="{html.escape(n.lower())}">{head_img(n, people, out_dir, "portrait")}'
                      f'<span class="pn">{html.escape(n)}</span><span class="pr">{role}</span>'
-                     f'<span class="ps">{appear[n]} shots · camera on {camera_on[n]}</span>'
+                     f'<span class="ps">{appear[n]} shots · camera on {camera_on[n]} · {lines_by[n]} lines</span>'
                      f'<span class="pt">{top or "—"}</span></button>')
 
     parts.append('</div><h2>Camera terms by character</h2><p class="muted">How many shots apply each camera term to each '
@@ -445,17 +478,34 @@ whose camera line names them, or that show them when the camera line names no on
         img = f'<img src="{html.escape(image_src(src, out_dir))}" alt="{html.escape(term)}" loading="lazy">' if src else ""
         parts.append(f'<div class="term">{img}<div class="n">{html.escape(term)}</div>'
                      f'<div class="c">{TERMS[term][0]} · used {usage[term]}×</div></div>')
+    parts.append('</div><h2>Conversations</h2><p class="muted">Every line of dialogue in story order, grouped by scene. '
+                 'Select a link to jump to the shot.</p><div class="convo">')
+    acts = {}  # act -> scene -> [(clip id, shot n, line)], in story order
+    for c in results:
+        for sh in c["shots"]:
+            for d in sh["dialogue"]:
+                acts.setdefault(c["act"], {}).setdefault(c["scene"], []).append((c["id"], sh["n"], d))
+    for act, scenes in acts.items():
+        parts.append(f"<h3>{html.escape(act)}</h3>")
+        for scene, lines in scenes.items():
+            speakers = list(dict.fromkeys(speaker_key(d["speaker"], people) for _, _, d in lines))
+            parts.append(f'<details class="scene" data-speakers="{html.escape(" ".join(x.lower() for x in speakers))}">'
+                         f'<summary><b>{html.escape(scene)}</b> <span class="muted">{len(lines)} lines · '
+                         f'{html.escape(", ".join(speakers))}</span></summary><div class="lines">')
+            for cid, n, d in lines:
+                parts.append(dialogue_html([d], people, out_dir, link=(cid, n)))
+            parts.append("</div></details>")
     parts.append('</div><h2>Shots</h2><div class="controls"><label><input type="checkbox" id="only"> '
                  'Only shots with warnings or notes</label><select id="who"><option value="">All characters</option>'
                  + "".join(f'<option value="{html.escape(n.lower())}">{html.escape(n)}</option>' for n in roster if appear[n])
                  + '</select><input type="search" id="q" placeholder="Filter by clip, scene, or camera text"></div>')
 
     for c in results:
-        parts.append(f'<section class="clip" data-text="{html.escape((c["id"] + " " + c["scene"] + " " + " ".join(s["camera"] for s in c["shots"])).lower())}">'
+        parts.append(f'<section class="clip" id="{c["id"]}" data-text="{html.escape((c["id"] + " " + c["scene"] + " " + " ".join(s["camera"] for s in c["shots"])).lower())}">'
                      f'<header><b>{c["id"]}</b><span>{html.escape(c["act"])} · {html.escape(c["scene"])}</span>'
                      f'<span class="muted">{html.escape(c["mode"])}</span></header>'
                      '<table class="shots"><thead><tr><th>Shot</th><th>Camera line</th><th>Characters</th>'
-                     '<th>Detected camera view</th><th>Checks</th></tr></thead><tbody>')
+                     '<th>Detected camera view</th><th>Checks</th></tr></thead>')
         for s in c["shots"]:
             issues = "".join(f'<div class="issue w">⚠ {html.escape(w)}</div>' for w in s["warnings"])
             issues += "".join(f'<div class="issue i">ℹ {html.escape(n)}</div>' for n in s["notes"])
@@ -467,20 +517,26 @@ whose camera line names them, or that show them when the camera line names no on
                        if s["targets"] and s["matches"] else "")
             names = " ".join(p["name"].lower() for p in s["cast"])
             flagged = "flag" if s["warnings"] or s["notes"] else "clean"
-            parts.append(f'<tr class="{flagged}" data-chars="{html.escape(names)}"><td>{s["n"]}<br><span class="muted">{html.escape(s["title"])}</span></td>'
+            parts.append(f'<tbody class="{flagged}" data-chars="{html.escape(names)}"><tr><td>{s["n"]}<br><span class="muted">{html.escape(s["title"])}</span></td>'
                          f'<td>{highlight(s["camera"], s["matches"])}</td><td class="castcell">{cast}</td>'
                          f'<td><div class="matches">{"".join(card(m, images, out_dir) for m in s["matches"]) or "<span class=ok>—</span>"}</div>{applies}</td>'
                          f'<td>{issues or "<span class=ok>✓ OK</span>"}</td></tr>')
-        parts.append("</tbody></table></section>")
+            if s["dialogue"]:
+                parts.append(f'<tr class="talk"><td></td><td colspan="4"><div class="dlg">'
+                             f'{dialogue_html(s["dialogue"], people, out_dir)}</div></td></tr>')
+            parts.append("</tbody>")
+        parts.append("</table></section>")
 
     parts.append("""</main><script>
 const only=document.getElementById('only'),q=document.getElementById('q'),who=document.getElementById('who');
 function apply(){const v=q.value.toLowerCase(),w=who.value,o=only.checked;
 document.querySelectorAll('.clip').forEach(c=>{let shown=0;
-c.querySelectorAll('tbody tr').forEach(r=>{const ok=(!o||r.classList.contains('flag'))&&(!w||(' '+r.dataset.chars+' ').includes(' '+w+' '));
+c.querySelectorAll('tbody').forEach(r=>{const ok=(!o||r.classList.contains('flag'))&&(!w||(' '+r.dataset.chars+' ').includes(' '+w+' '));
 r.style.display=ok?'':'none';if(ok)shown++});
 c.style.display=shown&&(!v||c.dataset.text.includes(v))?'':'none'});
-document.querySelectorAll('.person').forEach(p=>p.classList.toggle('on',p.dataset.name===w))}
+document.querySelectorAll('.person').forEach(p=>p.classList.toggle('on',p.dataset.name===w));
+document.querySelectorAll('.scene').forEach(d=>{d.style.display=!w||(' '+d.dataset.speakers+' ').includes(' '+w+' ')?'':'none'});
+document.querySelectorAll('.line').forEach(l=>l.classList.toggle('me',!!w&&l.dataset.speaker===w))}
 [only,q,who].forEach(e=>e.addEventListener('input',apply));
 document.querySelectorAll('.person').forEach(p=>p.onclick=()=>{who.value=who.value===p.dataset.name?'':p.dataset.name;apply();
 document.querySelector('.controls').scrollIntoView({behavior:'smooth'})});
