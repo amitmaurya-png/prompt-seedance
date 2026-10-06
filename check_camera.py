@@ -6,7 +6,8 @@ For each shot's Camera line the script:
   2. runs a similarity search (character-trigram TF-IDF vectors, cosine similarity) on the
      leftover words, so misspellings and unusual wording still map to the closest term,
   3. checks Seedance rules: one movement per shot, no "static" plus a move, a recognisable term,
-  4. compares neighbouring shots in a scene (big jumps in shot size, scenes that open close up).
+  4. compares neighbouring shots in a scene (big jumps in shot size, scenes that open close up),
+  5. works out which characters are in the shot and which of them the camera is on (from characters.json).
 
 Usage:
   python3 check_camera.py                       # writes camera_report.html
@@ -219,7 +220,46 @@ def size_rank(by_cat):
     return (min(ranks), max(ranks)) if ranks else None
 
 
-def analyse(prompt_path):
+ROLE_LABEL = {"subject": "camera on", "foreground": "foreground / over shoulder", "pov": "point of view",
+              "in shot": "in shot", "voice": "voice only"}
+TAG = re.compile(r" \(@Image \d+\)")
+
+
+def shot_cast(shot, clip_chars, roster):
+    """Characters in a shot and their role relative to the camera."""
+    camera, action = shot["camera"], TAG.sub("", shot["action"])
+    speakers = {d["character"].split()[0].title() for d in shot.get("dialogue", [])}
+    cast = []
+    for name in roster:
+        word = rf"\b{re.escape(name)}\b"
+        in_cam, in_action, speaks = re.search(word, camera), re.search(word, action), name in speakers
+        if not (in_cam or in_action or speaks):
+            continue
+        if in_cam and re.search(rf"over {re.escape(name)}['’]s shoulder|behind {re.escape(name)}\b", camera):
+            role = "foreground"
+        elif in_cam and re.search(rf"{re.escape(name)}['’]s point of view", camera):
+            role = "pov"
+        elif in_cam:
+            role = "subject"
+        elif in_action or name in clip_chars:
+            role = "in shot"
+        else:
+            role = "voice"
+        cast.append({"name": name, "role": role, "speaks": speaks})
+    return cast
+
+
+def camera_targets(cast):
+    """The characters the shot's camera terms apply to: those named in the camera line,
+    otherwise everyone visible in the shot."""
+    for roles in (("subject",), ("in shot",), ("foreground",)):
+        names = [c["name"] for c in cast if c["role"] in roles]
+        if names:
+            return names
+    return []
+
+
+def analyse(prompt_path, roster=()):
     data = json.loads(Path(prompt_path).read_text(), strict=False)
     clips = data["clips"]
     names = set()
@@ -231,6 +271,7 @@ def analyse(prompt_path):
         for s in c["shot_details"]:
             names.update(d["character"].split()[0].title() for d in s.get("dialogue", []))
     detector = Detector(names)
+    roster = list(roster) or sorted(names)
 
     results, prev_rank, prev_label = [], None, None
     for c in clips:
@@ -238,6 +279,7 @@ def analyse(prompt_path):
         if new_scene:
             prev_rank = None
         shots = []
+        clip_chars = {m.group(1) for x in c.get("subjects", []) for m in [re.search(r" as (\w+)$", x)] if m}
         for i, s in enumerate(c["shot_details"], 1):
             matches = detector.detect(s["camera"])
             by_cat, warnings, notes = check_shot(matches)
@@ -249,8 +291,10 @@ def analyse(prompt_path):
                 notes.append(f"Big jump in shot size from the previous shot ({prev_label} → {label}).")
             if rank:
                 prev_rank, prev_label = rank, label
+            cast = shot_cast(s, clip_chars, roster)
             shots.append({"n": i, "title": s["title"], "camera": s["camera"], "matches": matches,
-                          "by_category": by_cat, "warnings": warnings, "notes": notes})
+                          "by_category": by_cat, "warnings": warnings, "notes": notes,
+                          "cast": cast, "targets": camera_targets(cast)})
         results.append({"id": c["id"], "act": c["act"], "scene": c["scene"],
                         "mode": "new scene" if new_scene else f"continues {c['continuity'].get('previous_clip')}",
                         "shots": shots})
@@ -282,9 +326,28 @@ tr:last-child td{border-bottom:0}mark{background:var(--mark);color:inherit;borde
 .issue{border-radius:6px;padding:4px 8px;margin:0 0 6px;font-size:13px}.w{background:var(--warn-bg);color:var(--warn)}
 .i{background:var(--note-bg);color:var(--note)}.ok{color:var(--muted);font-size:13px}
 .controls{position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:1}
-body.issues-only tr.clean{display:none}body.issues-only .clip.clean{display:none}
 input[type=search]{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text);width:min(420px,100%)}
-@media (max-width:700px){td,th{padding:8px}.m{width:104px}}
+.cast{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.person{all:unset;cursor:pointer;display:grid;grid-template-columns:64px 1fr;column-gap:12px;align-items:center;
+background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px}
+.person:hover,.person.on{border-color:var(--note);box-shadow:0 0 0 2px var(--note-bg)}
+.person .portrait{grid-row:1/span 4;width:64px;height:64px;border-radius:50%;object-fit:cover;background:#ecdcc2}
+.pn{font-weight:700}.pr,.ps,.pt{font-size:12px;color:var(--muted)}.pt{color:var(--text)}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.matrix{border-collapse:collapse;font-size:13px}.matrix th,.matrix td{border-bottom:1px solid var(--line);padding:6px;text-align:center}
+.matrix thead th{vertical-align:bottom;min-width:64px}.matrix thead img{width:58px;border-radius:4px;display:block;margin:0 auto 4px;background:#dbe7f3}
+.matrix thead span{font-size:11px;font-weight:600;color:var(--text)}
+.matrix .rowh{text-align:left;white-space:nowrap;position:sticky;left:0;background:var(--card)}
+.matrix td{background:color-mix(in srgb,var(--note) calc(var(--a)*70%),transparent);font-weight:600}.matrix td.z{background:none}
+.face{width:34px;height:34px;border-radius:50%;object-fit:cover;background:#ecdcc2;flex:none;vertical-align:middle;margin-right:6px}
+.blank{display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:var(--muted)}
+.castcell{min-width:170px}.who{display:flex;align-items:center;font-size:12px;margin-bottom:6px;line-height:1.3}
+.who.r-subject .face{box-shadow:0 0 0 2px var(--note)}.who.r-voice{opacity:.7}.who.r-pov .face,.who.r-foreground .face{opacity:.75}
+.applies{font-size:12px;color:var(--muted);margin-top:6px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+select{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text)}
+@media (max-width:700px){td,th{padding:8px}.m{width:104px}.shots thead{display:none}.shots td{display:block;border:0}
+.shots tr{display:block;border-bottom:1px solid var(--line);padding:6px 0}}
 """
 
 
@@ -312,7 +375,14 @@ def card(m, images, out_dir):
             f'<div class="s">{m["category"]} · {m["score"]:.2f} · {how}</div></div>')
 
 
-def render(results, images, out_path):
+def head_img(name, people, out_dir, cls="face"):
+    src = (people.get(name) or {}).get("head")
+    if not src:
+        return f'<span class="{cls} blank">{html.escape(name[:1])}</span>'
+    return f'<img class="{cls}" src="{html.escape(image_src(src, out_dir))}" alt="{html.escape(name)}" loading="lazy">'
+
+
+def render(results, images, people, out_path):
     out_dir = Path(out_path).resolve().parent
     shots = [s for c in results for s in c["shots"]]
     usage = Counter(m["term"] for s in shots for m in s["matches"])
@@ -320,45 +390,100 @@ def render(results, images, out_path):
     n_note = sum(1 for s in shots if s["notes"])
     n_similar = sum(1 for s in shots for m in s["matches"] if m["method"] != "exact")
 
+    # character x camera term counts (terms count toward the shot's camera targets)
+    roster = [n for n in people] or sorted({c["name"] for s in shots for c in s["cast"]})
+    matrix = {n: Counter() for n in roster}
+    appear, camera_on = Counter(), Counter()
+    for s in shots:
+        for c in s["cast"]:
+            appear[c["name"]] += 1
+        for n in s["targets"]:
+            camera_on[n] += 1
+            matrix.setdefault(n, Counter()).update(dict.fromkeys((m["term"] for m in s["matches"]), 1))
+    used_terms = [t for t in sorted(TERMS, key=lambda t: (CATEGORY_ORDER.index(TERMS[t][0]), t)) if usage[t]]
+    peak = max((v for row in matrix.values() for v in row.values()), default=1)
+
     parts = [f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>Camera Check Report</title>
 <style>{CSS}</style></head><body><main>
 <h1>Camera check report</h1>
-<p class="muted">Camera direction for every shot in prompt.json, matched to camera_angles.json.</p>
+<p class="muted">Camera direction and characters for every shot in prompt.json, matched to camera_angles.json and characters.json.</p>
 <div class="stats"><div class="stat"><b>{len(results)}</b>clips</div><div class="stat"><b>{len(shots)}</b>shots</div>
+<div class="stat"><b>{len([n for n in roster if appear[n]])}</b>characters</div>
 <div class="stat"><b>{n_warn}</b>shots with warnings</div><div class="stat"><b>{n_note}</b>shots with notes</div>
 <div class="stat"><b>{n_similar}</b>similarity matches</div></div>
-<h2>Camera terms used</h2><div class="grid">"""]
+<h2>Characters</h2><p class="muted">Select a character to list every shot they appear in. "Camera on" counts shots
+whose camera line names them, or that show them when the camera line names no one.</p><div class="cast">"""]
+    for n in roster:
+        if not appear[n]:
+            continue
+        top = ", ".join(f"{html.escape(t)} {k}" for t, k in matrix[n].most_common(3))
+        role = html.escape((people.get(n) or {}).get("role", ""))
+        parts.append(f'<button class="person" data-name="{html.escape(n.lower())}">{head_img(n, people, out_dir, "portrait")}'
+                     f'<span class="pn">{html.escape(n)}</span><span class="pr">{role}</span>'
+                     f'<span class="ps">{appear[n]} shots · camera on {camera_on[n]}</span>'
+                     f'<span class="pt">{top or "—"}</span></button>')
+
+    parts.append('</div><h2>Camera terms by character</h2><p class="muted">How many shots apply each camera term to each '
+                 'character. Darker cells mean more shots.</p><div class="scroll"><table class="matrix"><thead><tr><th></th>')
+    for t in used_terms:
+        parts.append(f'<th title="{html.escape(t)} ({TERMS[t][0]})"><img src="{html.escape(image_src(images[t], out_dir))}" '
+                     f'alt=""><span>{html.escape(t)}</span></th>' if t in images else f'<th><span>{html.escape(t)}</span></th>')
+    parts.append("</tr></thead><tbody>")
+    for n in roster:
+        if not camera_on[n]:
+            continue
+        parts.append(f'<tr><th class="rowh">{head_img(n, people, out_dir)}{html.escape(n)}</th>')
+        for t in used_terms:
+            v = matrix[n][t]
+            parts.append(f'<td style="--a:{v/peak:.2f}" class="{"z" if not v else ""}">{v or ""}</td>')
+        parts.append("</tr>")
+    parts.append('</tbody></table></div><h2>Camera terms used</h2><div class="grid">')
+
     for term in sorted(TERMS, key=lambda t: (CATEGORY_ORDER.index(TERMS[t][0]), -usage[t], t)):
         src = images.get(term)
         img = f'<img src="{html.escape(image_src(src, out_dir))}" alt="{html.escape(term)}" loading="lazy">' if src else ""
         parts.append(f'<div class="term">{img}<div class="n">{html.escape(term)}</div>'
                      f'<div class="c">{TERMS[term][0]} · used {usage[term]}×</div></div>')
     parts.append('</div><h2>Shots</h2><div class="controls"><label><input type="checkbox" id="only"> '
-                 'Show only shots with warnings or notes</label> &nbsp; <input type="search" id="q" '
-                 'placeholder="Filter by clip, scene, or camera text"></div>')
+                 'Only shots with warnings or notes</label><select id="who"><option value="">All characters</option>'
+                 + "".join(f'<option value="{html.escape(n.lower())}">{html.escape(n)}</option>' for n in roster if appear[n])
+                 + '</select><input type="search" id="q" placeholder="Filter by clip, scene, or camera text"></div>')
 
     for c in results:
-        clean = all(not s["warnings"] and not s["notes"] for s in c["shots"])
-        parts.append(f'<section class="clip{" clean" if clean else ""}" data-text="{html.escape((c["id"] + " " + c["scene"] + " " + " ".join(s["camera"] for s in c["shots"])).lower())}">'
+        parts.append(f'<section class="clip" data-text="{html.escape((c["id"] + " " + c["scene"] + " " + " ".join(s["camera"] for s in c["shots"])).lower())}">'
                      f'<header><b>{c["id"]}</b><span>{html.escape(c["act"])} · {html.escape(c["scene"])}</span>'
                      f'<span class="muted">{html.escape(c["mode"])}</span></header>'
-                     '<table><thead><tr><th>Shot</th><th>Camera line</th><th>Detected camera view</th><th>Checks</th></tr></thead><tbody>')
+                     '<table class="shots"><thead><tr><th>Shot</th><th>Camera line</th><th>Characters</th>'
+                     '<th>Detected camera view</th><th>Checks</th></tr></thead><tbody>')
         for s in c["shots"]:
             issues = "".join(f'<div class="issue w">⚠ {html.escape(w)}</div>' for w in s["warnings"])
             issues += "".join(f'<div class="issue i">ℹ {html.escape(n)}</div>' for n in s["notes"])
-            row_clean = not s["warnings"] and not s["notes"]
-            parts.append(f'<tr class="{"clean" if row_clean else ""}"><td>{s["n"]}<br><span class="muted">{html.escape(s["title"])}</span></td>'
-                         f'<td>{highlight(s["camera"], s["matches"])}</td>'
-                         f'<td><div class="matches">{"".join(card(m, images, out_dir) for m in s["matches"]) or "<span class=ok>—</span>"}</div></td>'
+            cast = "".join(
+                f'<div class="who r-{p["role"].replace(" ", "")}">{head_img(p["name"], people, out_dir)}'
+                f'<span><b>{html.escape(p["name"])}</b><br>{ROLE_LABEL[p["role"]]}{" · speaks" if p["speaks"] else ""}</span></div>'
+                for p in s["cast"]) or '<span class="ok">—</span>'
+            applies = (f'<div class="applies">Applies to: {html.escape(", ".join(s["targets"]))}</div>'
+                       if s["targets"] and s["matches"] else "")
+            names = " ".join(p["name"].lower() for p in s["cast"])
+            flagged = "flag" if s["warnings"] or s["notes"] else "clean"
+            parts.append(f'<tr class="{flagged}" data-chars="{html.escape(names)}"><td>{s["n"]}<br><span class="muted">{html.escape(s["title"])}</span></td>'
+                         f'<td>{highlight(s["camera"], s["matches"])}</td><td class="castcell">{cast}</td>'
+                         f'<td><div class="matches">{"".join(card(m, images, out_dir) for m in s["matches"]) or "<span class=ok>—</span>"}</div>{applies}</td>'
                          f'<td>{issues or "<span class=ok>✓ OK</span>"}</td></tr>')
         parts.append("</tbody></table></section>")
 
     parts.append("""</main><script>
-const only=document.getElementById('only'),q=document.getElementById('q');
-only.onchange=()=>document.body.classList.toggle('issues-only',only.checked);
-q.oninput=()=>{const v=q.value.toLowerCase();document.querySelectorAll('.clip').forEach(c=>{
-c.style.display=!v||c.dataset.text.includes(v)?'':'none'})};
+const only=document.getElementById('only'),q=document.getElementById('q'),who=document.getElementById('who');
+function apply(){const v=q.value.toLowerCase(),w=who.value,o=only.checked;
+document.querySelectorAll('.clip').forEach(c=>{let shown=0;
+c.querySelectorAll('tbody tr').forEach(r=>{const ok=(!o||r.classList.contains('flag'))&&(!w||(' '+r.dataset.chars+' ').includes(' '+w+' '));
+r.style.display=ok?'':'none';if(ok)shown++});
+c.style.display=shown&&(!v||c.dataset.text.includes(v))?'':'none'});
+document.querySelectorAll('.person').forEach(p=>p.classList.toggle('on',p.dataset.name===w))}
+[only,q,who].forEach(e=>e.addEventListener('input',apply));
+document.querySelectorAll('.person').forEach(p=>p.onclick=()=>{who.value=who.value===p.dataset.name?'':p.dataset.name;apply();
+document.querySelector('.controls').scrollIntoView({behavior:'smooth'})});
 </script></body></html>""")
     Path(out_path).write_text("".join(parts))
 
@@ -367,6 +492,7 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--prompts", default=ROOT / "prompt.json")
     ap.add_argument("--angles", default=ROOT / "camera_angles.json")
+    ap.add_argument("--characters", default=ROOT / "characters.json")
     ap.add_argument("--out", default=ROOT / "camera_report.html")
     ap.add_argument("--query", help="run a similarity search for this camera description and exit")
     args = ap.parse_args()
@@ -386,11 +512,15 @@ def main():
             print(f"  {m['term']:24} {m['category']:9} {m['score']:.2f}  {m['method']}  [{m['matched']}]")
         return
 
-    results, _ = analyse(args.prompts)
-    render(results, images, args.out)
+    char_path = Path(args.characters)
+    people = json.loads(char_path.read_text()) if char_path.exists() else {}
+    results, _ = analyse(args.prompts, roster=people.keys())
+    render(results, images, people, args.out)
     shots = [s for c in results for s in c["shots"]]
     print(f"Checked {len(shots)} shots in {len(results)} clips -> {args.out}")
     print(f"  warnings: {sum(len(s['warnings']) for s in shots)}  notes: {sum(len(s['notes']) for s in shots)}")
+    per = Counter(c["name"] for s in shots for c in s["cast"])
+    print("  characters: " + ", ".join(f"{n} {k}" for n, k in per.most_common()))
     for c in results:
         for s in c["shots"]:
             for w in s["warnings"]:
