@@ -16,6 +16,16 @@ One Seedance 2.0 generation is a single clip of 4 to 15 seconds. Longer pieces a
 | [prompt_syntax.md](./references/prompt_syntax.md) | The default prompt structure: block order, block grammar, template, worked example, validation checklist |
 | [prompt_labels.txt](./references/prompt_labels.txt) | Label vocabulary from community Seedance prompts, grouped by category, with aliases and frequency |
 | [seedance_2_0_prompt_guide.md](./references/seedance_2_0_prompt_guide.md) | Official BytePlus Seedance 2.0 prompt guide notes: task patterns (reference, edit, extend), subject binding, shot and action rules, special symbols, asset limits, troubleshooting. Source: [Seedance 2.0 prompt guide](https://ai.byteplus.com/ark/region:ap-southeast-1/docs/ModelArk/seedance-2-0-prompt-guide) |
+| [camera_language.md](./references/camera_language.md) | Camera vocabulary: shot sizes (WS to ECU), angles, framing and dialogue coverage (OTS, shot/reverse shot, 180° rule), movements, focus, and how to write them in a shot's `Camera:` line |
+
+### Camera language
+
+Read `camera_language.md` when writing or reviewing a shot's `Camera:` line. Key rules:
+
+- Write the line as `<shot size>[, <angle>][, <one movement>]`, e.g. `Medium close-up, low angle, slow push-in`. Use `static` when the camera doesn't move.
+- Use one movement per shot. Shot size, angle, and focus are framing choices and can be combined freely.
+- Open each new scene with an establishing or wide shot, then step closer gradually (WS → MS → MCU → CU).
+- Cover dialogue with a two-shot, over-the-shoulder shots, or shot/reverse shot, and keep the 180° rule: each character stays on the same side of the frame throughout the scene.
 
 ### Official Seedance 2.0 guide
 
