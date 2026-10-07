@@ -168,7 +168,10 @@ def main():
 
         shots = clip["shot_details"]
         if clip["id"] in HANDOFF_FIXES:
-            shots[0]["camera"], shots[0]["action"] = HANDOFF_FIXES[clip["id"]]
+            camera, action = HANDOFF_FIXES[clip["id"]]
+            shots[0]["action"] = action
+            if "camera_previous" not in shots[0]:  # keep camera lines changed by apply_camera.py
+                shots[0]["camera"] = camera
         for s in shots:
             s["action"] = bind(s["action"], tags)
 

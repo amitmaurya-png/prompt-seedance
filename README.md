@@ -27,6 +27,7 @@ prompt-seedance/
 │   ├── make_camera_images.py Draws assets/camera/ and data/camera_angles.json
 │   ├── make_character_images.py  Draws assets/characters/, data/characters.json, reports/characters.html
 │   ├── camera_suggest.py     Detects a shot's genre/mood and suggests a camera
+│   ├── apply_camera.py       Writes reviewed camera lines into data/prompt.json
 │   └── check_camera.py       Checks every shot → reports/camera_report.html
 ├── assets/
 │   ├── camera/               Camera term diagrams (SVG)

@@ -310,7 +310,8 @@ def analyse(prompt_path, roster=()):
             sug = suggest(s["title"], TAG.sub("", s["action"]), s.get("visual", ""), dlg, cast, genre,
                           opens_scene=new_scene and i == 1)
             fit, fit_notes = compare(sug, matches, genre)
-            shots.append({"suggestion": sug, "fit": fit, "fit_notes": fit_notes,"n": i, "title": s["title"], "camera": s["camera"], "matches": matches,
+            shots.append({"previous": s.get("camera_previous"), "reason": s.get("camera_reason", ""),
+                          "suggestion": sug, "fit": fit, "fit_notes": fit_notes,"n": i, "title": s["title"], "camera": s["camera"], "matches": matches,
                           "by_category": by_cat, "warnings": warnings, "notes": notes,
                           "cast": cast, "targets": camera_targets(cast),
                           "dialogue": [{"speaker": d["character"].title(), "line": d["line"]}
@@ -382,6 +383,10 @@ display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));column-ga
 .chip{display:inline-flex;align-items:center;font-size:12px;background:var(--card);border-radius:999px;padding:2px 10px 2px 2px}
 .chip .face{width:26px;height:26px}.chip .ots{width:40px;height:22px;border-radius:4px;margin-left:6px;object-fit:cover}.chip.r-subject{box-shadow:0 0 0 2px var(--note)}.chip.r-voice{opacity:.7}
 .tag{font-size:11px;color:var(--note);margin-left:4px}
+.changed{margin:0 0 8px;padding:6px 10px;border-left:3px solid var(--note);background:var(--note-bg);border-radius:6px;font-size:13px}
+.was{text-decoration:line-through;color:var(--muted)}.chg{font-size:11px;font-weight:700;color:var(--note);border:1px solid var(--note);border-radius:999px;padding:0 8px}
+.chtable{border-collapse:collapse;width:100%;font-size:13px}.chtable th,.chtable td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.chtable a{color:var(--note);text-decoration:none;white-space:nowrap}.fitcell{font-weight:700}.fitcell.fit-matches{color:#3f9b5f}.fitcell.fit-close{color:#c79a2b}.fitcell.fit-differs{color:#c4553f}
 .sug{margin-top:10px;border:1px dashed var(--line);border-radius:10px;padding:8px 10px}
 .sug.fit-matches{border-color:#3f9b5f}.sug.fit-close{border-color:#c79a2b}.sug.fit-differs{border-color:#c4553f}
 .sline{font-weight:700;margin:2px 0 6px}.thumbs{display:flex;flex-wrap:wrap;gap:6px}
@@ -486,18 +491,40 @@ def shot_card(s, images, people, out_dir):
                   + "".join(f'<div class="fitnote">{html.escape(n)}</div>' for n in s["fit_notes"])
                   + f'<details><summary>Why</summary><div class="muted">Detected mood: {html.escape(mood_txt)}</div>'
                   + "".join(f'<div>• {html.escape(r)}</div>' for r in sug["reasons"]) + '</details></div>')
+    changed = (f'<div class="changed"><div class="label">Changed by camera-knowledge</div>'
+               f'<div><span class="was">{html.escape(s["previous"])}</span> → <b>{html.escape(s["camera"])}</b></div>'
+               + (f'<div class="muted">{html.escape(s["reason"])}</div>' if s["reason"] else "") + '</div>'
+               if s["previous"] else "")
     flagged = "flag" if s["warnings"] or s["notes"] else "clean"
     names = " ".join(p["name"].lower() for p in s["cast"])
-    return (f'<article class="shot {flagged}" id="{s["anchor"]}" data-fit="{s["fit"]}" data-chars="{html.escape(names)}">'
+    return (f'<article class="shot {flagged}" id="{s["anchor"]}" data-changed="{"yes" if s["previous"] else "no"}" data-fit="{s["fit"]}" data-chars="{html.escape(names)}">'
             f'<div class="sh"><span class="num">Shot {s["n"]}</span><b>{html.escape(s["title"])}</b>'
+            f'{"<span class=chg>changed</span>" if s["previous"] else ""}'
             f'{"<span class=ok>✓ OK</span>" if flagged == "clean" else ""}</div>'
             f'<div class="body"><div class="cam"><div class="label">Camera</div>'
-            f'<div class="camline">{highlight(s["camera"], s["matches"])}</div>'
+            f'<div class="camline">{highlight(s["camera"], s["matches"])}</div>{changed}'
             f'<div class="matches">{"".join(card(m, images, out_dir) for m in shown) or "<span class=ok>No camera term found</span>"}</div>'
             f'{applies}{ots_note}{suggestion}</div>'
             f'<div class="talk"><div class="label">Characters &amp; dialogue</div><div class="cast-row">{cast or "<span class=ok>No named characters</span>"}</div>'
             f'{"".join(lines) or "<div class=ok>No dialogue in this shot</div>"}</div></div>'
             f'{f"<div class=issues>{issues}</div>" if issues else ""}</article>')
+
+
+def changes_section(results):
+    """Before/after table of camera lines changed by the camera-knowledge skill (apply_camera.py)."""
+    rows = [(c, s) for c in results for s in c["shots"] if s["previous"]]
+    if not rows:
+        return '<h2 id="changes">Camera changes</h2><p class="muted">No camera lines have been changed yet.</p>'
+    out = [f'<h2 id="changes">Camera changes</h2><p class="muted">{len(rows)} camera lines changed by the '
+           'camera-knowledge skill. Undo one with <code>python3 scripts/apply_camera.py --undo clip-NN:N</code>.</p>'
+           '<div class="scroll"><table class="chtable"><thead><tr><th>Shot</th><th>Before</th><th>After</th>'
+           '<th>Why</th><th>Fit now</th></tr></thead><tbody>']
+    for c, s in rows:
+        out.append(f'<tr><td><a href="#{s["anchor"]}">{c["id"]} · {s["n"]}</a></td>'
+                   f'<td class="was">{html.escape(s["previous"])}</td><td><b>{html.escape(s["camera"])}</b></td>'
+                   f'<td class="muted">{html.escape(s["reason"])}</td><td class="fitcell fit-{s["fit"]}">{s["fit"]}</td></tr>')
+    out.append("</tbody></table></div>")
+    return "".join(out)
 
 
 def dialogue_section(results, people, out_dir):
@@ -541,6 +568,7 @@ def render(results, images, people, out_path):
     n_note = sum(1 for s in shots if s["notes"])
     n_similar = sum(1 for s in shots for m in s["matches"] if m["method"] != "exact")
     fits = Counter(s["fit"] for s in shots)
+    n_changed = sum(1 for s in shots if s["previous"])
 
     # character x camera term counts (terms count toward the shot's camera targets)
     roster = [n for n in people] or sorted({c["name"] for s in shots for c in s["cast"]})
@@ -567,8 +595,9 @@ def render(results, images, people, out_path):
 <div class="stat"><b>{n_lines}</b>dialogue lines</div>
 <div class="stat"><b>{n_warn}</b>shots with warnings</div><div class="stat"><b>{n_note}</b>shots with notes</div>
 <div class="stat"><b>{n_similar}</b>similarity matches</div>
-<div class="stat"><b>{fits["matches"]}/{fits["close"]}/{fits["differs"]}</b>fit / close / differ from suggestion</div></div>
-<nav class="jump"><a href="#dialogue">Dialogue</a><a href="#shots">Shots</a></nav>
+<div class="stat"><b>{fits["matches"]}/{fits["close"]}/{fits["differs"]}</b>fit / close / differ from suggestion</div>
+<div class="stat"><b>{n_changed}</b>camera lines changed</div></div>
+<nav class="jump"><a href="#changes">Camera changes</a><a href="#dialogue">Dialogue</a><a href="#shots">Shots</a></nav>
 <h2>Characters</h2><p class="muted">Select a character to list every shot they appear in. "Camera on" counts shots
 whose camera line names them, or that show them when the camera line names no one.</p><div class="cast">"""]
     for n in roster:
@@ -605,12 +634,13 @@ whose camera line names them, or that show them when the camera line names no on
     for c in results:
         for sh in c["shots"]:
             sh["anchor"] = f'{c["id"]}-shot-{sh["n"]}'
-    parts.append('</div>' + dialogue_section(results, people, out_dir))
+    parts.append('</div>' + changes_section(results) + dialogue_section(results, people, out_dir))
     parts.append('<h2 id="shots">Shots</h2><div class="controls"><label><input type="checkbox" id="only"> '
                  'Only shots with warnings or notes</label><select id="who"><option value="">All characters</option>'
                  + "".join(f'<option value="{html.escape(n.lower())}">{html.escape(n)}</option>' for n in roster if appear[n])
                  + '</select><select id="fit"><option value="">All suggestion fits</option><option value="differs">Differs from suggestion</option>'
-                 '<option value="close">Close to suggestion</option><option value="matches">Fits suggestion</option></select>'
+                 '<option value="close">Close to suggestion</option><option value="matches">Fits suggestion</option>'
+                 '<option value="changed">Changed by camera-knowledge</option></select>'
                  '<input type="search" id="q" placeholder="Filter by clip, scene, or camera text"></div>')
 
     act = scene = None
@@ -631,7 +661,7 @@ whose camera line names them, or that show them when the camera line names no on
 const only=document.getElementById('only'),q=document.getElementById('q'),who=document.getElementById('who'),fit=document.getElementById('fit');
 function apply(){const v=q.value.toLowerCase(),w=who.value,o=only.checked,f=fit.value;
 document.querySelectorAll('.clip').forEach(c=>{let shown=0;
-c.querySelectorAll('.shot').forEach(r=>{const ok=(!o||r.classList.contains('flag'))&&(!f||r.dataset.fit===f)&&(!w||(' '+r.dataset.chars+' ').includes(' '+w+' '));
+c.querySelectorAll('.shot').forEach(r=>{const ok=(!o||r.classList.contains('flag'))&&(!f||(f==='changed'?r.dataset.changed==='yes':r.dataset.fit===f))&&(!w||(' '+r.dataset.chars+' ').includes(' '+w+' '));
 r.style.display=ok?'':'none';if(ok)shown++});
 c.style.display=shown&&(!v||c.dataset.text.includes(v))?'':'none'});
 document.querySelectorAll('.sceneh,.acth').forEach(h=>{let n=h.nextElementSibling,any=false;
