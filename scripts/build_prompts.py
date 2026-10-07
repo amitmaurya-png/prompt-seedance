@@ -8,6 +8,7 @@ import sys
 import time
 from pathlib import Path
 
+from paths import DATA
 from extract_breakdown import (
     DEFAULT_MODEL,
     ENV_PATH,
@@ -145,8 +146,8 @@ def fill_components(client, clip: dict) -> tuple[str, dict]:
 def main() -> None:
     load_dotenv(ENV_PATH)
     parser = argparse.ArgumentParser(description="Build Seedance prompts with OpenAI GPT.")
-    parser.add_argument("breakdown", type=Path, nargs="?", default=Path("breakdown.json"))
-    parser.add_argument("-o", "--output", type=Path, default=Path("prompts.json"))
+    parser.add_argument("breakdown", type=Path, nargs="?", default=DATA / "breakdown.json")
+    parser.add_argument("-o", "--output", type=Path, default=DATA / "prompts.json")
     parser.add_argument("--max-clips", type=int, default=0, help="Stop after this many clips. 0 means all.")
     args = parser.parse_args()
 

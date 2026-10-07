@@ -2,7 +2,7 @@
 
 A single, general structure distilled from community Seedance prompts.
 Every prompt style, from a one-paragraph prompt to a 15-shot timeline, fits this skeleton.
-Label vocabulary and variants are listed in [prompt_labels.txt](./prompt_labels.txt).
+Label vocabulary and variants are listed in [prompt_labels.md](./prompt_labels.md).
 
 ---
 

@@ -15,7 +15,9 @@ import json
 import re
 from pathlib import Path
 
-PATH = Path(__file__).with_name("prompt.json")
+from paths import DATA
+
+PATH = DATA / "prompt.json"
 
 ORDER = ["Miri", "Nim", "Saba", "Ima", "Tav", "Yonah", "Andrew", "Philip", "Jesus"]
 

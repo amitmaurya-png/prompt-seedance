@@ -17,8 +17,9 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-ROOT = Path(__file__).parent
-OUT = ROOT / "assets" / "characters"
+from paths import ASSETS, DATA, REPORTS, ROOT
+
+OUT = ASSETS / "characters"
 SIZE = 1024  # PNG pixels
 
 STYLE = ("warm, painterly 2D storybook animation style, soft textured brushwork, gentle natural light, "
@@ -372,15 +373,20 @@ def render_png(svg_paths):
 
 
 def write_gallery(data):
-    """characters.html: every character's images, script details, design, and image prompt."""
+    """reports/characters.html: every character's images, script details, design, and image prompt."""
     import html as h
+    import os
+
+    def src(link):
+        return link if "://" in link else os.path.relpath(ROOT / link, REPORTS)
     cards = "".join(
-        f'<article><div class="imgs"><img src="{h.escape(d["full"])}" alt="{h.escape(n)} full body">'
-        f'<img src="{h.escape(d["head"])}" alt="{h.escape(n)} close-up"></div><h2>{h.escape(n)}</h2>'
+        f'<article><div class="imgs"><img src="{h.escape(src(d["full"]))}" alt="{h.escape(n)} full body">'
+        f'<img src="{h.escape(src(d["head"]))}" alt="{h.escape(n)} close-up"></div><h2>{h.escape(n)}</h2>'
         f'<p class="role">{h.escape(d["role"])}</p><p><b>From the script:</b> {h.escape(d["from_script"])}</p>'
         f'<p><b>Design:</b> {h.escape(d["design"])}</p><details><summary>Image prompt</summary>'
         f'<p class="prompt">{h.escape(d["image_prompt"])}</p></details></article>' for n, d in data.items())
-    (ROOT / "characters.html").write_text(f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
+    REPORTS.mkdir(exist_ok=True)
+    (REPORTS / "characters.html").write_text(f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>Character References</title><style>
 :root{{--bg:#f6f1e8;--card:#fff;--text:#2b2118;--muted:#6b5d50;--line:#e6dccd}}
 @media (prefers-color-scheme:dark){{:root{{--bg:#16130f;--card:#211c17;--text:#efe7dc;--muted:#b3a593;--line:#3a3128}}}}
@@ -417,7 +423,7 @@ def main():
             svg = OUT / Path(data[name][kind]).with_suffix(".svg").name
             if svg not in pngs:
                 data[name][kind] = f"assets/characters/{svg.name}"
-    (ROOT / "characters.json").write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+    (DATA / "characters.json").write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
     write_gallery(data)
     print(f"Wrote {len(svgs)} SVGs and {len(pngs)} PNGs to {OUT.relative_to(ROOT)}/ and characters.json")
 

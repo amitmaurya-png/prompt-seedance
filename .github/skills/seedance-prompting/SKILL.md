@@ -14,7 +14,7 @@ One Seedance 2.0 generation is a single clip of 4 to 15 seconds. Longer pieces a
 | File | Use it for |
 |---|---|
 | [prompt_syntax.md](./references/prompt_syntax.md) | The default prompt structure: block order, block grammar, template, worked example, validation checklist |
-| [prompt_labels.txt](./references/prompt_labels.txt) | Label vocabulary from community Seedance prompts, grouped by category, with aliases and frequency |
+| [prompt_labels.md](./references/prompt_labels.md) | Label vocabulary from community Seedance prompts, grouped by category, with aliases and frequency |
 | [seedance_2_0_prompt_guide.md](./references/seedance_2_0_prompt_guide.md) | Official BytePlus Seedance 2.0 prompt guide notes: task patterns (reference, edit, extend), subject binding, shot and action rules, special symbols, asset limits, troubleshooting. Source: [Seedance 2.0 prompt guide](https://ai.byteplus.com/ark/region:ap-southeast-1/docs/ModelArk/seedance-2-0-prompt-guide) |
 | [camera_language.md](./references/camera_language.md) | Camera vocabulary: shot sizes (WS to ECU), angles, framing and dialogue coverage (OTS, shot/reverse shot, 180° rule), movements, focus, and how to write them in a shot's `Camera:` line |
 
@@ -26,6 +26,7 @@ Read `camera_language.md` when writing or reviewing a shot's `Camera:` line. Key
 - Use one movement per shot. Shot size, angle, and focus are framing choices and can be combined freely.
 - Open each new scene with an establishing or wide shot, then step closer gradually (WS → MS → MCU → CU).
 - Cover dialogue with a two-shot, over-the-shoulder shots, or shot/reverse shot, and keep the 180° rule: each character stays on the same side of the frame throughout the scene.
+- Match camera choices to the genre (section 6 of `camera_language.md`). For this project's screenplay, use family storybook conventions (eye level at child height, gentle moves, few extreme close-ups) and epic/biblical conventions for the Galilean hillside (wide crowds, aerial reveals, Jesus only from behind or in silhouette).
 
 ### Official Seedance 2.0 guide
 
@@ -53,7 +54,7 @@ FORMAT → STYLE → REFERENCES → SUBJECT → SCENE → CAMERA → SHOTS → A
 
 ### Label vocabulary
 
-Use the canonical labels from `prompt_syntax.md`. Consult `prompt_labels.txt` when you need to:
+Use the canonical labels from `prompt_syntax.md`. Consult `prompt_labels.md` when you need to:
 
 - interpret or review a user's prompt that uses alias labels (for example `Visual`, `Tone`, `【Scene】`, `[Constraints (Important)]`), mapping each to its canonical block;
 - add a specialised sub-label that is already listed (for example `Velocity Ramp choreography`, `Freeze Frame`, `Final hero frame`).
@@ -80,13 +81,26 @@ Project rules override the generic syntax when working on this repository's scre
 - Keep the established warm, painterly storybook animation style when working on this screenplay unless the user requests a change.
 - Write dialogue in `{curly braces}` and asset tokens as `@Image 1`, `@Video 1`, `@Audio 1`.
 - Do not add timecodes; shots are numbered and the model sets the pace.
-- Follow `approach.md` and the system prompts in `build_prompts.py` when generating or reviewing prompts for this repository.
+- Follow [docs/approach.md](../../../docs/approach.md) and the system prompts in [scripts/build_prompts.py](../../../scripts/build_prompts.py) when generating or reviewing prompts for this repository.
+
+## Project Scripts
+
+Run these from the repository root. Data lives in `data/`, generated images in `assets/`, and HTML reports in `reports/`.
+
+| Script | When to run it |
+|---|---|
+| [scripts/add_continuity.py](../../../scripts/add_continuity.py) | After editing `data/prompt.json` or the continuity blocks: rebuilds prompts with scene continuity |
+| [scripts/check_camera.py](../../../scripts/check_camera.py) | To review camera lines, characters, and dialogue per shot: writes `reports/camera_report.html`. Use `--query "text"` for a camera-term similarity search |
+| [scripts/make_camera_images.py](../../../scripts/make_camera_images.py) | To redraw camera diagrams and reset `data/camera_angles.json` |
+| [scripts/make_character_images.py](../../../scripts/make_character_images.py) | To redraw character references and rewrite `data/characters.json` and `reports/characters.html` |
+| [scripts/extract_breakdown.py](../../../scripts/extract_breakdown.py) | Screenplay PDF → `data/breakdown.json` (calls the OpenAI API) |
+| [scripts/build_prompts.py](../../../scripts/build_prompts.py) | `data/breakdown.json` → `data/prompts.json` (calls the OpenAI API) |
 
 ## Output Formats
 
 For a standalone request, return a clean, copyable Seedance prompt in the `prompt_syntax.md` structure, including only the blocks useful for that prompt.
 
-When the user requests output compatible with `build_prompts.py`, return JSON with this shape. The syntax blocks map onto it: `REFERENCES` → `asset_preparation` and the `*_reference` fields, `SHOTS` → `shots`, and `STYLE` / `CAMERA` / `AUDIO` / `CONSTRAINTS` → `global_direction`.
+When the user requests output compatible with `scripts/build_prompts.py`, return JSON with this shape. The syntax blocks map onto it: `REFERENCES` → `asset_preparation` and the `*_reference` fields, `SHOTS` → `shots`, and `STYLE` / `CAMERA` / `AUDIO` / `CONSTRAINTS` → `global_direction`.
 
 ```json
 {

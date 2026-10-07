@@ -10,9 +10,9 @@ For each shot's Camera line the script:
   5. works out which characters are in the shot and which of them the camera is on (from characters.json).
 
 Usage:
-  python3 check_camera.py                       # writes camera_report.html
-  python3 check_camera.py --out report.html
-  python3 check_camera.py --query "camera circles slowly around the boy"   # similarity search only
+  python3 scripts/check_camera.py                # writes reports/camera_report.html
+  python3 scripts/check_camera.py --out other.html
+  python3 scripts/check_camera.py --query "camera circles slowly around the boy"   # similarity search only
 """
 
 import argparse
@@ -25,7 +25,7 @@ import re
 from collections import Counter
 from pathlib import Path
 
-ROOT = Path(__file__).parent
+from paths import DATA, REPORTS, ROOT
 
 # term -> (category, aliases). "*" in an alias matches any single word.
 TERMS = {
@@ -619,10 +619,10 @@ document.querySelector('.controls').scrollIntoView({behavior:'smooth'})});
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--prompts", default=ROOT / "prompt.json")
-    ap.add_argument("--angles", default=ROOT / "camera_angles.json")
-    ap.add_argument("--characters", default=ROOT / "characters.json")
-    ap.add_argument("--out", default=ROOT / "camera_report.html")
+    ap.add_argument("--prompts", default=DATA / "prompt.json")
+    ap.add_argument("--angles", default=DATA / "camera_angles.json")
+    ap.add_argument("--characters", default=DATA / "characters.json")
+    ap.add_argument("--out", default=REPORTS / "camera_report.html")
     ap.add_argument("--query", help="run a similarity search for this camera description and exit")
     args = ap.parse_args()
 

@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""Draw one SVG diagram per camera term into assets/camera/ and write camera_angles.json.
+"""Draw one SVG diagram per camera term into assets/camera/ and write data/camera_angles.json.
 
-camera_angles.json maps each camera term to its image link. Replace any link with your own
+data/camera_angles.json maps each camera term to its image link. Replace any link with your own
 image (a relative path or a full URL) and check_camera.py will use it.
 """
 
 import json
 from pathlib import Path
 
-ROOT = Path(__file__).parent
-OUT = ROOT / "assets" / "camera"
+from paths import ASSETS, DATA, ROOT
+
+OUT = ASSETS / "camera"
 
 SKY, GROUND, HILL = "#dbe7f3", "#cdb894", "#a9c18f"
 SKIN, HAIR, SHIRT, PANTS = "#f0c9a4", "#5a3b26", "#4f7cac", "#3b4a5a"
@@ -210,7 +211,7 @@ def main():
         name = term.lower().replace("/", "-").replace(" ", "-") + ".svg"
         (OUT / name).write_text(content)
         mapping[term] = f"assets/camera/{name}"
-    (ROOT / "camera_angles.json").write_text(json.dumps(mapping, indent=2) + "\n")
+    (DATA / "camera_angles.json").write_text(json.dumps(mapping, indent=2) + "\n")
     print(f"Wrote {len(mapping)} images to {OUT.relative_to(ROOT)}/ and camera_angles.json")
 
 

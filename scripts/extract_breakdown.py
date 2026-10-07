@@ -11,7 +11,7 @@ from pathlib import Path
 from pypdf import PdfReader
 
 DEFAULT_MODEL = "gpt-6-sol"
-ENV_PATH = Path(__file__).resolve().parent / ".env"
+from paths import DATA, ENV_PATH
 
 SYSTEM = """You extract a screenplay into acts, scenes, and shots.
 
@@ -98,7 +98,7 @@ def main() -> None:
     load_dotenv(ENV_PATH)
     parser = argparse.ArgumentParser(description="Extract acts, scenes, and shots with OpenAI GPT.")
     parser.add_argument("pdf", type=Path)
-    parser.add_argument("-o", "--output", type=Path, default=Path("breakdown.json"))
+    parser.add_argument("-o", "--output", type=Path, default=DATA / "breakdown.json")
     parser.add_argument("--max-tokens", type=int, default=65536)
     args = parser.parse_args()
 

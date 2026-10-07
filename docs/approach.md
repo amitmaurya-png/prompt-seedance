@@ -7,8 +7,8 @@ The goal is a set of text prompts that can be pasted into Seedance 2.0, one shor
 
 ## Step 1. Read the screenplay as acts, scenes, and shots
 
-`extract_breakdown.py` sends the PDF text to OpenAI GPT-6 Sol only. It retries the same model if the API is temporarily busy.
-The model returns JSON, saved as `breakdown.json`.
+`scripts/extract_breakdown.py` sends the PDF text to OpenAI GPT-6 Sol only. It retries the same model if the API is temporarily busy.
+The model returns JSON, saved as `data/breakdown.json`.
 
 - An **act** is a heading such as `ACT ONE`. Text before the first act is the cold open.
 - A **scene** is a heading that starts with `INT.` or `EXT.`
@@ -38,12 +38,12 @@ A change of place, a chase, or the hillside miracle is rendered as separate clip
 
 ## Step 3. Turn script shots into Seedance clips
 
-`build_prompts.py` reads `breakdown.json` and uses OpenAI GPT-6 Sol only. It retries the same model if the API is temporarily busy.
+`scripts/build_prompts.py` reads `data/breakdown.json` and uses OpenAI GPT-6 Sol only. It retries the same model if the API is temporarily busy.
 
 1. GPT groups the script shots into clips. Shots stay together when the place, the people, and the feeling stay the same. A new clip starts when one of those changes. A clip holds about two or three shots, short enough for 4 to 15 seconds. A script shot with too many spoken lines is split.
 2. GPT writes prompts in the supplied storyboard-example format: asset preparation, a short instruction binding characters and scene to their image references, optional camera-motion and audio references, numbered shots with actions and dialogue, then a global visual-style, continuity, motion, and audio direction. Dialogue is preserved verbatim in curly braces.
 
-The result is `prompts.json`. Each clip stores the asset-preparation and prompt sections plus a finished `prompt` string. The formula is recorded as `advanced`. Re-run `build_prompts.py` to regenerate clips in this format.
+The result is `data/prompts.json`. Each clip stores the asset-preparation and prompt sections plus a finished `prompt` string. The formula is recorded as `advanced`. Re-run `scripts/build_prompts.py` to regenerate clips in this format.
 
 ## Step 4. Use the text prompt
 
@@ -57,8 +57,9 @@ Generate one village clip first. If the look holds, reuse the same style line fo
 
 | File | Role |
 |---|---|
-| `extract_breakdown.py` | PDF to `breakdown.json` |
-| `breakdown.json` | Acts, scenes, and shots |
-| `build_prompts.py` | `breakdown.json` to `prompts.json` |
-| `prompts.json` | Formula fields and the text prompt for each clip |
+| `scripts/extract_breakdown.py` | PDF to `data/breakdown.json` |
+| `data/breakdown.json` | Acts, scenes, and shots |
+| `scripts/build_prompts.py` | `data/breakdown.json` to `data/prompts.json` |
+| `data/prompts.json` | Formula fields and the text prompt for each clip |
+| `data/prompt.json` | Current skill-based prompts with scene continuity (see `scripts/add_continuity.py`) |
 | `.env` | `OPENAI_API_KEY` for breakdown extraction and prompt generation, not committed |
