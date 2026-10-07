@@ -9,7 +9,9 @@ prompt-seedance/
 ├── README.md
 ├── requirements.txt
 ├── .env                      OPENAI_API_KEY (not committed)
-├── .github/skills/seedance-prompting/   VS Code agent skill: prompt rules and references
+├── .github/skills/
+│   ├── seedance-prompting/   Agent skill: writing Seedance prompts
+│   └── camera-knowledge/     Agent skill: camera terms, genre conventions, camera checks
 ├── docs/
 │   └── approach.md           How the screenplay becomes Seedance prompts
 ├── data/

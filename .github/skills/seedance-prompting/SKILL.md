@@ -16,17 +16,18 @@ One Seedance 2.0 generation is a single clip of 4 to 15 seconds. Longer pieces a
 | [prompt_syntax.md](./references/prompt_syntax.md) | The default prompt structure: block order, block grammar, template, worked example, validation checklist |
 | [prompt_labels.md](./references/prompt_labels.md) | Label vocabulary from community Seedance prompts, grouped by category, with aliases and frequency |
 | [seedance_2_0_prompt_guide.md](./references/seedance_2_0_prompt_guide.md) | Official BytePlus Seedance 2.0 prompt guide notes: task patterns (reference, edit, extend), subject binding, shot and action rules, special symbols, asset limits, troubleshooting. Source: [Seedance 2.0 prompt guide](https://ai.byteplus.com/ark/region:ap-southeast-1/docs/ModelArk/seedance-2-0-prompt-guide) |
-| [camera_language.md](./references/camera_language.md) | Camera vocabulary: shot sizes (WS to ECU), angles, framing and dialogue coverage (OTS, shot/reverse shot, 180° rule), movements, focus, and how to write them in a shot's `Camera:` line |
+| [camera_language.md](../camera-knowledge/references/camera_language.md) | Camera vocabulary and how to write a shot's `Camera:` line (owned by the `camera-knowledge` skill) |
+| [camera_genres.md](../camera-knowledge/references/camera_genres.md) | Which camera choices suit which genre (owned by the `camera-knowledge` skill) |
 
 ### Camera language
 
-Read `camera_language.md` when writing or reviewing a shot's `Camera:` line. Key rules:
+Camera details live in the `camera-knowledge` skill. Read its `camera_language.md` when writing or reviewing a shot's `Camera:` line. Key rules:
 
 - Write the line as `<shot size>[, <angle>][, <one movement>]`, e.g. `Medium close-up, low angle, slow push-in`. Use `static` when the camera doesn't move.
 - Use one movement per shot. Shot size, angle, and focus are framing choices and can be combined freely.
 - Open each new scene with an establishing or wide shot, then step closer gradually (WS → MS → MCU → CU).
 - Cover dialogue with a two-shot, over-the-shoulder shots, or shot/reverse shot, and keep the 180° rule: each character stays on the same side of the frame throughout the scene.
-- Match camera choices to the genre (section 6 of `camera_language.md`). For this project's screenplay, use family storybook conventions (eye level at child height, gentle moves, few extreme close-ups) and epic/biblical conventions for the Galilean hillside (wide crowds, aerial reveals, Jesus only from behind or in silhouette).
+- Match camera choices to the genre (`camera_genres.md`). For this project's screenplay, use family storybook conventions (eye level at child height, gentle moves, few extreme close-ups) and epic/biblical conventions for the Galilean hillside (wide crowds, aerial reveals, Jesus only from behind or in silhouette).
 
 ### Official Seedance 2.0 guide
 
