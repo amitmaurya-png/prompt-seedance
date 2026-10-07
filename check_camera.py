@@ -225,9 +225,20 @@ ROLE_LABEL = {"subject": "camera on", "foreground": "foreground / over shoulder"
 TAG = re.compile(r" \(@Image \d+\)")
 
 
+def behind_names(camera, roster):
+    """Names framed from behind or over the shoulder: 'over Miri's shoulder', 'behind Ima and Saba'."""
+    found = set()
+    for m in re.finditer(r"over ([\w']+?)['’]s shoulder", camera):
+        found.add(m.group(1))
+    for m in re.finditer(r"behind ((?:[A-Z]\w+)(?:\s*(?:,|and)\s*[A-Z]\w+)*)", camera):
+        found.update(n for n in re.split(r"\s*(?:,|and)\s*", m.group(1)) if n)
+    return found & set(roster)
+
+
 def shot_cast(shot, clip_chars, roster):
     """Characters in a shot and their role relative to the camera."""
     camera, action = shot["camera"], TAG.sub("", shot["action"])
+    behind = behind_names(camera, roster)
     speakers = {d["character"].split()[0].title() for d in shot.get("dialogue", [])}
     cast = []
     for name in roster:
@@ -235,7 +246,7 @@ def shot_cast(shot, clip_chars, roster):
         in_cam, in_action, speaks = re.search(word, camera), re.search(word, action), name in speakers
         if not (in_cam or in_action or speaks):
             continue
-        if in_cam and re.search(rf"over {re.escape(name)}['’]s shoulder|behind {re.escape(name)}\b", camera):
+        if name in behind:
             role = "foreground"
         elif in_cam and re.search(rf"{re.escape(name)}['’]s point of view", camera):
             role = "pov"
@@ -362,8 +373,16 @@ display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));column-ga
 .camline{margin-bottom:8px}.talk{background:var(--chip);border-radius:10px;padding:10px 12px}
 .cast-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
 .chip{display:inline-flex;align-items:center;font-size:12px;background:var(--card);border-radius:999px;padding:2px 10px 2px 2px}
-.chip .face{width:26px;height:26px}.chip.r-subject{box-shadow:0 0 0 2px var(--note)}.chip.r-voice{opacity:.7}
-.tag{font-size:11px;color:var(--note);margin-left:4px}.issues{margin-top:10px}
+.chip .face{width:26px;height:26px}.chip .ots{width:40px;height:22px;border-radius:4px;margin-left:6px;object-fit:cover}.chip.r-subject{box-shadow:0 0 0 2px var(--note)}.chip.r-voice{opacity:.7}
+.tag{font-size:11px;color:var(--note);margin-left:4px}
+.jump{display:flex;gap:10px;margin:4px 0 8px}.jump a{color:var(--note);text-decoration:none;font-weight:600;
+background:var(--note-bg);border-radius:8px;padding:4px 12px}
+.sact{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0}
+.sact>summary{cursor:pointer;padding:12px 14px;font-size:16px}
+.sclip{border-top:1px solid var(--line);padding:10px 14px}.sclip-h{margin-bottom:6px}
+.sshot{margin:6px 0 10px;padding-left:12px;border-left:3px solid var(--line)}
+.stitle{display:inline-block;font-size:12px;font-weight:700;color:var(--note);text-decoration:none;margin-bottom:2px}
+.sshot .ok{font-size:13px;font-style:italic}.issues{margin-top:10px}
 @media (max-width:760px){.body{grid-template-columns:1fr}}
 .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 select{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text)}
@@ -415,9 +434,13 @@ def shot_card(s, images, people, out_dir):
     issues += "".join(f'<div class="issue i">ℹ {html.escape(n)}</div>' for n in s["notes"])
     roles = {p["name"]: p["role"] for p in s["cast"]}
     framing = [m["term"] for m in s["matches"] if m["category"] in ("size", "framing", "angle")]
+    ots_src = images.get("Over-the-shoulder shot")
+    ots_icon = (f'<img class="ots" src="{html.escape(image_src(ots_src, out_dir))}" alt="over the shoulder">'
+                if ots_src else "")
     cast = "".join(
         f'<span class="chip r-{p["role"].replace(" ", "")}">{head_img(p["name"], people, out_dir)}'
-        f'<b>{html.escape(p["name"])}</b>&nbsp;{ROLE_LABEL[p["role"]]}</span>' for p in s["cast"])
+        f'<b>{html.escape(p["name"])}</b>&nbsp;{ROLE_LABEL[p["role"]]}'
+        f'{ots_icon if p["role"] == "foreground" else ""}</span>' for p in s["cast"])
     lines = []
     for d in s["dialogue"]:
         who = speaker_key(d["speaker"], people)
@@ -429,20 +452,59 @@ def shot_card(s, images, people, out_dir):
                      f'{head_img(who, people if named else {}, out_dir)}<div><b>{html.escape(d["speaker"])}</b>'
                      + (f' <span class="tag">{html.escape(tag)}</span>' if tag else "")
                      + f'<div class="say">{html.escape(d["line"])}</div></div></div>')
+    shown = list(s["matches"])
+    fg = [p["name"] for p in s["cast"] if p["role"] == "foreground"]
+    if fg and not any(m["term"] == "Over-the-shoulder shot" for m in shown):
+        shown.append({"term": "Over-the-shoulder shot", "category": "framing", "score": 1.0,
+                      "method": f"implied: framed from behind {' and '.join(fg)}"})
+    ots_note = (f'<div class="applies">Over the shoulder of: <b>{html.escape(", ".join(fg))}</b></div>' if fg else "")
     applies = (f'<div class="applies">Applies to: <b>{html.escape(", ".join(s["targets"]))}</b></div>'
                if s["targets"] and s["matches"] else "")
     flagged = "flag" if s["warnings"] or s["notes"] else "clean"
     names = " ".join(p["name"].lower() for p in s["cast"])
-    return (f'<article class="shot {flagged}" data-chars="{html.escape(names)}">'
+    return (f'<article class="shot {flagged}" id="{s["anchor"]}" data-chars="{html.escape(names)}">'
             f'<div class="sh"><span class="num">Shot {s["n"]}</span><b>{html.escape(s["title"])}</b>'
             f'{"<span class=ok>✓ OK</span>" if flagged == "clean" else ""}</div>'
             f'<div class="body"><div class="cam"><div class="label">Camera</div>'
             f'<div class="camline">{highlight(s["camera"], s["matches"])}</div>'
-            f'<div class="matches">{"".join(card(m, images, out_dir) for m in s["matches"]) or "<span class=ok>No camera term found</span>"}</div>'
-            f'{applies}</div>'
+            f'<div class="matches">{"".join(card(m, images, out_dir) for m in shown) or "<span class=ok>No camera term found</span>"}</div>'
+            f'{applies}{ots_note}</div>'
             f'<div class="talk"><div class="label">Characters &amp; dialogue</div><div class="cast-row">{cast or "<span class=ok>No named characters</span>"}</div>'
             f'{"".join(lines) or "<div class=ok>No dialogue in this shot</div>"}</div></div>'
             f'{f"<div class=issues>{issues}</div>" if issues else ""}</article>')
+
+
+def dialogue_section(results, people, out_dir):
+    """Every clip and shot in story order with only the characters' lines."""
+    out = ['<h2 id="dialogue">Dialogue</h2><p class="muted">Every shot of every clip in story order, showing only '
+           'what the characters say. Select a shot title to open its camera details.</p><div class="script">']
+    act = None
+    for c in results:
+        if c["act"] != act:
+            if act is not None:
+                out.append("</details>")
+            act = c["act"]
+            n_lines = sum(len(sh["dialogue"]) for x in results if x["act"] == act for sh in x["shots"])
+            out.append(f'<details class="sact" open><summary><b>{html.escape(act)}</b> '
+                       f'<span class="muted">{n_lines} lines</span></summary>')
+        speakers = {speaker_key(d["speaker"], people).lower() for sh in c["shots"] for d in sh["dialogue"]}
+        out.append(f'<div class="sclip" data-speakers="{html.escape(" ".join(sorted(speakers)))}">'
+                   f'<div class="sclip-h"><b>{c["id"]}</b> <span class="muted">{html.escape(c["scene"])}</span></div>')
+        for sh in c["shots"]:
+            out.append(f'<div class="sshot"><a class="stitle" href="#{sh["anchor"]}">Shot {sh["n"]} · '
+                       f'{html.escape(sh["title"])}</a>')
+            if not sh["dialogue"]:
+                out.append('<div class="ok">No dialogue</div>')
+            for d in sh["dialogue"]:
+                who = speaker_key(d["speaker"], people)
+                named = who in people
+                out.append(f'<div class="line{"" if named else " extra"}" data-speaker="{html.escape(who.lower())}">'
+                           f'{head_img(who, people if named else {}, out_dir)}<div><b>{html.escape(d["speaker"])}</b>'
+                           f'<div class="say">{html.escape(d["line"])}</div></div></div>')
+            out.append("</div>")
+        out.append("</div>")
+    out.append("</details></div>")
+    return "".join(out)
 
 
 def render(results, images, people, out_path):
@@ -478,6 +540,7 @@ def render(results, images, people, out_path):
 <div class="stat"><b>{n_lines}</b>dialogue lines</div>
 <div class="stat"><b>{n_warn}</b>shots with warnings</div><div class="stat"><b>{n_note}</b>shots with notes</div>
 <div class="stat"><b>{n_similar}</b>similarity matches</div></div>
+<nav class="jump"><a href="#dialogue">Dialogue</a><a href="#shots">Shots</a></nav>
 <h2>Characters</h2><p class="muted">Select a character to list every shot they appear in. "Camera on" counts shots
 whose camera line names them, or that show them when the camera line names no one.</p><div class="cast">"""]
     for n in roster:
@@ -511,7 +574,11 @@ whose camera line names them, or that show them when the camera line names no on
         img = f'<img src="{html.escape(image_src(src, out_dir))}" alt="{html.escape(term)}" loading="lazy">' if src else ""
         parts.append(f'<div class="term">{img}<div class="n">{html.escape(term)}</div>'
                      f'<div class="c">{TERMS[term][0]} · used {usage[term]}×</div></div>')
-    parts.append('</div><h2>Shots</h2><div class="controls"><label><input type="checkbox" id="only"> '
+    for c in results:
+        for sh in c["shots"]:
+            sh["anchor"] = f'{c["id"]}-shot-{sh["n"]}'
+    parts.append('</div>' + dialogue_section(results, people, out_dir))
+    parts.append('<h2 id="shots">Shots</h2><div class="controls"><label><input type="checkbox" id="only"> '
                  'Only shots with warnings or notes</label><select id="who"><option value="">All characters</option>'
                  + "".join(f'<option value="{html.escape(n.lower())}">{html.escape(n)}</option>' for n in roster if appear[n])
                  + '</select><input type="search" id="q" placeholder="Filter by clip, scene, or camera text"></div>')
@@ -541,7 +608,8 @@ document.querySelectorAll('.sceneh,.acth').forEach(h=>{let n=h.nextElementSiblin
 while(n&&!n.matches('.sceneh,.acth')){if(n.matches('.clip')&&n.style.display!=='none')any=true;n=n.nextElementSibling}
 if(h.matches('.sceneh'))h.style.display=any?'':'none'});
 document.querySelectorAll('.person').forEach(p=>p.classList.toggle('on',p.dataset.name===w));
-document.querySelectorAll('.line').forEach(l=>l.classList.toggle('me',!!w&&l.dataset.speaker===w))}
+document.querySelectorAll('.line').forEach(l=>l.classList.toggle('me',!!w&&l.dataset.speaker===w));
+document.querySelectorAll('.sclip').forEach(x=>{x.style.display=!w||(' '+x.dataset.speakers+' ').includes(' '+w+' ')?'':'none'})}
 [only,q,who].forEach(e=>e.addEventListener('input',apply));
 document.querySelectorAll('.person').forEach(p=>p.onclick=()=>{who.value=who.value===p.dataset.name?'':p.dataset.name;apply();
 document.querySelector('.controls').scrollIntoView({behavior:'smooth'})});
