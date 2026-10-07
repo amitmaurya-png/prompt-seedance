@@ -7,7 +7,8 @@ For each shot's Camera line the script:
      leftover words, so misspellings and unusual wording still map to the closest term,
   3. checks Seedance rules: one movement per shot, no "static" plus a move, a recognisable term,
   4. compares neighbouring shots in a scene (big jumps in shot size, scenes that open close up),
-  5. works out which characters are in the shot and which of them the camera is on (from characters.json).
+  5. works out which characters are in the shot and which of them the camera is on (from characters.json),
+  6. detects the shot's genre and mood and suggests a camera, compared with the current line (camera_suggest.py).
 
 Usage:
   python3 scripts/check_camera.py                # writes reports/camera_report.html
@@ -25,6 +26,7 @@ import re
 from collections import Counter
 from pathlib import Path
 
+from camera_suggest import GENRES, compare, genre_for, suggest
 from paths import DATA, REPORTS, ROOT
 
 # term -> (category, aliases). "*" in an alias matches any single word.
@@ -303,7 +305,12 @@ def analyse(prompt_path, roster=()):
             if rank:
                 prev_rank, prev_label = rank, label
             cast = shot_cast(s, clip_chars, roster)
-            shots.append({"n": i, "title": s["title"], "camera": s["camera"], "matches": matches,
+            dlg = [{"speaker": d["character"].title(), "line": d["line"]} for d in s.get("dialogue", [])]
+            genre = genre_for(c["scene"])
+            sug = suggest(s["title"], TAG.sub("", s["action"]), s.get("visual", ""), dlg, cast, genre,
+                          opens_scene=new_scene and i == 1)
+            fit, fit_notes = compare(sug, matches, genre)
+            shots.append({"suggestion": sug, "fit": fit, "fit_notes": fit_notes,"n": i, "title": s["title"], "camera": s["camera"], "matches": matches,
                           "by_category": by_cat, "warnings": warnings, "notes": notes,
                           "cast": cast, "targets": camera_targets(cast),
                           "dialogue": [{"speaker": d["character"].title(), "line": d["line"]}
@@ -375,6 +382,12 @@ display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));column-ga
 .chip{display:inline-flex;align-items:center;font-size:12px;background:var(--card);border-radius:999px;padding:2px 10px 2px 2px}
 .chip .face{width:26px;height:26px}.chip .ots{width:40px;height:22px;border-radius:4px;margin-left:6px;object-fit:cover}.chip.r-subject{box-shadow:0 0 0 2px var(--note)}.chip.r-voice{opacity:.7}
 .tag{font-size:11px;color:var(--note);margin-left:4px}
+.sug{margin-top:10px;border:1px dashed var(--line);border-radius:10px;padding:8px 10px}
+.sug.fit-matches{border-color:#3f9b5f}.sug.fit-close{border-color:#c79a2b}.sug.fit-differs{border-color:#c4553f}
+.sline{font-weight:700;margin:2px 0 6px}.thumbs{display:flex;flex-wrap:wrap;gap:6px}
+.thumbs figure{margin:0;width:84px;font-size:10px;color:var(--muted)}.thumbs img{width:84px;aspect-ratio:16/9;border-radius:4px;background:#dbe7f3;display:block}
+.fit{font-size:12px;font-weight:700;margin-top:6px}.fit-matches .fit{color:#3f9b5f}.fit-close .fit{color:#c79a2b}.fit-differs .fit{color:#c4553f}
+.fitnote{font-size:12px;color:var(--muted)}.sug details{font-size:12px;margin-top:4px}.sug summary{cursor:pointer;color:var(--muted)}
 .jump{display:flex;gap:10px;margin:4px 0 8px}.jump a{color:var(--note);text-decoration:none;font-weight:600;
 background:var(--note-bg);border-radius:8px;padding:4px 12px}
 .sact{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0}
@@ -460,15 +473,28 @@ def shot_card(s, images, people, out_dir):
     ots_note = (f'<div class="applies">Over the shoulder of: <b>{html.escape(", ".join(fg))}</b></div>' if fg else "")
     applies = (f'<div class="applies">Applies to: <b>{html.escape(", ".join(s["targets"]))}</b></div>'
                if s["targets"] and s["matches"] else "")
+    sug = s["suggestion"]
+    thumbs = "".join(
+        f'<figure><img src="{html.escape(image_src(images[t], out_dir))}" alt="{html.escape(t)}" loading="lazy">'
+        f'<figcaption>{html.escape(t)}</figcaption></figure>' for t in sug["terms"] if t in images)
+    mood_txt = ", ".join(f'{m} ({", ".join(ev[:3])})' for m, _, ev in sug["moods"]) or sug["mood"]
+    fit_label = {"matches": "✓ Current camera fits", "close": "≈ Close to the suggestion",
+                 "differs": "✗ Differs from the suggestion"}[s["fit"]]
+    suggestion = (f'<div class="sug fit-{s["fit"]}"><div class="label">Suggested camera · {html.escape(GENRES[sug["genre"]])}'
+                  f' · mood: {html.escape(sug["mood"])}</div><div class="sline">{html.escape(sug["line"])}</div>'
+                  f'<div class="thumbs">{thumbs}</div><div class="fit">{fit_label}</div>'
+                  + "".join(f'<div class="fitnote">{html.escape(n)}</div>' for n in s["fit_notes"])
+                  + f'<details><summary>Why</summary><div class="muted">Detected mood: {html.escape(mood_txt)}</div>'
+                  + "".join(f'<div>• {html.escape(r)}</div>' for r in sug["reasons"]) + '</details></div>')
     flagged = "flag" if s["warnings"] or s["notes"] else "clean"
     names = " ".join(p["name"].lower() for p in s["cast"])
-    return (f'<article class="shot {flagged}" id="{s["anchor"]}" data-chars="{html.escape(names)}">'
+    return (f'<article class="shot {flagged}" id="{s["anchor"]}" data-fit="{s["fit"]}" data-chars="{html.escape(names)}">'
             f'<div class="sh"><span class="num">Shot {s["n"]}</span><b>{html.escape(s["title"])}</b>'
             f'{"<span class=ok>✓ OK</span>" if flagged == "clean" else ""}</div>'
             f'<div class="body"><div class="cam"><div class="label">Camera</div>'
             f'<div class="camline">{highlight(s["camera"], s["matches"])}</div>'
             f'<div class="matches">{"".join(card(m, images, out_dir) for m in shown) or "<span class=ok>No camera term found</span>"}</div>'
-            f'{applies}{ots_note}</div>'
+            f'{applies}{ots_note}{suggestion}</div>'
             f'<div class="talk"><div class="label">Characters &amp; dialogue</div><div class="cast-row">{cast or "<span class=ok>No named characters</span>"}</div>'
             f'{"".join(lines) or "<div class=ok>No dialogue in this shot</div>"}</div></div>'
             f'{f"<div class=issues>{issues}</div>" if issues else ""}</article>')
@@ -514,6 +540,7 @@ def render(results, images, people, out_path):
     n_warn = sum(1 for s in shots if s["warnings"])
     n_note = sum(1 for s in shots if s["notes"])
     n_similar = sum(1 for s in shots for m in s["matches"] if m["method"] != "exact")
+    fits = Counter(s["fit"] for s in shots)
 
     # character x camera term counts (terms count toward the shot's camera targets)
     roster = [n for n in people] or sorted({c["name"] for s in shots for c in s["cast"]})
@@ -539,7 +566,8 @@ def render(results, images, people, out_path):
 <div class="stat"><b>{len([n for n in roster if appear[n]])}</b>characters</div>
 <div class="stat"><b>{n_lines}</b>dialogue lines</div>
 <div class="stat"><b>{n_warn}</b>shots with warnings</div><div class="stat"><b>{n_note}</b>shots with notes</div>
-<div class="stat"><b>{n_similar}</b>similarity matches</div></div>
+<div class="stat"><b>{n_similar}</b>similarity matches</div>
+<div class="stat"><b>{fits["matches"]}/{fits["close"]}/{fits["differs"]}</b>fit / close / differ from suggestion</div></div>
 <nav class="jump"><a href="#dialogue">Dialogue</a><a href="#shots">Shots</a></nav>
 <h2>Characters</h2><p class="muted">Select a character to list every shot they appear in. "Camera on" counts shots
 whose camera line names them, or that show them when the camera line names no one.</p><div class="cast">"""]
@@ -581,7 +609,9 @@ whose camera line names them, or that show them when the camera line names no on
     parts.append('<h2 id="shots">Shots</h2><div class="controls"><label><input type="checkbox" id="only"> '
                  'Only shots with warnings or notes</label><select id="who"><option value="">All characters</option>'
                  + "".join(f'<option value="{html.escape(n.lower())}">{html.escape(n)}</option>' for n in roster if appear[n])
-                 + '</select><input type="search" id="q" placeholder="Filter by clip, scene, or camera text"></div>')
+                 + '</select><select id="fit"><option value="">All suggestion fits</option><option value="differs">Differs from suggestion</option>'
+                 '<option value="close">Close to suggestion</option><option value="matches">Fits suggestion</option></select>'
+                 '<input type="search" id="q" placeholder="Filter by clip, scene, or camera text"></div>')
 
     act = scene = None
     for c in results:
@@ -598,10 +628,10 @@ whose camera line names them, or that show them when the camera line names no on
         parts.append("</section>")
 
     parts.append("""</main><script>
-const only=document.getElementById('only'),q=document.getElementById('q'),who=document.getElementById('who');
-function apply(){const v=q.value.toLowerCase(),w=who.value,o=only.checked;
+const only=document.getElementById('only'),q=document.getElementById('q'),who=document.getElementById('who'),fit=document.getElementById('fit');
+function apply(){const v=q.value.toLowerCase(),w=who.value,o=only.checked,f=fit.value;
 document.querySelectorAll('.clip').forEach(c=>{let shown=0;
-c.querySelectorAll('.shot').forEach(r=>{const ok=(!o||r.classList.contains('flag'))&&(!w||(' '+r.dataset.chars+' ').includes(' '+w+' '));
+c.querySelectorAll('.shot').forEach(r=>{const ok=(!o||r.classList.contains('flag'))&&(!f||r.dataset.fit===f)&&(!w||(' '+r.dataset.chars+' ').includes(' '+w+' '));
 r.style.display=ok?'':'none';if(ok)shown++});
 c.style.display=shown&&(!v||c.dataset.text.includes(v))?'':'none'});
 document.querySelectorAll('.sceneh,.acth').forEach(h=>{let n=h.nextElementSibling,any=false;
@@ -610,7 +640,7 @@ if(h.matches('.sceneh'))h.style.display=any?'':'none'});
 document.querySelectorAll('.person').forEach(p=>p.classList.toggle('on',p.dataset.name===w));
 document.querySelectorAll('.line').forEach(l=>l.classList.toggle('me',!!w&&l.dataset.speaker===w));
 document.querySelectorAll('.sclip').forEach(x=>{x.style.display=!w||(' '+x.dataset.speakers+' ').includes(' '+w+' ')?'':'none'})}
-[only,q,who].forEach(e=>e.addEventListener('input',apply));
+[only,q,who,fit].forEach(e=>e.addEventListener('input',apply));
 document.querySelectorAll('.person').forEach(p=>p.onclick=()=>{who.value=who.value===p.dataset.name?'':p.dataset.name;apply();
 document.querySelector('.controls').scrollIntoView({behavior:'smooth'})});
 </script></body></html>""")

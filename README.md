@@ -26,6 +26,7 @@ prompt-seedance/
 │   ├── add_continuity.py     Adds scene continuity to data/prompt.json
 │   ├── make_camera_images.py Draws assets/camera/ and data/camera_angles.json
 │   ├── make_character_images.py  Draws assets/characters/, data/characters.json, reports/characters.html
+│   ├── camera_suggest.py     Detects a shot's genre/mood and suggests a camera
 │   └── check_camera.py       Checks every shot → reports/camera_report.html
 ├── assets/
 │   ├── camera/               Camera term diagrams (SVG)
@@ -50,6 +51,7 @@ Run from the repository root.
 python3 scripts/add_continuity.py           # rebuild data/prompt.json with scene continuity
 python3 scripts/check_camera.py             # rebuild reports/camera_report.html
 python3 scripts/check_camera.py --query "slow dolly-in on the boy"   # camera-term similarity search
+python3 scripts/camera_suggest.py --describe "Yonah hesitates, then offers his lunch"   # mood → camera suggestion
 python3 scripts/make_camera_images.py       # redraw camera diagrams
 python3 scripts/make_character_images.py    # redraw character references and gallery
 
