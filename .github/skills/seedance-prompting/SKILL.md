@@ -90,6 +90,7 @@ Run these from the repository root. Data lives in `data/`, generated images in `
 
 | Script | When to run it |
 |---|---|
+| [scripts/check_continuity.py](../../../scripts/check_continuity.py) | To check continuity in every scene (owned by the `scene-continuity` skill): writes `reports/continuity_report.html` |
 | [scripts/add_continuity.py](../../../scripts/add_continuity.py) | After editing `data/prompt.json` or the continuity blocks: rebuilds prompts with scene continuity |
 | [scripts/check_camera.py](../../../scripts/check_camera.py) | To review camera lines, characters, and dialogue per shot: writes `reports/camera_report.html`. Use `--query "text"` for a camera-term similarity search |
 | [scripts/make_camera_images.py](../../../scripts/make_camera_images.py) | To redraw camera diagrams and reset `data/camera_angles.json` |

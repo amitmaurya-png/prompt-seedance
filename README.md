@@ -11,7 +11,9 @@ prompt-seedance/
 ├── .env                      OPENAI_API_KEY (not committed)
 ├── .github/skills/
 │   ├── seedance-prompting/   Agent skill: writing Seedance prompts
-│   └── camera-knowledge/     Agent skill: camera terms, genre conventions, camera checks
+│   ├── camera-knowledge/     Agent skill: camera terms, genre conventions, camera checks
+│   ├── scene-continuity/     Agent skill: checks and fixes continuity in every scene
+│   └── clip-continuity/      Agent skill: checks and fixes every clip and clip-to-clip boundary
 ├── docs/
 │   └── approach.md           How the screenplay becomes Seedance prompts
 ├── data/
@@ -28,12 +30,16 @@ prompt-seedance/
 │   ├── make_character_images.py  Draws assets/characters/, data/characters.json, reports/characters.html
 │   ├── camera_suggest.py     Detects a shot's genre/mood and suggests a camera
 │   ├── apply_camera.py       Writes reviewed camera lines into data/prompt.json
-│   └── check_camera.py       Checks every shot → reports/camera_report.html
+│   ├── check_camera.py       Checks every shot → reports/camera_report.html
+│   ├── check_continuity.py   Checks every scene → reports/continuity_report.html
+│   ├── fix_continuity.py     Fixes continuity breaks between clips in data/prompt.json
+│   └── check_clips.py        Checks/fixes every clip and boundary (transitions, cast, timing)
 ├── assets/
 │   ├── camera/               Camera term diagrams (SVG)
 │   └── characters/           Character references (PNG for Seedance, SVG source)
 └── reports/
     ├── camera_report.html    Shots, camera terms, characters, and dialogue
+    ├── continuity_report.html  Scene-by-scene continuity checks
     └── characters.html       Character reference gallery
 ```
 
@@ -53,6 +59,9 @@ python3 scripts/add_continuity.py           # rebuild data/prompt.json with scen
 python3 scripts/check_camera.py             # rebuild reports/camera_report.html
 python3 scripts/check_camera.py --query "slow dolly-in on the boy"   # camera-term similarity search
 python3 scripts/camera_suggest.py --describe "Yonah hesitates, then offers his lunch"   # mood → camera suggestion
+python3 scripts/check_continuity.py         # check continuity in every scene
+python3 scripts/fix_continuity.py --dry-run # preview continuity fixes (drop --dry-run to apply)
+python3 scripts/check_clips.py --fix        # clip-level continuity and scene transitions
 python3 scripts/make_camera_images.py       # redraw camera diagrams
 python3 scripts/make_character_images.py    # redraw character references and gallery
 

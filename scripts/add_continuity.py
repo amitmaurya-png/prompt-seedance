@@ -175,10 +175,13 @@ def main():
         for s in shots:
             s["action"] = bind(s["action"], tags)
 
-        handoff = None
+        handoff = clip.get("continuity_transition") if not chained and not title_card else None
         if chained:
             handoff = (f"Continue the same moment from @Image {last_img}: keep the lighting, positions, props, "
                        f"and character appearance exactly as in that frame")
+            kept = [n for n in clip.get("continuity_added", []) if n in tags]
+            if kept:  # characters added by fix_continuity.py so they don't vanish mid-scene
+                handoff += ", with " + " and ".join(f"{n} ({tags[n]})" for n in kept) + " still present"
 
         speakers = sorted({d["character"].title() for s in shots for d in s["dialogue"]} & set(VOICE),
                           key=ORDER.index)

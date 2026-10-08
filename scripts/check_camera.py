@@ -27,6 +27,8 @@ from collections import Counter
 from pathlib import Path
 
 from camera_suggest import GENRES, compare, genre_for, suggest
+from check_clips import check as check_clip_continuity
+from check_continuity import check_scene, group_scenes
 from paths import DATA, REPORTS, ROOT
 
 # term -> (category, aliases). "*" in an alias matches any single word.
@@ -287,6 +289,18 @@ def analyse(prompt_path, roster=()):
     roster = list(roster) or sorted(names)
 
     results, prev_rank, prev_label = [], None, None
+    cont_issues = {}
+    from collections import defaultdict as _dd
+    defs, voices = _dd(set), _dd(set)
+    for sc in group_scenes(clips):
+        for lv, cid, msg in check_scene(sc, defs, voices):
+            cont_issues.setdefault(cid, []).append((lv, msg))
+    clip_issues, boundaries = check_clip_continuity(clips)
+    for cid, items in clip_issues.items():
+        for lv, kind, msg in items:
+            if (lv, msg) not in cont_issues.get(cid, []):
+                cont_issues.setdefault(cid, []).append((lv, f"[{kind}] {msg}"))
+    analyse.boundaries = boundaries
     for c in clips:
         new_scene = c.get("continuity", {}).get("mode", "new_scene") == "new_scene"
         if new_scene:
@@ -316,7 +330,12 @@ def analyse(prompt_path, roster=()):
                           "cast": cast, "targets": camera_targets(cast),
                           "dialogue": [{"speaker": d["character"].title(), "line": d["line"]}
                                        for d in s.get("dialogue", [])]})
-        results.append({"id": c["id"], "act": c["act"], "scene": c["scene"],
+        results.append({"continuity_issues": cont_issues.get(c["id"], []),
+                        "continuity_fixes": c.get("continuity_fixes", []) + c.get("clip_fixes", []),
+                        "transition": c.get("continuity_transition"),
+                        "continuity_added": c.get("continuity_added", []),
+                        "previous_clip": c.get("continuity", {}).get("previous_clip"),
+                        "id": c["id"], "act": c["act"], "scene": c["scene"],
                         "mode": "new scene" if new_scene else f"continues {c['continuity'].get('previous_clip')}",
                         "shots": shots})
     return results, detector
@@ -383,6 +402,11 @@ display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));column-ga
 .chip{display:inline-flex;align-items:center;font-size:12px;background:var(--card);border-radius:999px;padding:2px 10px 2px 2px}
 .chip .face{width:26px;height:26px}.chip .ots{width:40px;height:22px;border-radius:4px;margin-left:6px;object-fit:cover}.chip.r-subject{box-shadow:0 0 0 2px var(--note)}.chip.r-voice{opacity:.7}
 .tag{font-size:11px;color:var(--note);margin-left:4px}
+.cont{font-size:12px;font-weight:700;margin-left:auto}.cont.ok{color:#3f9b5f}.cont.bad{color:#c79a2b}
+.contbox{margin:0;padding:8px 14px;border-bottom:1px solid var(--line);font-size:13px}.contbox ul{margin:2px 0 0;padding-left:18px}
+.contbox li.fixd{color:#3f9b5f}.contbox li.trans{color:var(--muted);list-style:none;margin-left:-14px}
+.kind{font-size:11px;font-weight:700;border-radius:999px;padding:1px 8px}.kind.continue{background:var(--note-bg);color:var(--note)}
+.kind.cut{background:var(--warn-bg);color:var(--warn)}.contbox li.note{color:var(--note)}.contbox li.warn{color:var(--warn)}
 .changed{margin:0 0 8px;padding:6px 10px;border-left:3px solid var(--note);background:var(--note-bg);border-radius:6px;font-size:13px}
 .was{text-decoration:line-through;color:var(--muted)}.chg{font-size:11px;font-weight:700;color:var(--note);border:1px solid var(--note);border-radius:999px;padding:0 8px}
 .chtable{border-collapse:collapse;width:100%;font-size:13px}.chtable th,.chtable td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
@@ -395,12 +419,6 @@ display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));column-ga
 .fitnote{font-size:12px;color:var(--muted)}.sug details{font-size:12px;margin-top:4px}.sug summary{cursor:pointer;color:var(--muted)}
 .jump{display:flex;gap:10px;margin:4px 0 8px}.jump a{color:var(--note);text-decoration:none;font-weight:600;
 background:var(--note-bg);border-radius:8px;padding:4px 12px}
-.sact{background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0}
-.sact>summary{cursor:pointer;padding:12px 14px;font-size:16px}
-.sclip{border-top:1px solid var(--line);padding:10px 14px}.sclip-h{margin-bottom:6px}
-.sshot{margin:6px 0 10px;padding-left:12px;border-left:3px solid var(--line)}
-.stitle{display:inline-block;font-size:12px;font-weight:700;color:var(--note);text-decoration:none;margin-bottom:2px}
-.sshot .ok{font-size:13px;font-style:italic}.issues{margin-top:10px}
 @media (max-width:760px){.body{grid-template-columns:1fr}}
 .controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 select{padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--text)}
@@ -510,6 +528,38 @@ def shot_card(s, images, people, out_dir):
             f'{f"<div class=issues>{issues}</div>" if issues else ""}</article>')
 
 
+def continuity_box(c):
+    """Per-clip continuity: what the clip continues from, fixes applied, and remaining notes."""
+    if not (c["continuity_issues"] or c["continuity_fixes"] or c["transition"]):
+        return ""
+    items = (f'<li class="trans">↳ {html.escape(c["transition"])}</li>' if c["transition"] else "")
+    items += "".join(f'<li class="fixd">✓ {html.escape(f)}</li>' for f in c["continuity_fixes"])
+    items += "".join(f'<li class="{lv}">{"⚠" if lv == "warn" else "ℹ"} {html.escape(m)}</li>' for lv, m in c["continuity_issues"])
+    return f'<div class="contbox"><div class="label">Scene continuity</div><ul>{items}</ul></div>'
+
+
+def transitions_section(results, boundaries):
+    """Every clip-to-clip boundary: continue (same moment) or cut (new scene), with its status."""
+    if not boundaries:
+        return ""
+    status = {c["id"]: c["continuity_issues"] for c in results}
+    rows = []
+    for b in boundaries:
+        notes = status.get(b["to"], [])
+        state = ('<span class="fitcell fit-matches">✓</span>' if not notes
+                 else f'<span class="fitcell fit-close">{len(notes)} note(s)</span>')
+        kind = "continue" if b["type"] == "continue" else "cut"
+        rows.append(f'<tr><td><a href="#{b["from"]}">{b["from"]}</a> → <a href="#{b["to"]}">{b["to"]}</a></td>'
+                    f'<td><span class="kind {kind}">{kind}</span></td><td class="muted">{html.escape(b["detail"])}</td>'
+                    f'<td>{state}</td></tr>')
+    n_ok = sum(1 for b in boundaries if not status.get(b["to"]))
+    return (f'<h2 id="transitions">Clip-to-clip transitions</h2><p class="muted">{len(boundaries)} boundaries: '
+            f'{sum(b["type"] == "continue" for b in boundaries)} continue the same moment, '
+            f'{sum(b["type"] == "cut" for b in boundaries)} cut to a new scene. {n_ok} with no continuity notes.</p>'
+            '<div class="scroll"><table class="chtable"><thead><tr><th>Boundary</th><th>Type</th><th>Detail</th>'
+            '<th>Status</th></tr></thead><tbody>' + "".join(rows) + "</tbody></table></div>")
+
+
 def changes_section(results):
     """Before/after table of camera lines changed by the camera-knowledge skill (apply_camera.py)."""
     rows = [(c, s) for c in results for s in c["shots"] if s["previous"]]
@@ -524,39 +574,6 @@ def changes_section(results):
                    f'<td class="was">{html.escape(s["previous"])}</td><td><b>{html.escape(s["camera"])}</b></td>'
                    f'<td class="muted">{html.escape(s["reason"])}</td><td class="fitcell fit-{s["fit"]}">{s["fit"]}</td></tr>')
     out.append("</tbody></table></div>")
-    return "".join(out)
-
-
-def dialogue_section(results, people, out_dir):
-    """Every clip and shot in story order with only the characters' lines."""
-    out = ['<h2 id="dialogue">Dialogue</h2><p class="muted">Every shot of every clip in story order, showing only '
-           'what the characters say. Select a shot title to open its camera details.</p><div class="script">']
-    act = None
-    for c in results:
-        if c["act"] != act:
-            if act is not None:
-                out.append("</details>")
-            act = c["act"]
-            n_lines = sum(len(sh["dialogue"]) for x in results if x["act"] == act for sh in x["shots"])
-            out.append(f'<details class="sact" open><summary><b>{html.escape(act)}</b> '
-                       f'<span class="muted">{n_lines} lines</span></summary>')
-        speakers = {speaker_key(d["speaker"], people).lower() for sh in c["shots"] for d in sh["dialogue"]}
-        out.append(f'<div class="sclip" data-speakers="{html.escape(" ".join(sorted(speakers)))}">'
-                   f'<div class="sclip-h"><b>{c["id"]}</b> <span class="muted">{html.escape(c["scene"])}</span></div>')
-        for sh in c["shots"]:
-            out.append(f'<div class="sshot"><a class="stitle" href="#{sh["anchor"]}">Shot {sh["n"]} · '
-                       f'{html.escape(sh["title"])}</a>')
-            if not sh["dialogue"]:
-                out.append('<div class="ok">No dialogue</div>')
-            for d in sh["dialogue"]:
-                who = speaker_key(d["speaker"], people)
-                named = who in people
-                out.append(f'<div class="line{"" if named else " extra"}" data-speaker="{html.escape(who.lower())}">'
-                           f'{head_img(who, people if named else {}, out_dir)}<div><b>{html.escape(d["speaker"])}</b>'
-                           f'<div class="say">{html.escape(d["line"])}</div></div></div>')
-            out.append("</div>")
-        out.append("</div>")
-    out.append("</details></div>")
     return "".join(out)
 
 
@@ -596,8 +613,10 @@ def render(results, images, people, out_path):
 <div class="stat"><b>{n_warn}</b>shots with warnings</div><div class="stat"><b>{n_note}</b>shots with notes</div>
 <div class="stat"><b>{n_similar}</b>similarity matches</div>
 <div class="stat"><b>{fits["matches"]}/{fits["close"]}/{fits["differs"]}</b>fit / close / differ from suggestion</div>
-<div class="stat"><b>{n_changed}</b>camera lines changed</div></div>
-<nav class="jump"><a href="#changes">Camera changes</a><a href="#dialogue">Dialogue</a><a href="#shots">Shots</a></nav>
+<div class="stat"><b>{n_changed}</b>camera lines changed</div>
+<div class="stat"><b>{sum(1 for c in results if not c["continuity_issues"])}/{len(results)}</b>clips continuous</div>
+<div class="stat"><b>{sum(len(c["continuity_fixes"]) for c in results)}</b>continuity fixes</div></div>
+<nav class="jump"><a href="#changes">Camera changes</a><a href="#transitions">Clip transitions</a><a href="#shots">Shots</a></nav>
 <h2>Characters</h2><p class="muted">Select a character to list every shot they appear in. "Camera on" counts shots
 whose camera line names them, or that show them when the camera line names no one.</p><div class="cast">"""]
     for n in roster:
@@ -634,13 +653,13 @@ whose camera line names them, or that show them when the camera line names no on
     for c in results:
         for sh in c["shots"]:
             sh["anchor"] = f'{c["id"]}-shot-{sh["n"]}'
-    parts.append('</div>' + changes_section(results) + dialogue_section(results, people, out_dir))
+    parts.append('</div>' + changes_section(results) + transitions_section(results, getattr(analyse, "boundaries", [])))
     parts.append('<h2 id="shots">Shots</h2><div class="controls"><label><input type="checkbox" id="only"> '
                  'Only shots with warnings or notes</label><select id="who"><option value="">All characters</option>'
                  + "".join(f'<option value="{html.escape(n.lower())}">{html.escape(n)}</option>' for n in roster if appear[n])
                  + '</select><select id="fit"><option value="">All suggestion fits</option><option value="differs">Differs from suggestion</option>'
                  '<option value="close">Close to suggestion</option><option value="matches">Fits suggestion</option>'
-                 '<option value="changed">Changed by camera-knowledge</option></select>'
+                 '<option value="changed">Changed by camera-knowledge</option><option value="cont">Clips with continuity notes</option></select>'
                  '<input type="search" id="q" placeholder="Filter by clip, scene, or camera text"></div>')
 
     act = scene = None
@@ -651,8 +670,11 @@ whose camera line names them, or that show them when the camera line names no on
         if c["scene"] != scene:
             scene = c["scene"]
             parts.append(f'<h4 class="sceneh">{html.escape(scene)}</h4>')
-        parts.append(f'<section class="clip" id="{c["id"]}" data-text="{html.escape((c["id"] + " " + c["scene"] + " " + " ".join(s["camera"] + " " + " ".join(d["line"] for d in s["dialogue"]) for s in c["shots"])).lower())}">'
-                     f'<header><b>{c["id"]}</b><span class="muted">{html.escape(c["mode"])}</span></header>')
+        parts.append(f'<section class="clip" id="{c["id"]}" data-cont="{"yes" if c["continuity_issues"] else "no"}" data-text="{html.escape((c["id"] + " " + c["scene"] + " " + " ".join(s["camera"] + " " + " ".join(d["line"] for d in s["dialogue"]) for s in c["shots"])).lower())}">'
+                     f'<header><b>{c["id"]}</b><span class="muted">{html.escape(c["mode"])}</span>'
+                     + ('<span class="cont ok">✓ continuous</span>' if not c["continuity_issues"]
+                        else f'<span class="cont bad">{len(c["continuity_issues"])} continuity note(s)</span>')
+                     + '</header>' + continuity_box(c))
         for s in c["shots"]:
             parts.append(shot_card(s, images, people, out_dir))
         parts.append("</section>")
@@ -661,7 +683,7 @@ whose camera line names them, or that show them when the camera line names no on
 const only=document.getElementById('only'),q=document.getElementById('q'),who=document.getElementById('who'),fit=document.getElementById('fit');
 function apply(){const v=q.value.toLowerCase(),w=who.value,o=only.checked,f=fit.value;
 document.querySelectorAll('.clip').forEach(c=>{let shown=0;
-c.querySelectorAll('.shot').forEach(r=>{const ok=(!o||r.classList.contains('flag'))&&(!f||(f==='changed'?r.dataset.changed==='yes':r.dataset.fit===f))&&(!w||(' '+r.dataset.chars+' ').includes(' '+w+' '));
+c.querySelectorAll('.shot').forEach(r=>{const ok=(!o||r.classList.contains('flag'))&&(!f||(f==='cont'?c.dataset.cont==='yes':f==='changed'?r.dataset.changed==='yes':r.dataset.fit===f))&&(!w||(' '+r.dataset.chars+' ').includes(' '+w+' '));
 r.style.display=ok?'':'none';if(ok)shown++});
 c.style.display=shown&&(!v||c.dataset.text.includes(v))?'':'none'});
 document.querySelectorAll('.sceneh,.acth').forEach(h=>{let n=h.nextElementSibling,any=false;
@@ -669,7 +691,7 @@ while(n&&!n.matches('.sceneh,.acth')){if(n.matches('.clip')&&n.style.display!=='
 if(h.matches('.sceneh'))h.style.display=any?'':'none'});
 document.querySelectorAll('.person').forEach(p=>p.classList.toggle('on',p.dataset.name===w));
 document.querySelectorAll('.line').forEach(l=>l.classList.toggle('me',!!w&&l.dataset.speaker===w));
-document.querySelectorAll('.sclip').forEach(x=>{x.style.display=!w||(' '+x.dataset.speakers+' ').includes(' '+w+' ')?'':'none'})}
+}
 [only,q,who,fit].forEach(e=>e.addEventListener('input',apply));
 document.querySelectorAll('.person').forEach(p=>p.onclick=()=>{who.value=who.value===p.dataset.name?'':p.dataset.name;apply();
 document.querySelector('.controls').scrollIntoView({behavior:'smooth'})});
