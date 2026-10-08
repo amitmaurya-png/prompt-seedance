@@ -135,7 +135,8 @@ def dialogue(shot, tags):
         if name in tags and name not in seen:
             seen.add(name)
             name = f"{name} ({tags[name]})"
-        parts.append(f"{name}: {{{d['line']}}}")
+        delivery = d.get("delivery")  # set by detect_emotions.py
+        parts.append(f"{name}{', ' + delivery if delivery else ''}: {{{d['line']}}}")
     return " ".join(parts)
 
 

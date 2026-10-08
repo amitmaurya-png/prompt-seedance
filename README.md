@@ -13,7 +13,8 @@ prompt-seedance/
 │   ├── seedance-prompting/   Agent skill: writing Seedance prompts
 │   ├── camera-knowledge/     Agent skill: camera terms, genre conventions, camera checks
 │   ├── scene-continuity/     Agent skill: checks and fixes continuity in every scene
-│   └── clip-continuity/      Agent skill: checks and fixes every clip and clip-to-clip boundary
+│   ├── clip-continuity/      Agent skill: checks and fixes every clip and clip-to-clip boundary
+│   └── emotion-detector/     Agent skill: detects each line's emotion and the conversation mood
 ├── docs/
 │   └── approach.md           How the screenplay becomes Seedance prompts
 ├── data/
@@ -33,7 +34,8 @@ prompt-seedance/
 │   ├── check_camera.py       Checks every shot → reports/camera_report.html
 │   ├── check_continuity.py   Checks every scene → reports/continuity_report.html
 │   ├── fix_continuity.py     Fixes continuity breaks between clips in data/prompt.json
-│   └── check_clips.py        Checks/fixes every clip and boundary (transitions, cast, timing)
+│   ├── check_clips.py        Checks/fixes every clip and boundary (transitions, cast, timing)
+│   └── detect_emotions.py    Adds emotion/delivery to each dialogue line in data/prompt.json
 ├── assets/
 │   ├── camera/               Camera term diagrams (SVG)
 │   └── characters/           Character references (PNG for Seedance, SVG source)
@@ -62,6 +64,7 @@ python3 scripts/camera_suggest.py --describe "Yonah hesitates, then offers his l
 python3 scripts/check_continuity.py         # check continuity in every scene
 python3 scripts/fix_continuity.py --dry-run # preview continuity fixes (drop --dry-run to apply)
 python3 scripts/check_clips.py --fix        # clip-level continuity and scene transitions
+python3 scripts/detect_emotions.py          # dialogue emotions and conversation moods (--dry-run to preview)
 python3 scripts/make_camera_images.py       # redraw camera diagrams
 python3 scripts/make_character_images.py    # redraw character references and gallery
 

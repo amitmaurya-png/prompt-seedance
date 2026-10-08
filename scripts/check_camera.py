@@ -328,7 +328,10 @@ def analyse(prompt_path, roster=()):
                           "suggestion": sug, "fit": fit, "fit_notes": fit_notes,"n": i, "title": s["title"], "camera": s["camera"], "matches": matches,
                           "by_category": by_cat, "warnings": warnings, "notes": notes,
                           "cast": cast, "targets": camera_targets(cast),
-                          "dialogue": [{"speaker": d["character"].title(), "line": d["line"]}
+                          "conversation_mood": s.get("conversation_mood"),
+                          "dialogue": [{"speaker": d["character"].title(), "line": d["line"],
+                                        "emotion": d.get("emotion"), "intensity": d.get("intensity"),
+                                        "emotion_evidence": d.get("emotion_evidence", [])}
                                        for d in s.get("dialogue", [])]})
         results.append({"continuity_issues": cont_issues.get(c["id"], []),
                         "continuity_fixes": c.get("continuity_fixes", []) + c.get("clip_fixes", []),
@@ -398,10 +401,16 @@ display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));column-ga
 .body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:16px}
 .label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;margin-bottom:6px}
 .camline{margin-bottom:8px}.talk{background:var(--chip);border-radius:10px;padding:10px 12px}
-.cast-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.inshot{margin-top:8px}.incams{display:flex;flex-wrap:wrap;gap:8px}
+.incam{display:flex;align-items:center;gap:8px;background:var(--chip);border-radius:12px;padding:6px 12px 6px 6px;font-size:13px}
+.incam .blank{width:44px;height:44px;border-radius:50%;font-size:18px}
+.incam .portrait{width:44px;height:44px;border-radius:50%;object-fit:cover;background:#ecdcc2;box-shadow:0 0 0 2px var(--note)}
 .chip{display:inline-flex;align-items:center;font-size:12px;background:var(--card);border-radius:999px;padding:2px 10px 2px 2px}
 .chip .face{width:26px;height:26px}.chip .ots{width:40px;height:22px;border-radius:4px;margin-left:6px;object-fit:cover}.chip.r-subject{box-shadow:0 0 0 2px var(--note)}.chip.r-voice{opacity:.7}
 .tag{font-size:11px;color:var(--note);margin-left:4px}
+.emo{font-size:11px;font-weight:700;border-radius:999px;padding:0 8px;margin-left:4px;background:var(--card);border:1px solid var(--line)}
+.emo-joyful,.emo-excited,.emo-amazed{color:#3f9b5f}.emo-worried,.emo-regretful,.emo-disappointed,.emo-reluctant{color:#c4553f}
+.emo-playful,.emo-teasing,.emo-eager,.emo-proud{color:#c79a2b}.emo-hopeful,.emo-tender{color:#3f9b5f}.emo-guilty,.emo-doubtful{color:#c4553f}.emo-warm,.emo-reassuring,.emo-calm,.emo-wise{color:var(--note)}.emo-hesitant,.emo-silent{color:var(--muted)}
 .cont{font-size:12px;font-weight:700;margin-left:auto}.cont.ok{color:#3f9b5f}.cont.bad{color:#c79a2b}
 .contbox{margin:0;padding:8px 14px;border-bottom:1px solid var(--line);font-size:13px}.contbox ul{margin:2px 0 0;padding-left:18px}
 .contbox li.fixd{color:#3f9b5f}.contbox li.trans{color:var(--muted);list-style:none;margin-left:-14px}
@@ -470,13 +479,13 @@ def shot_card(s, images, people, out_dir):
     issues += "".join(f'<div class="issue i">ℹ {html.escape(n)}</div>' for n in s["notes"])
     roles = {p["name"]: p["role"] for p in s["cast"]}
     framing = [m["term"] for m in s["matches"] if m["category"] in ("size", "framing", "angle")]
-    ots_src = images.get("Over-the-shoulder shot")
-    ots_icon = (f'<img class="ots" src="{html.escape(image_src(ots_src, out_dir))}" alt="over the shoulder">'
-                if ots_src else "")
-    cast = "".join(
-        f'<span class="chip r-{p["role"].replace(" ", "")}">{head_img(p["name"], people, out_dir)}'
-        f'<b>{html.escape(p["name"])}</b>&nbsp;{ROLE_LABEL[p["role"]]}'
-        f'{ots_icon if p["role"] == "foreground" else ""}</span>' for p in s["cast"])
+    # only the characters the camera framing applies to
+    frame_txt = " · ".join(dict.fromkeys(framing)) or "in frame"
+    extras = [] if s["targets"] else re.findall(r"\bon (Small Girl|Girl|Mother|Child)\b", s["camera"])
+    in_shot = "".join(
+        f'<div class="incam">{head_img(n, people, out_dir, "portrait")}<div><b>{html.escape(n)}</b>'
+        f'<div class="muted">{html.escape(frame_txt)}{"" if n in people else " · unnamed extra"}</div></div></div>'
+        for n in s["targets"] + extras)
     lines = []
     for d in s["dialogue"]:
         who = speaker_key(d["speaker"], people)
@@ -486,6 +495,9 @@ def shot_card(s, images, people, out_dir):
         tag = " · ".join(x for x in (ROLE_LABEL.get(role, "") if role else "", shot_on) if x)
         lines.append(f'<div class="line{"" if named else " extra"}" data-speaker="{html.escape(who.lower())}">'
                      f'{head_img(who, people if named else {}, out_dir)}<div><b>{html.escape(d["speaker"])}</b>'
+                     + (f' <span class="emo emo-{html.escape(d["emotion"])}" title="{html.escape(", ".join(d.get("emotion_evidence", [])))}">'
+                        f'{html.escape(d["emotion"])}{" · " + d["intensity"] if d.get("intensity") not in (None, "low") else ""}</span>'
+                        if d.get("emotion") else "")
                      + (f' <span class="tag">{html.escape(tag)}</span>' if tag else "")
                      + f'<div class="say">{html.escape(d["line"])}</div></div></div>')
     shown = list(s["matches"])
@@ -494,8 +506,10 @@ def shot_card(s, images, people, out_dir):
         shown.append({"term": "Over-the-shoulder shot", "category": "framing", "score": 1.0,
                       "method": f"implied: framed from behind {' and '.join(fg)}"})
     ots_note = (f'<div class="applies">Over the shoulder of: <b>{html.escape(", ".join(fg))}</b></div>' if fg else "")
-    applies = (f'<div class="applies">Applies to: <b>{html.escape(", ".join(s["targets"]))}</b></div>'
-               if s["targets"] and s["matches"] else "")
+    applies = (f'<div class="inshot"><div class="label">Characters in this camera shot</div>'
+               f'<div class="incams">{in_shot}</div></div>' if in_shot
+               else '<div class="inshot"><div class="label">Characters in this camera shot</div>'
+                    '<span class="ok">No named characters (crowd, place, or object)</span></div>')
     sug = s["suggestion"]
     thumbs = "".join(
         f'<figure><img src="{html.escape(image_src(images[t], out_dir))}" alt="{html.escape(t)}" loading="lazy">'
@@ -514,7 +528,7 @@ def shot_card(s, images, people, out_dir):
                + (f'<div class="muted">{html.escape(s["reason"])}</div>' if s["reason"] else "") + '</div>'
                if s["previous"] else "")
     flagged = "flag" if s["warnings"] or s["notes"] else "clean"
-    names = " ".join(p["name"].lower() for p in s["cast"])
+    names = " ".join(n.lower() for n in s["targets"])
     return (f'<article class="shot {flagged}" id="{s["anchor"]}" data-changed="{"yes" if s["previous"] else "no"}" data-fit="{s["fit"]}" data-chars="{html.escape(names)}">'
             f'<div class="sh"><span class="num">Shot {s["n"]}</span><b>{html.escape(s["title"])}</b>'
             f'{"<span class=chg>changed</span>" if s["previous"] else ""}'
@@ -523,7 +537,8 @@ def shot_card(s, images, people, out_dir):
             f'<div class="camline">{highlight(s["camera"], s["matches"])}</div>{changed}'
             f'<div class="matches">{"".join(card(m, images, out_dir) for m in shown) or "<span class=ok>No camera term found</span>"}</div>'
             f'{applies}{ots_note}{suggestion}</div>'
-            f'<div class="talk"><div class="label">Characters &amp; dialogue</div><div class="cast-row">{cast or "<span class=ok>No named characters</span>"}</div>'
+            f'<div class="talk"><div class="label">Dialogue'
+            f'{" · conversation mood: " + html.escape(s["conversation_mood"]) if s.get("conversation_mood") else ""}</div>'
             f'{"".join(lines) or "<div class=ok>No dialogue in this shot</div>"}</div></div>'
             f'{f"<div class=issues>{issues}</div>" if issues else ""}</article>')
 
@@ -617,7 +632,7 @@ def render(results, images, people, out_path):
 <div class="stat"><b>{sum(1 for c in results if not c["continuity_issues"])}/{len(results)}</b>clips continuous</div>
 <div class="stat"><b>{sum(len(c["continuity_fixes"]) for c in results)}</b>continuity fixes</div></div>
 <nav class="jump"><a href="#changes">Camera changes</a><a href="#transitions">Clip transitions</a><a href="#shots">Shots</a></nav>
-<h2>Characters</h2><p class="muted">Select a character to list every shot they appear in. "Camera on" counts shots
+<h2>Characters</h2><p class="muted">Select a character to list every shot the camera is on them. "Camera on" counts shots
 whose camera line names them, or that show them when the camera line names no one.</p><div class="cast">"""]
     for n in roster:
         if not appear[n]:
