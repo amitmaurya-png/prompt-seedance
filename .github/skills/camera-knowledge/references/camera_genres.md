@@ -19,7 +19,7 @@ Genres have conventions, not hard rules. Use this table to pick defaults that fi
 
 ## Applying it in a Seedance prompt
 
-- Name the genre in `STYLE`, then let the `Camera:` lines follow its defaults (e.g. "Warm, painterly 2D storybook animation" -> eye level at child height, gentle moves).
+- Name the genre in `STYLE`, then let the `Camera:` lines follow its defaults (e.g. "Warm, stylized 3D storybook animation" -> eye level at child height, gentle moves).
 - Keep the Seedance rules on top of any genre: one movement per shot, open new scenes wide, keep the 180° rule.
 - Mixed genres: pick the dominant genre for each scene. In this project, the village and scroll-room scenes follow family storybook conventions, while the Galilean hillside scenes borrow epic/biblical conventions (wide crowds, aerial reveals, Jesus shown only from behind or in silhouette).
 - To check a prompt against a genre, compare its camera terms with the "Typical" columns and look for anything in "Use sparingly or avoid" (`scripts/check_camera.py` lists the terms used in every shot).

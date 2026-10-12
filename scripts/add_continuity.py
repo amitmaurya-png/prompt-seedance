@@ -140,7 +140,10 @@ def dialogue(shot, tags):
             seen.add(name)
             name = f"{name} ({tags[name]})"
         delivery = d.get("delivery")  # set by detect_emotions.py
-        parts.append(f"{name}{', ' + delivery if delivery else ''}: {{{d['line']}}}")
+        to = d.get("addressee")        # set by add_eyelines.py
+        to = f"to {to}" if to else ""
+        how = ", ".join(x for x in (delivery, to) if x)
+        parts.append(f"{name}{', ' + how if how else ''}: {{{d['line']}}}")
     return " ".join(parts)
 
 
@@ -235,6 +238,8 @@ def main():
                 p.append(f"  Action: {s['action']}")
             if visual:
                 p.append(f"  Visual: {visual}")
+            if s.get("eyeline"):  # set by add_eyelines.py
+                p.append(f"  Eyeline: {s['eyeline']['direction']}")
             if s["dialogue"]:
                 p.append("  Dialogue: " + dialogue(s, tags))
         p += ["AUDIO:", *[f"- {a}" for a in audio], "CONSTRAINTS:", *[f"- {c}" for c in constraints]]
@@ -260,7 +265,8 @@ def main():
                 + (f"; continue from the last frame of {prev['id']} in @Image {last_img}." if chained else ".")),
             "shots": [
                 f"{s['title']}. " + (f"{handoff}. " if i == 0 and handoff else "")
-                + " ".join(f"{t.rstrip('.')}." for t in (s["camera"], s["action"], s["visual"]) if t)
+                + " ".join(f"{t.rstrip('.')}." for t in (s["camera"], s["action"], s["visual"],
+                                                        (s.get("eyeline") or {}).get("direction")) if t)
                 + (" " + dialogue(s, tags) if s["dialogue"] else "")
                 for i, s in enumerate(shots)],
             "global_direction": (

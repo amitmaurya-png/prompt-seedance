@@ -79,7 +79,7 @@ Project rules override the generic syntax when working on this repository's scre
 
 - For this project's screenplay, Nim is a fox, not a dog.
 - If Jesus appears, show only his hands, robe, and silhouette; never show his face.
-- Keep the established warm, painterly storybook animation style when working on this screenplay unless the user requests a change.
+- Keep the established warm, stylized 3D storybook animation style (feature-film CG, not 2D) when working on this screenplay unless the user requests a change. Character reference images are 2D drawings: use them for design only and say so in each clip's constraints, so the output doesn't drift to 2D.
 - Write dialogue in `{curly braces}` and asset tokens as `@Image 1`, `@Video 1`, `@Audio 1`.
 - Do not add timecodes; shots are numbered and the model sets the pace.
 - Follow [docs/approach.md](../../../docs/approach.md) and the system prompts in [scripts/build_prompts.py](../../../scripts/build_prompts.py) when generating or reviewing prompts for this repository.

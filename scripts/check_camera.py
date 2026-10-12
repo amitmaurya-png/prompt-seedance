@@ -414,8 +414,6 @@ display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));column-ga
 .cont{font-size:12px;font-weight:700;margin-left:auto}.cont.ok{color:#3f9b5f}.cont.bad{color:#c79a2b}
 .contbox{margin:0;padding:8px 14px;border-bottom:1px solid var(--line);font-size:13px}.contbox ul{margin:2px 0 0;padding-left:18px}
 .contbox li.fixd{color:#3f9b5f}.contbox li.trans{color:var(--muted);list-style:none;margin-left:-14px}
-.kind{font-size:11px;font-weight:700;border-radius:999px;padding:1px 8px}.kind.continue{background:var(--note-bg);color:var(--note)}
-.kind.cut{background:var(--warn-bg);color:var(--warn)}.contbox li.note{color:var(--note)}.contbox li.warn{color:var(--warn)}
 .changed{margin:0 0 8px;padding:6px 10px;border-left:3px solid var(--note);background:var(--note-bg);border-radius:6px;font-size:13px}
 .was{text-decoration:line-through;color:var(--muted)}.chg{font-size:11px;font-weight:700;color:var(--note);border:1px solid var(--note);border-radius:999px;padding:0 8px}
 .chtable{border-collapse:collapse;width:100%;font-size:13px}.chtable th,.chtable td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
@@ -553,28 +551,6 @@ def continuity_box(c):
     return f'<div class="contbox"><div class="label">Scene continuity</div><ul>{items}</ul></div>'
 
 
-def transitions_section(results, boundaries):
-    """Every clip-to-clip boundary: continue (same moment) or cut (new scene), with its status."""
-    if not boundaries:
-        return ""
-    status = {c["id"]: c["continuity_issues"] for c in results}
-    rows = []
-    for b in boundaries:
-        notes = status.get(b["to"], [])
-        state = ('<span class="fitcell fit-matches">✓</span>' if not notes
-                 else f'<span class="fitcell fit-close">{len(notes)} note(s)</span>')
-        kind = "continue" if b["type"] == "continue" else "cut"
-        rows.append(f'<tr><td><a href="#{b["from"]}">{b["from"]}</a> → <a href="#{b["to"]}">{b["to"]}</a></td>'
-                    f'<td><span class="kind {kind}">{kind}</span></td><td class="muted">{html.escape(b["detail"])}</td>'
-                    f'<td>{state}</td></tr>')
-    n_ok = sum(1 for b in boundaries if not status.get(b["to"]))
-    return (f'<h2 id="transitions">Clip-to-clip transitions</h2><p class="muted">{len(boundaries)} boundaries: '
-            f'{sum(b["type"] == "continue" for b in boundaries)} continue the same moment, '
-            f'{sum(b["type"] == "cut" for b in boundaries)} cut to a new scene. {n_ok} with no continuity notes.</p>'
-            '<div class="scroll"><table class="chtable"><thead><tr><th>Boundary</th><th>Type</th><th>Detail</th>'
-            '<th>Status</th></tr></thead><tbody>' + "".join(rows) + "</tbody></table></div>")
-
-
 def changes_section(results):
     """Before/after table of camera lines changed by the camera-knowledge skill (apply_camera.py)."""
     rows = [(c, s) for c in results for s in c["shots"] if s["previous"]]
@@ -631,7 +607,7 @@ def render(results, images, people, out_path):
 <div class="stat"><b>{n_changed}</b>camera lines changed</div>
 <div class="stat"><b>{sum(1 for c in results if not c["continuity_issues"])}/{len(results)}</b>clips continuous</div>
 <div class="stat"><b>{sum(len(c["continuity_fixes"]) for c in results)}</b>continuity fixes</div></div>
-<nav class="jump"><a href="#changes">Camera changes</a><a href="#transitions">Clip transitions</a><a href="#shots">Shots</a></nav>
+<nav class="jump"><a href="#changes">Camera changes</a><a href="#shots">Shots</a></nav>
 <h2>Characters</h2><p class="muted">Select a character to list every shot the camera is on them. "Camera on" counts shots
 whose camera line names them, or that show them when the camera line names no one.</p><div class="cast">"""]
     for n in roster:
@@ -668,7 +644,7 @@ whose camera line names them, or that show them when the camera line names no on
     for c in results:
         for sh in c["shots"]:
             sh["anchor"] = f'{c["id"]}-shot-{sh["n"]}'
-    parts.append('</div>' + changes_section(results) + transitions_section(results, getattr(analyse, "boundaries", [])))
+    parts.append('</div>' + changes_section(results))
     parts.append('<h2 id="shots">Shots</h2><div class="controls"><label><input type="checkbox" id="only"> '
                  'Only shots with warnings or notes</label><select id="who"><option value="">All characters</option>'
                  + "".join(f'<option value="{html.escape(n.lower())}">{html.escape(n)}</option>' for n in roster if appear[n])

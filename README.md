@@ -14,7 +14,8 @@ prompt-seedance/
 │   ├── camera-knowledge/     Agent skill: camera terms, genre conventions, camera checks
 │   ├── scene-continuity/     Agent skill: checks and fixes continuity in every scene
 │   ├── clip-continuity/      Agent skill: checks and fixes every clip and clip-to-clip boundary
-│   └── emotion-detector/     Agent skill: detects each line's emotion and the conversation mood
+│   ├── emotion-detector/     Agent skill: detects each line's emotion and the conversation mood
+│   └── eyeline-direction/    Agent skill: who each line is said to, and where characters look
 ├── docs/
 │   └── approach.md           How the screenplay becomes Seedance prompts
 ├── data/
@@ -37,7 +38,8 @@ prompt-seedance/
 │   ├── check_continuity.py   Checks every scene → reports/continuity_report.html
 │   ├── fix_continuity.py     Fixes continuity breaks between clips in data/prompt.json
 │   ├── check_clips.py        Checks/fixes every clip and boundary (transitions, cast, timing)
-│   └── detect_emotions.py    Adds emotion/delivery to each dialogue line in data/prompt.json
+│   ├── detect_emotions.py    Adds emotion/delivery to each dialogue line in data/prompt.json
+│   └── add_eyelines.py       Adds eyelines and each line's listener to data/prompt.json
 ├── assets/
 │   ├── camera/               Camera term diagrams (SVG)
 │   └── characters/           Character references (PNG for Seedance, SVG source)
@@ -68,6 +70,7 @@ python3 scripts/check_continuity.py         # check continuity in every scene
 python3 scripts/fix_continuity.py --dry-run # preview continuity fixes (drop --dry-run to apply)
 python3 scripts/check_clips.py --fix        # clip-level continuity and scene transitions
 python3 scripts/detect_emotions.py          # dialogue emotions and conversation moods (--dry-run to preview)
+python3 scripts/add_eyelines.py             # eyelines and who each line is said to (--dry-run to preview)
 python3 scripts/make_camera_images.py       # redraw camera diagrams
 python3 scripts/make_character_images.py    # redraw character references and gallery
 

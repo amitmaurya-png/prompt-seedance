@@ -14,7 +14,7 @@ Then run add_continuity.py (references, continuity, prompt text) and the other s
 Usage:
   python3 scripts/build_prompt_json.py --dry-run     # summary only
   python3 scripts/build_prompt_json.py               # write data/prompt.json (backup saved)
-  python3 scripts/build_prompt_json.py --all         # write, then continuity, emotions, fixes, and reports
+  python3 scripts/build_prompt_json.py --all         # write, then emotions, eyelines, continuity, fixes, reports
 """
 
 import argparse
@@ -34,8 +34,9 @@ HERE = Path(__file__).resolve().parent
 BREAKDOWN, PROMPTS = DATA / "breakdown.json", DATA / "prompt.json"
 
 MAX_WORDS, MAX_SHOTS, MAX_CHARS, WPS = 28, 3, 4, 2.6
-STYLE = ("Warm, painterly 2D storybook animation, soft textured brushwork, gentle natural light, "
-         "HD, rich details, heartfelt tone with light comedy")
+STYLE = ("Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, "
+         "rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy")
+RENDER_3D = "Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style"
 ROSTER = ["Miri", "Nim", "Saba", "Ima", "Tav", "Yonah", "Andrew", "Philip", "Jesus"]
 CHAR_DEF = {
     "Miri": "the young village girl", "Nim": "the small fox", "Saba": "the elderly storyteller",
@@ -100,7 +101,9 @@ def title_for(text, dialogue):
     src = text or (dialogue[0]["line"] if dialogue else "")
     first = re.split(r"(?<=[.!?])\s+", src.strip())[0] if src else "Moment"
     title = " ".join(first.split()[:6]).rstrip(".,;:!?")
-    return title[0].upper() + title[1:].lower() if title else "Moment"
+    # screenplay first mentions are in capitals ("MIRI stops"): keep names, soften other all-caps words
+    title = " ".join(w.title() if w.isupper() and len(w) > 1 else w for w in title.split())
+    return title[0].upper() + title[1:] if title else "Moment"
 
 
 MEMORY_RE = re.compile(r"\b(remembers?|imagines?|imagining|thinks? of|thinking of|pictures?)\b[^.]*", re.I)
@@ -213,7 +216,8 @@ def build(breakdown):
                     constraints += ["Render only the title text in 【 】, exactly as written, clearly legible",
                                     "Do not generate a logo; do not generate a watermark"]
                 else:
-                    constraints += ["Faces and body proportions stay stable without deformation; movements are slow, "
+                    constraints += [RENDER_3D,
+                                    "Faces and body proportions stay stable without deformation; movements are slow, "
                                     "natural, and smooth, with no stutter or flicker"]
                     if "Nim" in chars:
                         constraints.append("Nim is a small fox, never a dog")
@@ -245,20 +249,25 @@ def build(breakdown):
 
 
 def carry_manual_emotions(old_path, data):
-    """Reapply hand-reviewed emotions from the previous prompt.json, matched by speaker and line text."""
+    """Reapply hand-reviewed emotions and addressees from the previous prompt.json, matched by speaker and line."""
     try:
         old = json.loads(Path(old_path).read_text(), strict=False)
     except (OSError, ValueError):
         return 0
     manual = {(d["character"], d["line"]): d for c in old.get("clips", []) for s in c["shot_details"]
-              for d in s["dialogue"] if d.get("emotion_source") == "manual"}
+              for d in s["dialogue"] if d.get("emotion_source") == "manual" or d.get("addressee_source") == "manual"}
     n = 0
     for c in data["clips"]:
         for s in c["shot_details"]:
             for d in s["dialogue"]:
                 m = manual.get((d["character"], d["line"]))
                 if m:
-                    for key in ("emotion", "intensity", "delivery", "emotion_evidence", "emotion_source"):
+                    keys = []
+                    if m.get("emotion_source") == "manual":
+                        keys += ["emotion", "intensity", "delivery", "emotion_evidence", "emotion_source"]
+                    if m.get("addressee_source") == "manual":
+                        keys += ["addressee", "addressee_source", "addressee_reason"]
+                    for key in keys:
                         if key in m:
                             d[key] = m[key]
                     n += 1
@@ -297,7 +306,7 @@ def main():
 
     steps = ["add_continuity.py"]
     if args.all:
-        steps = [["detect_emotions.py", "--no-rebuild"], "add_continuity.py", ["fix_continuity.py", "--no-rebuild"],
+        steps = [["detect_emotions.py", "--no-rebuild"], "add_continuity.py", ["add_eyelines.py", "--no-rebuild"], ["fix_continuity.py", "--no-rebuild"],
                  ["check_clips.py", "--fix", "--no-rebuild"], "add_continuity.py", "check_continuity.py", "check_camera.py"]
     for step in steps:
         cmd = step if isinstance(step, list) else [step]

@@ -37,7 +37,7 @@ Return a complete prompt with these sections:
 3. Shot sequence: write the supplied beats as **Shot 1**, **Shot 2**, and so on, in order. For each, describe the setting/time, concrete visible action and expression, framing or camera movement, and spatial changes. Keep movement natural and use no timestamps.
 4. Global direction: close with a concise project-consistent visual style, character-continuity, motion-quality, and audio direction. Include practical constraints such as no subtitles, logos, or watermarks when appropriate.
 
-Preserve every supplied dialogue line exactly once, with its original speaker, in curly braces. Do not invent, omit, reorder, or paraphrase dialogue or events. Do not add unsupported character appearance details. Nim is a small fox, not a dog. If Jesus appears, his face is not shown. Keep the overall look consistent with a warm, painterly storybook animation.
+Preserve every supplied dialogue line exactly once, with its original speaker, in curly braces. Do not invent, omit, reorder, or paraphrase dialogue or events. Do not add unsupported character appearance details. Nim is a small fox, not a dog. If Jesus appears, his face is not shown. Keep the overall look consistent with a warm, stylized 3D storybook animation.
 
 Return JSON only:
 {"asset_preparation": ["@Image 1: ..."], "image_reference": "Use ...", "video_reference": "Refer to the camera movement in @Video 1...", "audio_reference": "Use @Audio 1 for ...", "shots": ["Shot content, including any dialogue"], "global_direction": "The entire video should ..."}

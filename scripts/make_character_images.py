@@ -22,7 +22,7 @@ from paths import ASSETS, DATA, REPORTS, ROOT
 OUT = ASSETS / "characters"
 SIZE = 1024  # PNG pixels
 
-STYLE = ("warm, painterly 2D storybook animation style, soft textured brushwork, gentle natural light, "
+STYLE = ("warm, stylized 3D storybook animation style (feature-film CG), soft global illumination, gentle natural light, "
          "ancient Galilee setting, simple handwoven clothing")
 
 LINE = "#4a3426"
