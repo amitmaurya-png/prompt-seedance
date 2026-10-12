@@ -126,7 +126,7 @@ def check_scene(scene, char_defs, char_voices):
         # scene state
         if not title:
             if not cont.get("scene_state"):
-                add("warn", c, "No CONTINUITY block for this scene.")
+                pass  # scene-state blocks are optional (off by default: prompts carry screenplay text only)
             elif len(states_by_heading[c["scene"]]) > 1:
                 add("warn", c, "CONTINUITY block differs from other clips with the same scene heading.")
 

@@ -108,6 +108,8 @@ CONTINUES_ACROSS_HEADING = {
     ("EXT. HILLSIDE — LATE AFTERNOON", "EXT. HILLSIDE — CONTINUOUS"),
 }
 
+USE_SCENE_STATE = False
+
 TAG = re.compile(r" \(@Image \d+\)")
 
 
@@ -163,7 +165,7 @@ def main():
         old_loc = next(r for r in clip["references"] if r.endswith(("scene reference", "style reference")))
         loc_label = re.sub(r"^@Image \d+: ", "", old_loc)
         loc_desc = re.sub(r" \(@Image \d+\)$", "", clip["scene_setting"])
-        ambience = next((a for a in clip["audio"] if a.startswith("Sound effects")), "")
+        ambience = next((a for a in clip["audio"] if a.startswith("Sound effects")), None)
 
         refs = [f"{tags[ch]}: {ch} character reference" if ch != "Jesus"
                 else f"{tags[ch]}: Jesus reference (robe, hands, silhouette only)" for ch in chars]
@@ -201,7 +203,7 @@ def main():
             music = ("（the gentle storybook theme continues from the previous clip"
                      if chained else "（the gentle storybook theme begins softly")
             music += ", under the dialogue）" if has_lines else "）"
-            audio = [ambience, f"Music: {music}"]
+            audio = [x for x in (ambience, f"Music: {music}") if x]
             if speakers:
                 audio.append("Voices: " + "; ".join((f"{ch} ({tags[ch]}) {VOICE[ch]}" if ch in tags
                                                   else f"{ch} (voice-over) {VOICE[ch]}") for ch in speakers)
@@ -220,7 +222,9 @@ def main():
             constraints.append("Keep it subtitle-free; avoid generating any text or subtitles; "
                                "do not generate a logo; do not generate a watermark")
 
-        cont = CONTINUITY.get(clip["scene"])
+        # CONTINUITY (light, props, screen positions) was written by hand, not taken from the screenplay;
+        # it is off so prompts contain only screenplay text plus labelled direction. Set USE_SCENE_STATE = True to restore.
+        cont = CONTINUITY.get(clip["scene"]) if USE_SCENE_STATE else None
         p = [f"FORMAT: {clip['format']}", f"STYLE: {clip['style']}", "REFERENCES:", *[f"- {r}" for r in refs],
              "SUBJECT:", *[f"- {s}" for s in subjects], f"SCENE: {loc_desc} (@Image {loc_img})"]
         if cont:

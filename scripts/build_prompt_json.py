@@ -4,9 +4,9 @@
 No AI model is used.
   1. Each scene's shots are grouped into Seedance clips of 4-15 s (about 28 spoken words and up to 3 shots
      per clip). A shot whose dialogue is too long for one clip is split across clips.
-  2. For every shot: the action paragraphs are copied word for word; sentences about characters go to
-     "action", sentences about the place go to "visual". Dialogue is copied word for word with its
-     parenthetical (e.g. SOFTLY) and voice-over flag.
+  2. For every shot: the action paragraphs are copied word for word, in the screenplay's order, nothing added.
+     When long dialogue is split across clips, only the first part carries the action. Dialogue is copied word
+     for word with its parenthetical (e.g. SOFTLY) and voice-over flag. The scene is the screenplay heading.
   3. A camera line is suggested from the shot's genre and mood (camera_suggest.py, camera-knowledge rules).
   4. Characters for the image references: speakers first, then characters in the action (max 4).
 Then run add_continuity.py (references, continuity, prompt text) and the other skills' scripts; see --all.
@@ -89,14 +89,6 @@ def words(dialogue):
     return sum(len(d["line"].split()) for d in dialogue)
 
 
-def split_action(text):
-    """Sentences about characters -> action; sentences only about the place -> visual."""
-    sentences = re.split(r"(?<=[.!?])\s+", text.strip()) if text else []
-    action = [s for s in sentences if PERSON_RE.search(s)]
-    visual = [s for s in sentences if not PERSON_RE.search(s)]
-    return " ".join(action), " ".join(visual)
-
-
 def title_for(text, dialogue):
     src = text or (dialogue[0]["line"] if dialogue else "")
     first = re.split(r"(?<=[.!?])\s+", src.strip())[0] if src else "Moment"
@@ -136,12 +128,9 @@ def shot_units(scene):
         parts.append(cur)
         for i, part in enumerate(parts):
             speakers = list(dict.fromkeys(d["character"].split()[0].title() for d in part))
-            if i == 0:
-                action_text = sh["action"]
-            else:
-                who = " and ".join(s for s in speakers if s in ROSTER) or "They"
-                action_text = f"{who} continue{'s' if ' and ' not in who and who != 'They' else ''} the conversation"
-            units.append({"order": sh["order"], "part": i + 1, "action_text": action_text, "dialogue": part,
+            # the screenplay's action belongs to the first part only; later parts are dialogue only (nothing invented)
+            action_text = sh["action"] if i == 0 else ""
+            units.append({"order": sh["order"], "part": i + 1, "of": len(parts), "action_text": action_text, "dialogue": part,
                           "line_from": sum(len(p) for p in parts[:i]) + 1})
     return units
 
@@ -195,16 +184,18 @@ def build(breakdown):
                 cast = [{"name": c, "role": "in shot"} for c in chars]
                 shots = []
                 for k, u in enumerate(units):
-                    action, visual = split_action(u["action_text"])
-                    if title_card:
-                        action, visual = "A warm, painted title card unfurls like parchment", \
-                            "Title text reads: LITTLE WITNESSES “THE SMALLEST LUNCH”"
+                    action, visual = u["action_text"], ""  # verbatim, in the screenplay's order
+                    if title_card:  # mark the title words as on-screen text; the action stays verbatim
+                        visual = "Title text reads: LITTLE WITNESSES “THE SMALLEST LUNCH”"
                     dlg = [{k2: v for k2, v in d.items()} for d in u["dialogue"]]
                     sug = suggest(title_for(u["action_text"], dlg), action, visual,
                                   [{"speaker": d["character"].title(), "line": d["line"]} for d in dlg],
                                   cast, "title" if title_card else genre,
                                   opens_scene=(ci == 0 and k == 0 and heading != prev_scene))
-                    shots.append({"title": "Main titles" if title_card else title_for(u["action_text"], dlg),
+                    title = "Main titles" if title_card else title_for(u["action_text"], dlg)
+                    if not u["action_text"] and u["part"] > 1:
+                        title = f"{title_for('', dlg)} (dialogue continues, part {u['part']} of {u['of']})"
+                    shots.append({"title": title,
                                   "camera": sug["line"], "action": action, "visual": visual, "dialogue": dlg})
                 dur = estimate(units)
                 loc_img = len(chars) + 1
@@ -237,10 +228,10 @@ def build(breakdown):
                     "references": refs,
                     "subjects": [f"Define {CHAR_DEF[c]} in @Image {i} as {c}" for i, c in enumerate(chars, 1)]
                                 or [f"A painted parchment title card in the style of @Image {loc_img}"],
-                    "scene_setting": f"{loc_desc} (@Image {loc_img})",
+                    "scene_setting": f"{heading} (@Image {loc_img})",
                     "shot_details": shots,
-                    "audio": [f"Music: （{ambience}）", "No dialogue"] if title_card
-                             else [f"Sound effects: <{ambience}>", "Music: （a soft, warm storybook score）"],
+                    "audio": ["Music: （a gentle storybook theme）", "No dialogue"] if title_card
+                             else ["Music: （a soft, warm storybook score）"],
                     "constraints": constraints,
                     "continuity": {"mode": "new_scene"},
                 })
