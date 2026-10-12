@@ -55,7 +55,12 @@ def heading_time(scene):
     return None
 
 
+MEMORY_RE = re.compile(r"\b(remembers?|imagines?|imagining|thinks? of|thinking of|pictures?)\b[^.]*", re.I)
+
+
 def names_in(text):
+    """Characters present in a text; names inside a memory ("She remembers Tav's face") don't count."""
+    text = MEMORY_RE.sub("", text)
     return {n for n in ORDER if re.search(rf"\b{n}\b", text)}
 
 

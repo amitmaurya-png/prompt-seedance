@@ -7,7 +7,7 @@ The goal is a set of text prompts that can be pasted into Seedance 2.0, one shor
 
 ## Step 1. Read the screenplay as acts, scenes, and shots
 
-`scripts/extract_breakdown.py` sends the PDF text to OpenAI GPT-6 Sol only. It retries the same model if the API is temporarily busy.
+`scripts/parse_screenplay.py` reads the PDF directly and copies every action paragraph and dialogue line word for word, using the screenplay's indentation to tell scene headings, action, character cues, parentheticals, and dialogue apart (no AI). Each shot keeps `actions` (the separate action paragraphs), `action` (them joined), and `dialogue`; voice-over lines are flagged. The older `scripts/extract_breakdown.py` sends the PDF text to OpenAI GPT-6 Sol only. It retries the same model if the API is temporarily busy.
 The model returns JSON, saved as `data/breakdown.json`.
 
 - An **act** is a heading such as `ACT ONE`. Text before the first act is the cold open.

@@ -47,6 +47,9 @@ CONTINUITY = {
         "Late morning, dappled sunlight through the fig leaves. Saba holds the sandal he is repairing; his sleeve "
         "is patched; Miri's linen basket holds the linen and the hidden cake bundle. Screen positions: Saba under "
         "the fig tree frame left, Miri frame right, Nim near the roots between them.",
+    "INT. SABA’S HOUSE — CONTINUOUS":
+        "Warm, dim interior light; a warm, crowded room with a faded hanging cloth leading to the scroll room. "
+        "Screen positions: Saba leads frame right, Miri follows frame left, Nim at her heels.",
     "INT. SABA’S HOUSE — CONTINUOUS / INT. SCROLL ROOM — CONTINUOUS":
         "Warm, dim interior light with dust floating in shafts of light. Endless shelves of old scrolls. "
         "Screen positions: Saba leads frame right, Miri follows frame left, Nim at her heels.",
@@ -94,15 +97,16 @@ CONTINUITY = {
 
 # Openings rewritten so the clip picks up exactly where the previous one ended.
 HANDOFF_FIXES = {
-    "clip-32": ("Medium two-shot, tracking to a stop",
-                "Still walking, Miri slows and looks at the crowd, then at the bundle Yonah holds; "
-                "Nim trots between them, then sits"),
-    "clip-51": ("Slow arc around Miri and Nim",
-                "Miri sits down slowly beside Nim on the ridge, and they look out together"),
+    # "clip-NN": ("<camera>", "<opening action>"), for clips whose opening must bridge from the previous clip.
+    # Clip ids change when build_prompt_json.py regroups clips, so review these after a rebuild.
 }
 
 # Scene headings that change but stay in the same place and moment (script says CONTINUOUS).
-CONTINUES_ACROSS_HEADING = {"clip-45"}
+# Scene headings that change but stay in the same place and moment (the script says CONTINUOUS).
+CONTINUES_ACROSS_HEADING = {
+    ("INT. SABA’S HOUSE — CONTINUOUS", "INT. SCROLL ROOM — CONTINUOUS"),
+    ("EXT. HILLSIDE — LATE AFTERNOON", "EXT. HILLSIDE — CONTINUOUS"),
+}
 
 TAG = re.compile(r" \(@Image \d+\)")
 
@@ -122,7 +126,7 @@ def bind(text, tags):
     text = TAG.sub("", text)
     for ch, tag in tags.items():
         name = "Saba Elior" if ch == "Saba" and "Saba Elior" in text else ch
-        m = re.search(rf"\b{name}\b(?!['’]s)", text)
+        m = re.search(rf"\b{name}\b(?!['’]s)", text, re.I)  # also "MIRI", the screenplay's first-mention caps
         if m:
             text = text[:m.end()] + f" ({tag})" + text[m.end():]
     return text
@@ -146,7 +150,8 @@ def main():
     prev = None
     for clip in clips:
         title_card = clip["scene"] == "MAIN TITLES"
-        chained = (same_scene(prev, clip) or clip["id"] in CONTINUES_ACROSS_HEADING) and not title_card
+        chained = (same_scene(prev, clip) or (prev and (prev["scene"], clip["scene"]) in CONTINUES_ACROSS_HEADING)) \
+            and not title_card
         chars = characters(clip)
         tags = {ch: f"@Image {i}" for i, ch in enumerate(chars, 1)}
         loc_img = len(chars) + 1
@@ -225,7 +230,11 @@ def main():
             visual = s["visual"]
             if title_card and "【" not in visual:
                 visual = visual.replace("Title text reads: ", "Title text: 【") + "】"
-            p += [f"  Camera: {s['camera']}", f"  Action: {s['action']}", f"  Visual: {visual}"]
+            p.append(f"  Camera: {s['camera']}")
+            if s["action"]:
+                p.append(f"  Action: {s['action']}")
+            if visual:
+                p.append(f"  Visual: {visual}")
             if s["dialogue"]:
                 p.append("  Dialogue: " + dialogue(s, tags))
         p += ["AUDIO:", *[f"- {a}" for a in audio], "CONSTRAINTS:", *[f"- {c}" for c in constraints]]
@@ -251,7 +260,7 @@ def main():
                 + (f"; continue from the last frame of {prev['id']} in @Image {last_img}." if chained else ".")),
             "shots": [
                 f"{s['title']}. " + (f"{handoff}. " if i == 0 and handoff else "")
-                + f"{s['camera']}. {s['action']}. {s['visual']}."
+                + " ".join(f"{t.rstrip('.')}." for t in (s["camera"], s["action"], s["visual"]) if t)
                 + (" " + dialogue(s, tags) if s["dialogue"] else "")
                 for i, s in enumerate(shots)],
             "global_direction": (

@@ -24,7 +24,9 @@ prompt-seedance/
 │   └── characters.json       Character → reference images, design notes, image prompt
 ├── scripts/
 │   ├── paths.py              Shared folder paths
-│   ├── extract_breakdown.py  Screenplay PDF → data/breakdown.json (OpenAI API)
+│   ├── parse_screenplay.py   Screenplay PDF → data/breakdown.json, every action and line verbatim (no AI)
+│   ├── extract_breakdown.py  Screenplay PDF → data/breakdown.json (OpenAI API, summarised; older method)
+│   ├── build_prompt_json.py  data/breakdown.json → data/prompt.json, verbatim actions and dialogue (no AI)
 │   ├── build_prompts.py      data/breakdown.json → data/prompts.json (OpenAI API)
 │   ├── add_continuity.py     Adds scene continuity to data/prompt.json
 │   ├── make_camera_images.py Draws assets/camera/ and data/camera_angles.json
@@ -57,6 +59,7 @@ echo "OPENAI_API_KEY=..." > .env      # only needed for extract_breakdown.py and
 Run from the repository root.
 
 ```bash
+python3 scripts/build_prompt_json.py --all  # rebuild data/prompt.json from breakdown.json, then all skills' steps
 python3 scripts/add_continuity.py           # rebuild data/prompt.json with scene continuity
 python3 scripts/check_camera.py             # rebuild reports/camera_report.html
 python3 scripts/check_camera.py --query "slow dolly-in on the boy"   # camera-term similarity search
@@ -68,6 +71,7 @@ python3 scripts/detect_emotions.py          # dialogue emotions and conversation
 python3 scripts/make_camera_images.py       # redraw camera diagrams
 python3 scripts/make_character_images.py    # redraw character references and gallery
 
+.venv/bin/python scripts/parse_screenplay.py [path/to/screenplay.pdf]  # verbatim breakdown, no AI
 .venv/bin/python scripts/extract_breakdown.py path/to/screenplay.pdf   # OpenAI API
 .venv/bin/python scripts/build_prompts.py                               # OpenAI API
 ```

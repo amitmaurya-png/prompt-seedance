@@ -90,6 +90,8 @@ Run these from the repository root. Data lives in `data/`, generated images in `
 
 | Script | When to run it |
 |---|---|
+| [scripts/parse_screenplay.py](../../../scripts/parse_screenplay.py) | Screenplay PDF (`pdf_document/TSL.pdf`) → `data/breakdown.json`, every action and line verbatim (no AI) |
+| [scripts/build_prompt_json.py](../../../scripts/build_prompt_json.py) `--all` | `data/breakdown.json` → `data/prompt.json` with verbatim actions and dialogue, then continuity, emotions, fixes, and reports |
 | [scripts/check_continuity.py](../../../scripts/check_continuity.py) | To check continuity in every scene (owned by the `scene-continuity` skill): writes `reports/continuity_report.html` |
 | [scripts/add_continuity.py](../../../scripts/add_continuity.py) | After editing `data/prompt.json` or the continuity blocks: rebuilds prompts with scene continuity |
 | [scripts/check_camera.py](../../../scripts/check_camera.py) | To review camera lines, characters, and dialogue per shot: writes `reports/camera_report.html`. Use `--query "text"` for a camera-term similarity search |
