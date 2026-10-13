@@ -15,7 +15,8 @@ prompt-seedance/
 │   ├── scene-continuity/     Agent skill: checks and fixes continuity in every scene
 │   ├── clip-continuity/      Agent skill: checks and fixes every clip and clip-to-clip boundary
 │   ├── emotion-detector/     Agent skill: detects each line's emotion and the conversation mood
-│   └── eyeline-direction/    Agent skill: who each line is said to, and where characters look
+│   ├── eyeline-direction/    Agent skill: who each line is said to, and where characters look
+│   └── skit-to-prompt-json/  Agent skill: builds data/prompt.json from a skit, verbatim and in order
 ├── docs/
 │   └── approach.md           How the screenplay becomes Seedance prompts
 ├── data/
