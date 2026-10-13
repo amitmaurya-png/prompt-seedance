@@ -35,7 +35,7 @@ How `data/prompt.json` is built from a skit's `data/breakdown.json`.
 | `constraints` | One camera move per shot, 3D render rule, stable faces, no duplicates, held end frame, continuity match, no subtitles, logos, or watermarks |
 | `continuity` | `mode` (`new_scene` / `continue_scene`) and the hand-off image |
 | `prompt` | The rendered text sent to Seedance (template below) |
-| `asset_preparation`, `image_reference`, `shots`, `global_direction` | Copies kept for `build_prompts.py` compatibility |
+| `shots`, `global_direction` | Copies kept for `build_prompts.py` compatibility |
 
 ## Grouping shots into clips
 
