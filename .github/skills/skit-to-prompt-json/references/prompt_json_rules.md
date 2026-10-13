@@ -51,7 +51,7 @@ How `data/prompt.json` is built from a skit's `data/breakdown.json`.
 - **Groups** (children, crowd, disciples, families) that appear in the action are one image and one subject: `Define the group of village children around Saba in @Image 5 as the children (a group)`.
 - **Unnamed speakers** (GIRL, CHILD, SMALL GIRL, MOTHER IN CROWD) are subjects too. If they belong to a group in the clip, draw them from that group's image and say so: `Define the curly-haired girl in plum from the children in @Image 5.
 - Voice-over lines (V.O.) don't need the speaker on screen, so they don't add a subject.
-- Tag each mention in actions and dialogue with the image: `A GIRL (@Image 6) spots…`, `Girl (@Image 6), excitedly, to the children: {Come on!}`. Don't tag a different group that only shares a word (e.g. "older children" in the lane).
+- Tag each mention in actions and dialogue with the image: `A GIRL (@Image 6) spots…`, `Girl who is also sitting around Saba within group of childrens, excitedly, to the children: {Come on!}`. Don't tag a different group that only shares a word (e.g. "older children" in the lane).
 - Scene images go in `REFERENCES` and on the `SCENE:` line. The previous clip's last frame is added when the scene continues.
 
 ## Rendered prompt template
