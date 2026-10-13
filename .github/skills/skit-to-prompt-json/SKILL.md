@@ -38,12 +38,11 @@ Run from the repository root.
 | `python3 scripts/build_prompt_json.py --all` | Write `data/prompt.json` (backup in `data/backups/`), then emotions, eyelines, continuity, fixes, and reports |
 | `python3 scripts/add_continuity.py` | Re-render every clip's `prompt` text after editing fields |
 | `python3 scripts/check_clips.py` / `check_continuity.py` / `check_camera.py` | Review clips, continuity, and camera (HTML reports in `reports/`) |
-| `python3 scripts/make_character_images.py` | Draw character reference images in `assets/characters/` |
 
 ## Workflow
 
 1. **Parse.** Run `parse_screenplay.py` on the skit. Check the summary (acts, scenes, shots, action paragraphs, dialogue lines) against the PDF. Fix parser errors in the parser, never by hand-editing the text.
-2. **Set up the skit.** For a new skit, update `build_prompt_json.py`'s `ROSTER`, `CHAR_DEF`, `LOCATIONS`, and `STYLE`, then draw a reference image for every named character, recurring group, and unnamed speaker (see the rules file).
+2. **Set up the skit.** For a new skit, update `build_prompt_json.py`'s `ROSTER`, `CHAR_DEF`, `LOCATIONS`, and `STYLE`. This skill doesn't generate assets: reference images are supplied separately, and the prompts only refer to them as `@Image N`.
 3. **Build.** Run `build_prompt_json.py --dry-run`, check the grouping, then run `--all`.
 4. **Add references and subjects.** Every character who speaks or is seen in a clip has a reference image and a `Define … in @Image N as <Name>` subject. That includes groups (the children, the crowd) and unnamed speakers (Girl, Child, Mother In Crowd). See the rules file.
 5. **Review direction** with the owning skills: camera lines, continuity hand-offs, emotions, and eyelines.
@@ -55,5 +54,5 @@ Run from the repository root.
 - `breakdown.json` is the source of truth. Copy actions and dialogue verbatim and in order. Tag character names with their image (`Miri (@Image 1)`), but don't otherwise change the text.
 - One clip is 4-15 s, up to 3 shots, about 28 spoken words, and up to 4 main characters. Split long dialogue across clips rather than cutting it.
 - Render in stylized 3D. Reference images are 2D drawings and are used for design only, so say so in every clip's constraints.
-- When the user asks for a change "at the prompt level", edit only `data/prompt.json` and the image assets. Don't change the scripts, and tell the user that a rebuild would overwrite the edit.
+- When the user asks for a change "at the prompt level", edit only `data/prompt.json`. Don't change the scripts, and tell the user that a rebuild would overwrite the edit.
 - Project rules: Nim is a fox; Jesus's face is never shown (hands, robe, silhouette, or from behind only); no subtitles, logos, or watermarks.
