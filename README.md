@@ -16,7 +16,8 @@ prompt-seedance/
 │   ├── clip-continuity/      Agent skill: checks and fixes every clip and clip-to-clip boundary
 │   ├── emotion-detector/     Agent skill: detects each line's emotion and the conversation mood
 │   ├── eyeline-direction/    Agent skill: who each line is said to, and where characters look
-│   └── skit-to-prompt-json/  Agent skill: builds data/prompt.json from a skit, verbatim and in order
+│   ├── skit-to-prompt-json/  Agent skill: builds data/prompt.json from a skit, verbatim and in order
+│   └── seedance-curl/        Agent skill: one Seedance API curl command per clip → curl/curl_commands.json
 ├── docs/
 │   └── approach.md           How the screenplay becomes Seedance prompts
 ├── data/
@@ -40,7 +41,10 @@ prompt-seedance/
 │   ├── fix_continuity.py     Fixes continuity breaks between clips in data/prompt.json
 │   ├── check_clips.py        Checks/fixes every clip and boundary (transitions, cast, timing)
 │   ├── detect_emotions.py    Adds emotion/delivery to each dialogue line in data/prompt.json
-│   └── add_eyelines.py       Adds eyelines and each line's listener to data/prompt.json
+│   ├── add_eyelines.py       Adds eyelines and each line's listener to data/prompt.json
+│   └── build_curl_commands.py  data/prompt.json → curl/curl_commands.json (Seedance API request per clip)
+├── curl/
+│   └── curl_commands.json    Curl command and request body per clip (URL inputs: .github/skills/seedance-curl/references/)
 ├── assets/
 │   ├── camera/               Camera term diagrams (SVG)
 │   └── characters/           Character references (PNG for Seedance, SVG source)
@@ -72,6 +76,7 @@ python3 scripts/fix_continuity.py --dry-run # preview continuity fixes (drop --d
 python3 scripts/check_clips.py --fix        # clip-level continuity and scene transitions
 python3 scripts/detect_emotions.py          # dialogue emotions and conversation moods (--dry-run to preview)
 python3 scripts/add_eyelines.py             # eyelines and who each line is said to (--dry-run to preview)
+python3 scripts/build_curl_commands.py      # Seedance curl command per clip (--clip clip-14 for one clip)
 python3 scripts/make_camera_images.py       # redraw camera diagrams
 python3 scripts/make_character_images.py    # redraw character references and gallery
 

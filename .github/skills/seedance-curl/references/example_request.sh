@@ -1,0 +1,22 @@
+curl --location --request POST 'https://ark.ap-southeast.bytepluses.com/api/v3/contents/generations/tasks' \
+--header "Authorization: Bearer $ARK_API_KEY" \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "model": "dreamina-seedance-2-0-mini-260615",
+  "content": [
+    {
+      "type": "text",
+      "text": "FORMAT: 14s / 16:9 / 2 shots / soft cuts\n\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\n\nREFERENCES:\n\n- @Image 1: Miri character reference\n\n- @Image 2: Saba character reference\n\n- @Image 3: Saba'\''s courtyard scene reference\n\n- @Image 4: last frame of clip-13 (continuity reference)\n\n- @Image 5: Children group reference\n\n- @Image 6: A girl sitting within the group of children around Saba @Image 2 in @Image 5\n\nSUBJECT:\n\n- Define the young village girl in @Image 1 as Miri\n\n- Define the elderly storyteller in @Image 2 as Saba\n\n- Define the group of village children around Saba in @Image 5 as the children (a group)\n\n- Define the curly-haired girl in plum from the children in @Image 5, shown alone in @Image 6, as Girl (speaking role)\n\nSCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 3)\n\nSHOTS:\n\nShot 1: A few children (@Image 5) giggle\n\n  Continuity: Continue the same moment from @Image 4: keep the lighting, positions, props, and character appearance exactly as in that frame\n\n  Camera: Medium shot, static on Saba\n\n  Action: A few children giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening.\n\n  Eyeline: Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba\n\n  Dialogue: Saba (@Image 2), thoughtfully, to the children: {But the camel did not listen, because camels are very good at chewing and very poor at hearing wisdom.}\n\nShot 2: Miri smiles despite herself\n\n  Camera: Medium shot, gentle tracking on Miri\n\n  Action: Miri (@Image 1) smiles despite herself. A GIRL (@Image 6) sitting within the group of children in @Image 5 spots a group of older children playing with a hoop in the lane.\n\n  Eyeline: Girl looks around at the children while speaking, meeting their eyes one by one; the children look back at Girl\n\n  Dialogue: Girl (@Image 6), excitedly, to the children: {Come on!}\n\nAUDIO:\n\n- Music: （the gentle storybook theme continues from the previous clip, under the dialogue）\n\n- Voices: Saba (@Image 2) warm, slow, gently gravelly elder; clear English dialogue\n\nCONSTRAINTS:\n\n- One camera move per shot\n\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n\n- Each character appears only once; no duplicate or twin characters\n\n- End on a calm, held frame with no new action in the final second\n\n- Match lighting, positions, props, and character appearance to @Image 4\n\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark"
+    },
+    { "type": "image_url", "image_url": { "url": "https://storage.googleapis.com/b2b_marketplace/generated-images/tsl/Saba.png" }, "role": "reference_image" },
+    { "type": "image_url", "image_url": { "url": "https://storage.googleapis.com/b2b_marketplace/generated-images/tsl/SABA_COURTYARD__EXT.png" }, "role": "reference_image" },
+    { "type": "audio_url", "audio_url": { "url": "https://storage.googleapis.com/b2b_marketplace/generated-images/tsl/voices/saba_voice.mp3" }, "role": "reference_audio" },
+    { "type": "audio_url", "audio_url": { "url": "https://storage.googleapis.com/b2b_marketplace/generated-images/tsl/voices/miri_voice_v2.mp3" }, "role": "reference_audio" }
+  ],
+  "ratio": "16:9",
+  "duration": 10,
+  "resolution": "720p",
+  "generate_audio": true,
+  "return_last_frame": true,
+  "watermark": false
+}'

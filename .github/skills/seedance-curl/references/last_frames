@@ -1,0 +1,2 @@
+# Last frame of each generated clip, from the finished task's last_frame_url.
+# One "clip-NN : url" per line; the next clip uses it as its continuity image.
