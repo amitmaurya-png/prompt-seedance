@@ -14,6 +14,8 @@ URL files (one "NAME : url" per line, in .github/skills/seedance-curl/references
   audio_urls    character voices (NAME is the character, e.g. SABA)
   last_frames   last frame of each generated clip (NAME is the clip id, e.g. clip-13); fill it in from each
                 task's last_frame_url so the next clip continues from it
+  video_urls    each generated clip's video (NAME is the clip id), from the finished task's video_url;
+                used only with --video-ref
 
 A reference with no URL gets a "<missing: ...>" placeholder and is listed in the clip's "missing".
 The API key is never written: commands read it from $ARK_API_KEY.
@@ -23,6 +25,9 @@ Usage:
   python3 scripts/build_curl_commands.py --clip clip-14      # only these clips (others in the file are kept)
   python3 scripts/build_curl_commands.py --model dreamina-seedance-2-0-mini-260615 --resolution 720p
   python3 scripts/build_curl_commands.py --first-frame       # send the previous clip's last frame as first_frame
+  python3 scripts/build_curl_commands.py --video-ref         # previous clip's video as @Video 1, the first reference,
+                                                             # in place of its last-frame image
+                                                             # -> curl/curl_commands_video_ref.json
 """
 
 import argparse
@@ -35,6 +40,7 @@ CURL = ROOT / "curl"
 REFS = ROOT / ".github" / "skills" / "seedance-curl" / "references"
 PROMPT_JSON = DATA / "prompt.json"
 OUT = CURL / "curl_commands.json"
+OUT_VIDEO_REF = CURL / "curl_commands_video_ref.json"
 ENDPOINT = "https://ark.ap-southeast.bytepluses.com/api/v3/contents/generations/tasks"
 MAX_AUDIO = 3
 
@@ -86,9 +92,39 @@ def speakers(clip):
     return seen
 
 
-def build(clip, images, voices, last_frames, args):
+def add_video_ref(text, prev, frame_ref):
+    """List @Video 1 first under REFERENCES and open SHOTS by extending it (official extend wording).
+
+    The previous clip's last-frame image (frame_ref, e.g. '@Image 4', always the last image) is dropped:
+    its REFERENCES line goes, and the Continuity and Match lines point at the end of @Video 1 instead.
+    """
+    if frame_ref:
+        tok = re.escape(frame_ref) + r"(?!\d)"
+        text = re.sub(r"^- " + tok + r":.*\n", "", text, flags=re.M)
+        text = re.sub(r"from " + tok + r": (.*?) exactly as in that frame",
+                      r"from the end of @Video 1: \1 exactly as in its last frame", text)
+        text = re.sub(r"to " + tok + r"$", "to the end of @Video 1", text, flags=re.M)
+        text = re.sub(tok, "the end of @Video 1", text)
+    text = re.sub(r"^(REFERENCES:[ \t]*)$",
+                  lambda m: m.group(1) + f"\n- @Video 1: video of {prev} (the previous clip, to extend)",
+                  text, count=1, flags=re.M)
+    return re.sub(r"^(SHOTS:[ \t]*)$",
+                  lambda m: m.group(1) + "\nExtend @Video 1 forward: continue the same moment from its last frame,"
+                                         " with no cut.",
+                  text, count=1, flags=re.M)
+
+
+def build(clip, images, voices, last_frames, videos, args):
     content = []
     missing = []
+    prev = clip.get("continuity", {}).get("previous_clip")
+    frame_ref = None
+    if args.video_ref and prev:
+        url = videos.get(prev)
+        if not url:
+            missing.append(f"@Video 1: video of {prev}")
+            url = f"<missing: video of {prev}>"
+        content.append({"type": "video_url", "video_url": {"url": url}, "role": "reference_video"})
     for ref in clip["references"]:
         m = REF_RE.match(ref)
         if not m:
@@ -96,6 +132,9 @@ def build(clip, images, voices, last_frames, args):
         label = m.group(2)
         role = "reference_image"
         lf = LAST_FRAME_RE.search(label)
+        if lf and args.video_ref and prev:
+            frame_ref = f"@Image {m.group(1)}"  # replaced by the previous clip's video
+            continue
         if lf:
             url = last_frames.get(lf.group(1))
             if args.first_frame:
@@ -115,6 +154,8 @@ def build(clip, images, voices, last_frames, args):
             content.append({"type": "audio_url", "audio_url": {"url": url}, "role": "reference_audio"})
 
     text = clip["prompt"].rstrip("\n")
+    if args.video_ref and prev:
+        text = add_video_ref(text, prev, frame_ref)
     if voice_names:
         line = "- Voice references: " + "; ".join(
             f"@Audio {i} is {n}'s voice" for i, n in enumerate(voice_names, 1))
@@ -145,18 +186,23 @@ def main():
     ap.add_argument("--resolution", default="720p")
     ap.add_argument("--first-frame", action="store_true",
                     help="send the previous clip's last frame with role first_frame instead of reference_image")
+    ap.add_argument("--video-ref", action="store_true",
+                    help="send the previous clip's video as @Video 1, the first reference, and write "
+                         + str(OUT_VIDEO_REF.relative_to(ROOT)))
     args = ap.parse_args()
+    out_path = OUT_VIDEO_REF if args.video_ref else OUT
 
     # strict=False: prompt.json may hold prompts with literal line breaks (edited by hand)
     clips = json.loads(PROMPT_JSON.read_text(encoding="utf-8"), strict=False)["clips"]
     images = read_urls(REFS / "image_urls")
     voices = read_urls(REFS / "audio_urls")
     last_frames = read_urls(REFS / "last_frames")
+    videos = read_urls(REFS / "video_urls")
 
     out = {"endpoint": ENDPOINT, "source": "data/prompt.json", "builder": "scripts/build_curl_commands.py",
            "api_key": "read from $ARK_API_KEY", "clips": {}}
-    if args.clip and OUT.exists():
-        out["clips"] = json.loads(OUT.read_text(encoding="utf-8"))["clips"]
+    if args.clip and out_path.exists():
+        out["clips"] = json.loads(out_path.read_text(encoding="utf-8"))["clips"]
 
     wanted = set(args.clip or [])
     unknown = wanted - {c["id"] for c in clips}
@@ -166,7 +212,7 @@ def main():
     for clip in clips:
         if wanted and clip["id"] not in wanted:
             continue
-        body, missing = build(clip, images, voices, last_frames, args)
+        body, missing = build(clip, images, voices, last_frames, videos, args)
         out["clips"][clip["id"]] = {
             "scene": clip["scene"],
             "duration_seconds": body["duration"],
@@ -177,15 +223,15 @@ def main():
         }
 
     out["clips"] = dict(sorted(out["clips"].items(), key=lambda kv: int(kv[0].split("-")[1])))
-    OUT.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    out_path.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     built = [c for c in out["clips"] if not wanted or c in wanted]
     ready = [c for c in built if not out["clips"][c]["missing"]]
-    print(f"Wrote {OUT.relative_to(ROOT)}: {len(built)} clips built, {len(ready)} with every URL filled in")
+    print(f"Wrote {out_path.relative_to(ROOT)}: {len(built)} clips built, {len(ready)} with every URL filled in")
     gaps = {}
     for c in built:
         for m in out["clips"][c]["missing"]:
-            key = LAST_FRAME_RE.sub("clip-N", m.split(": ", 1)[1])
+            key = re.sub(r"clip-\d+", "clip-N", m.split(": ", 1)[1])
             gaps.setdefault(key, []).append(c)
     for label, ids in sorted(gaps.items(), key=lambda kv: -len(kv[1])):
         print(f"  missing URL ({len(ids)} clips): {label}")

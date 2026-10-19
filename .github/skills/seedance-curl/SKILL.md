@@ -28,6 +28,7 @@ python3 scripts/build_curl_commands.py                    # every clip
 python3 scripts/build_curl_commands.py --clip clip-14     # only these clips; other clips in the file are kept
 python3 scripts/build_curl_commands.py --model dreamina-seedance-2-0-mini-260615 --resolution 720p
 python3 scripts/build_curl_commands.py --first-frame      # previous last frame sent as role first_frame
+python3 scripts/build_curl_commands.py --video-ref        # previous clip's video as @Video 1 -> curl/curl_commands_video_ref.json
 ```
 
 To run a command: `export ARK_API_KEY=...`, then copy the clip's `curl` value into the terminal.
@@ -39,7 +40,8 @@ To run a command: `export ARK_API_KEY=...`, then copy the clip's `curl` value in
 3. **URL matching**: a reference label is matched to a `NAME` in `references/image_urls`. It tries the full label first ("Saba's courtyard scene reference"), then the subject ("Saba's courtyard" → `SABA's COURTYARD`), then a unique word match ("Children" → `COURTYARD_CHILDREN`). Case, `_`, and `'s` are ignored. If a match is wrong or ambiguous, add a line whose NAME is the exact label.
 4. **Last frame**: "last frame of clip-13" takes its URL from `references/last_frames`. Generate clips in order, add each finished clip's `last_frame_url` there, and rebuild the next clip.
 5. **Audio**: the voice of each character with dialogue in the clip, in order of their first line, at most 3.
-6. **Params**: the clip's `api_params`, with `duration` set to the clip's `duration_seconds` so it matches `FORMAT`, plus `resolution` (default `720p`). `--model` overrides the model.
+6. **Video reference** (`--video-ref` only): a clip that continues from a previous clip sends that clip's video first, as `video_url` with role `reference_video`, taking its URL from `references/video_urls` (the finished task's `video_url`). The prompt gets `- @Video 1: video of clip-NN (the previous clip, to extend)` as the first line under `REFERENCES:` and `Extend @Video 1 forward: …` as the first line under `SHOTS:`. The previous clip's last-frame image is not sent: its `@Image N` line is removed and the `Continuity:` and `Match …` lines point at the end of `@Video 1` instead (the last-frame image is always the clip's last image, so other `@Image` numbers don't change). Clips that open a scene get no video. The output goes to `curl/curl_commands_video_ref.json`, so `curl/curl_commands.json` stays unchanged.
+7. **Params**: the clip's `api_params`, with `duration` set to the clip's `duration_seconds` so it matches `FORMAT`, plus `resolution` (default `720p`). `--model` overrides the model.
 
 A reference with no URL is sent as `<missing: label>` and listed in the clip's `missing`. A clip is ready to send only when `missing` is empty.
 

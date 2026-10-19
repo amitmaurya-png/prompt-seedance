@@ -1,0 +1,2 @@
+# Video of each generated clip, from the finished task's video_url.
+# One "clip-NN : url" per line; with --video-ref the next clip sends it as @Video 1 (role reference_video).
