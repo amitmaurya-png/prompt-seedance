@@ -25,7 +25,7 @@ Usage:
   python3 scripts/build_curl_commands.py --clip clip-14      # only these clips (others in the file are kept)
   python3 scripts/build_curl_commands.py --model dreamina-seedance-2-0-mini-260615 --resolution 720p
   python3 scripts/build_curl_commands.py --first-frame       # send the previous clip's last frame as first_frame
-  python3 scripts/build_curl_commands.py --video-ref         # previous clip's video as @Video 1, the first reference,
+  python3 scripts/build_curl_commands.py --video-ref         # extend the previous clip's video (@Video 1) forward,
                                                              # in place of its last-frame image
                                                              # -> curl/curl_commands_video_ref.json
 """
@@ -92,26 +92,43 @@ def speakers(clip):
     return seen
 
 
-def add_video_ref(text, prev, frame_ref):
-    """List @Video 1 first under REFERENCES and open SHOTS by extending it (official extend wording).
+EXTEND_LINE = ("Extend @Video 1 forward: generate the content after @Video 1, continuing the same moment"
+               " without a cut, as described below.")
 
-    The previous clip's last-frame image (frame_ref, e.g. '@Image 4', always the last image) is dropped:
-    its REFERENCES line goes, and the Continuity and Match lines point at the end of @Video 1 instead.
+
+def as_extension(text, frame_ref=None):
+    """Turn a continuing clip's prompt into an extend task on @Video 1 (official Seedance 2.0 wording).
+
+    The prompt opens with EXTEND_LINE, and @Video 1 is not listed under REFERENCES: an extend task names
+    the video directly, or the model treats it as a style/motion reference. The previous clip's last-frame
+    image (frame_ref, e.g. '@Image 4', always the last image) is dropped with its REFERENCES line. Its
+    Continuity lines go (the model blends the join itself), keeping only who is still present, and its
+    Match constraint asks for consistency with @Video 1. Also accepts a prompt already in the older
+    video-ref form ('- @Video 1: …', 'from the end of @Video 1').
     """
+    src = r"(?:the end of @Video 1"
     if frame_ref:
         tok = re.escape(frame_ref) + r"(?!\d)"
+        src += "|" + tok
         text = re.sub(r"^- " + tok + r":.*\n", "", text, flags=re.M)
-        text = re.sub(r"from " + tok + r": (.*?) exactly as in that frame",
-                      r"from the end of @Video 1: \1 exactly as in its last frame", text)
-        text = re.sub(r"to " + tok + r"$", "to the end of @Video 1", text, flags=re.M)
-        text = re.sub(tok, "the end of @Video 1", text)
-    text = re.sub(r"^(REFERENCES:[ \t]*)$",
-                  lambda m: m.group(1) + f"\n- @Video 1: video of {prev} (the previous clip, to extend)",
-                  text, count=1, flags=re.M)
-    return re.sub(r"^(SHOTS:[ \t]*)$",
-                  lambda m: m.group(1) + "\nExtend @Video 1 forward: continue the same moment from its last frame,"
-                                         " with no cut.",
-                  text, count=1, flags=re.M)
+    src += ")"
+    text = re.sub(r"^- @Video 1:.*\n", "", text, flags=re.M)
+    text = re.sub(r"^Extend @Video 1 forward:.*\n", "", text, flags=re.M)
+
+    def continuity(m):
+        present = m.group(2)
+        if not present:
+            return ""
+        present = re.sub(r" still present$", "", present)
+        return f"{m.group(1)}Continuity: {present} still present\n"
+
+    text = re.sub(r"^([ \t]*)Continuity: Continue the same moment from " + src
+                  + r": keep .*? exactly as in (?:that|its last) frame(?:, with (.+))?\n",
+                  continuity, text, flags=re.M)
+    text = re.sub(r"^- Match (.*) to " + src + r"$", r"- Keep \1 consistent with @Video 1", text, flags=re.M)
+    if frame_ref:
+        text = re.sub(tok, "@Video 1", text)
+    return EXTEND_LINE + "\n" + text
 
 
 def build(clip, images, voices, last_frames, videos, args):
@@ -155,7 +172,7 @@ def build(clip, images, voices, last_frames, videos, args):
 
     text = clip["prompt"].rstrip("\n")
     if args.video_ref and prev:
-        text = add_video_ref(text, prev, frame_ref)
+        text = as_extension(text, frame_ref)
     if voice_names:
         line = "- Voice references: " + "; ".join(
             f"@Audio {i} is {n}'s voice" for i, n in enumerate(voice_names, 1))
@@ -187,7 +204,7 @@ def main():
     ap.add_argument("--first-frame", action="store_true",
                     help="send the previous clip's last frame with role first_frame instead of reference_image")
     ap.add_argument("--video-ref", action="store_true",
-                    help="send the previous clip's video as @Video 1, the first reference, and write "
+                    help="extend the previous clip's video (@Video 1) forward instead of sending its last frame, and write "
                          + str(OUT_VIDEO_REF.relative_to(ROOT)))
     args = ap.parse_args()
     out_path = OUT_VIDEO_REF if args.video_ref else OUT

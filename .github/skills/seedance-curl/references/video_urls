@@ -1,2 +1,4 @@
 # Video of each generated clip, from the finished task's video_url.
 # One "clip-NN : url" per line; with --video-ref the next clip sends it as @Video 1 (role reference_video).
+clip-13 : https://storage.googleapis.com/b2b_marketplace/generated-images/tsl/13_tail.mp4
+clip-14 : https://storage.googleapis.com/b2b_marketplace/generated-images/tsl/14_tail.mp4
