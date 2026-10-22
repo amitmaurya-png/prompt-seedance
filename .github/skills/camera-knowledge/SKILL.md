@@ -1,6 +1,6 @@
 ---
 name: camera-knowledge
-description: "Camera knowledge for film and Seedance prompts: shot sizes, camera angles, framing, over-the-shoulder and dialogue coverage, the 180° rule, camera movement, focus, and which choices suit which genre and mood. Detects a shot's genre and mood and suggests the right camera angle. Use when choosing, explaining, suggesting, reviewing, or fixing a shot's camera direction, matching camera to genre or mood, or checking camera lines in data/prompt.json."
+description: "Camera knowledge for film and Seedance prompts: shot sizes (extreme wide to extreme close-up), camera angles (eye level, high, low/up shot, worm's-eye, overhead, Dutch), framing and special shots (over-the-shoulder, POV, insert, cutaway, reaction, profile, rear, silhouette), dialogue coverage, the 180° rule, camera movement, focus, choosing a shot by storytelling goal, and which choices suit which genre and mood. Detects a shot's genre and mood and suggests the right camera angle. Use when choosing, explaining, suggesting, reviewing, or fixing a shot's camera direction, matching camera to genre or mood, or checking camera lines in data/prompt.json."
 argument-hint: "[clip id, scene, or camera question]"
 ---
 
@@ -12,7 +12,7 @@ Answer camera questions and choose or review camera direction for this project's
 
 | File | Use it for |
 |---|---|
-| [camera_language.md](./references/camera_language.md) | Camera vocabulary: shot sizes (WS to ECU), angles, framing and dialogue coverage (OTS, shot/reverse shot, 180° rule), movements, focus; how to write a `Camera:` line; checklist |
+| [camera_language.md](./references/camera_language.md) | Camera vocabulary: shot sizes (EWS to ECU), angles with their feeling and uses (incl. worm's-eye, Dutch), framing and special-purpose shots (OTS, POV, insert, cutaway, reaction, profile, rear, reflection, silhouette), dialogue coverage (180° rule), movements, focus; choosing a shot by storytelling goal; a suspense sequence example; AI-prompt wording examples; how to write a `Camera:` line; checklist |
 | [camera_genres.md](./references/camera_genres.md) | Typical and avoided camera choices for 12 genres, and how to apply them in a Seedance prompt |
 | [camera_moods.md](./references/camera_moods.md) | How to detect a shot's mood, the camera defaults per mood, and how to adjust for genre, speakers, children, and continuity |
 | [camera_angles.json](../../../data/camera_angles.json) | Camera term → diagram image (images in `assets/camera/`) |
