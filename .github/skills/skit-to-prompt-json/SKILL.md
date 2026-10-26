@@ -37,6 +37,7 @@ Run from the repository root.
 | `python3 scripts/build_prompt_json.py --dry-run` | Preview the clip grouping |
 | `python3 scripts/build_prompt_json.py --all` | Write `data/prompt.json` (backup in `data/backups/`), then emotions, eyelines, continuity, fixes, and reports |
 | `python3 scripts/add_continuity.py` | Re-render every clip's `prompt` text after editing fields |
+| `python3 scripts/keep_present.py [--dry-run]` | Keep every character on screen until they explicitly leave the scene (image while there is room, otherwise named as still present) |
 | `python3 scripts/check_clips.py` / `check_continuity.py` / `check_camera.py` | Review clips, continuity, and camera (HTML reports in `reports/`) |
 
 ## Workflow
@@ -45,6 +46,7 @@ Run from the repository root.
 2. **Set up the skit.** For a new skit, update `build_prompt_json.py`'s `ROSTER`, `CHAR_DEF`, `LOCATIONS`, and `STYLE`. This skill doesn't generate assets: reference images are supplied separately, and the prompts only refer to them as `@Image N`.
 3. **Build.** Run `build_prompt_json.py --dry-run`, check the grouping, then run `--all`.
 4. **Add references and subjects.** Every character who speaks or is seen in a clip has a reference image and a `Define … in @Image N as <Name>` subject. That includes groups (the children, the crowd) and unnamed speakers (Girl, Child, Mother In Crowd). See the rules file.
+   Then run `keep_present.py`: characters stay on screen until the screenplay has them leave, so nobody vanishes between clips.
 5. **Review direction** with the owning skills: camera lines, continuity hand-offs, emotions, and eyelines.
 6. **Validate** with the checklist in the rules file, and compare `prompt.json` with `breakdown.json`: same actions, same dialogue, same order, nothing invented.
 7. **Report** the clip count, total seconds, and anything you set by hand.

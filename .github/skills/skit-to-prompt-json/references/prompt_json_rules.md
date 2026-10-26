@@ -51,6 +51,7 @@ How `data/prompt.json` is built from a skit's `data/breakdown.json`.
 - **Groups** (children, crowd, disciples, families) that appear in the action are one image and one subject: `Define the group of village children around Saba in @Image 5 as the children (a group)`.
 - **Unnamed speakers** (GIRL, CHILD, SMALL GIRL, MOTHER IN CROWD) are subjects too. If they belong to a group in the clip, define them from that group's image and say so: `Define the curly-haired girl in plum from the children in @Image 5.
 - Voice-over lines (V.O.) don't need the speaker on screen, so they don't add a subject.
+- **Characters stay on screen until they leave.** Within a scene, everyone who has appeared stays present in every later clip until an action line explicitly takes them out ("hurries away", "scatter", "exits", "out of frame", or "follows" right after someone leaves). A character who is only heard (voice-over) isn't on screen. Carry each one into clips that don't otherwise include them: named characters (never Jesus) get an image and subject while the clip has fewer than 4 character images; everyone else is named in shot 1's Continuity line as `… with Nim (the small fox) and the hillside crowd of families with children still present`. `scripts/keep_present.py` does this.
 - Tag each mention in actions and dialogue with the image: `A GIRL (@Image 6) spots…`, `Girl who is also sitting around Saba within group of childrens, excitedly, to the children: {Come on!}`. Don't tag a different group that only shares a word (e.g. "older children" in the lane).
 - Scene images go in `REFERENCES` and on the `SCENE:` line. The previous clip's last frame is added when the scene continues.
 
@@ -88,6 +89,7 @@ Leave out lines that don't apply (no `Eyeline:` without dialogue, no `Continuity
 - [ ] Every clip is 4-15 s with up to 3 shots, and `total_seconds` equals the sum.
 - [ ] Every speaker on screen and every group in the action has a reference image and a subject, and every `@Image N` used is listed in `REFERENCES`.
 - [ ] Every character is tagged consistently throughout the clip.
+- [ ] Nobody vanishes mid-scene: everyone who has appeared and not explicitly left is a subject or named "still present" (`keep_present.py --dry-run` lists nothing).
 - [ ] One camera move per shot; dialogue in `{}`, music in `（）`, SFX in `<>`; no `【】`.
 - [ ] Constraints include the 3D render rule and no subtitles, logos, or watermarks.
 - [ ] Jesus's face is never shown, and Nim is a fox.

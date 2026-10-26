@@ -25,6 +25,8 @@ Run from the repository root.
 | [scripts/check_continuity.py](../../../scripts/check_continuity.py) | Check every scene; prints issues and writes `reports/continuity_report.html`. Use `--scene "<heading text>"` for one scene |
 | [scripts/fix_continuity.py](../../../scripts/fix_continuity.py) `--dry-run` | Preview fixes: characters kept in the scene so they don't vanish between clips, plus rebuilt chain/state |
 | `python3 scripts/fix_continuity.py [--scene "<heading>"] [--skip clip-60:Miri]` | Apply the fixes to `data/prompt.json` (backup saved, each fix recorded on the clip), then rebuild prompts, `continuity_report.html`, and `camera_report.html` |
+| [scripts/keep_present.py](../../../scripts/keep_present.py) `--dry-run` | Preview who is carried into which clip because they are still in the scene (not yet exited), and whether by image or by text |
+| `python3 scripts/keep_present.py` | Carry them into `data/prompt.json` (backup saved, recorded in each clip's `still_present`); then rebuild the curl commands for the changed clips |
 | [scripts/add_continuity.py](../../../scripts/add_continuity.py) | Rebuild prompts after changing continuity settings or a clip's `subjects` |
 | [scripts/check_camera.py](../../../scripts/check_camera.py) | Camera continuity (shot-size jumps, scene openings); hand camera fixes to the `camera-knowledge` skill |
 
@@ -42,6 +44,7 @@ Run from the repository root.
 
 - Never change dialogue wording or order; `data/breakdown.json` is the source of truth.
 - Change actions only to bridge a handoff (via `HANDOFF_FIXES`), and keep the story's events unchanged.
+- **Characters stay on screen until they leave.** Within a scene, everyone who has appeared stays present in every later clip until an action line explicitly takes them out ("hurries away", "scatter", "exits", "out of frame", or "follows" right after someone leaves). A character who is only heard (voice-over) isn't on screen. Carry each one into clips that don't otherwise include them: named characters (never Jesus) get an image and subject while the clip has fewer than 4 character images; everyone else is named in shot 1's Continuity line as `… with Nim (the small fox) and the hillside crowd of families with children still present`. `scripts/keep_present.py` does this.
 - Keep at most 4 characters and about 5-6 images per clip (Seedance guidance).
 - Keep each character's definition, voice, and image slot identical across clips.
 - Camera lines belong to the `camera-knowledge` skill; whole-prompt format belongs to `seedance-prompting`.
