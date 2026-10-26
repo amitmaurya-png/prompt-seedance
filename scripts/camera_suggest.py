@@ -242,6 +242,10 @@ def suggest(title="", action="", visual="", dialogue=(), cast=(), genre="storybo
         size, angle, move, focus, framing = "Close-up", "Eye-level shot", "Push-in", "", None
         mood, reasons = "title", ["Title card: a slow push-in on the painted card."]
 
+    # project choice: single and over-the-shoulder medium frames are always medium close-ups
+    if size == "Medium shot" and framing in (None, "Over-the-shoulder shot"):
+        size = "Medium close-up"
+
     parts = [f"{size.replace(' shot', '')} {framing.lower()}" if framing else size]
     if angle != "Eye-level shot":
         parts.append(angle.replace(" shot", "").lower())
