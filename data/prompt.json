@@ -1894,20 +1894,24 @@
       "format": "10s / 16:9 / one continuous shot",
       "style": "Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy",
       "references": [
-        "@Image 1: Saba character reference",
-        "@Image 2: Children group reference (the village children)",
-        "@Image 3: Saba's courtyard scene reference"
+        "@Image 1: Miri character reference",
+        "@Image 2: Nim character reference",
+        "@Image 3: Saba character reference",
+        "@Image 4: Children group reference (the village children)",
+        "@Image 5: Saba's courtyard scene reference"
       ],
       "subjects": [
-        "Define the elderly storyteller in @Image 1 as Saba",
-        "Define the group of village children in @Image 2 as the children (a group)"
+        "Define the young village girl in @Image 1 as Miri",
+        "Define the small fox in @Image 2 as Nim",
+        "Define the elderly storyteller in @Image 3 as Saba",
+        "Define the group of village children in @Image 4 as the children (a group)"
       ],
-      "scene_setting": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 3)",
+      "scene_setting": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 5)",
       "shot_details": [
         {
           "title": "Saba Elior sits beneath a fig",
           "camera": "Wide shot, static",
-          "action": "SABA ELIOR (@Image 1) sits beneath a fig tree, surrounded by several village children (@Image 2). He is repairing a sandal with one hand and gesturing grandly with the other.",
+          "action": "SABA ELIOR (@Image 3) sits beneath a fig tree, surrounded by several village children (@Image 4). He is repairing a sandal with one hand and gesturing grandly with the other. A few children (@Image 4) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening. Nim (@Image 2) follows at Miri's heels.",
           "visual": "",
           "dialogue": [
             {
@@ -1937,12 +1941,14 @@
       ],
       "audio": [
         "Music: （the gentle storybook theme begins softly, under the dialogue）",
-        "Voices: Saba (@Image 1) warm, slow, gently gravelly elder; clear English dialogue"
+        "Voices: Saba (@Image 3) warm, slow, gently gravelly elder; clear English dialogue"
       ],
       "constraints": [
         "One camera move per shot",
         "Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style",
         "Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker",
+        "Nim is a small fox, never a dog",
+        "Each character appears only once; no duplicate or twin characters",
         "End on a calm, held frame with no new action in the final second",
         "Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark"
       ],
@@ -1952,21 +1958,24 @@
         "last_frame_reference": null,
         "scene_state": null
       },
-      "prompt": "FORMAT: 10s / 16:9 / one continuous shot\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Saba character reference\n- @Image 2: Children group reference (the village children)\n- @Image 3: Saba's courtyard scene reference\nSUBJECT:\n- Define the elderly storyteller in @Image 1 as Saba\n- Define the group of village children in @Image 2 as the children (a group)\nSCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 3)\nSHOTS:\nShot 1: Saba Elior sits beneath a fig\n  Continuity: New scene: cut from Main Titles (clip-12) to Saba Elior’s Courtyard, late morning light; do not carry over the previous clip's framing\n  Camera: Wide shot, static\n  Action: SABA ELIOR (@Image 1) sits beneath a fig tree, surrounded by several village children (@Image 2). He is repairing a sandal with one hand and gesturing grandly with the other.\n  Eyeline: Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba\n  Dialogue: Saba (@Image 1), thoughtfully, to the children: {And so the little sparrow said to the great camel, “If your knees bend, perhaps your pride may also.”}\nAUDIO:\n- Music: （the gentle storybook theme begins softly, under the dialogue）\n- Voices: Saba (@Image 1) warm, slow, gently gravelly elder; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- End on a calm, held frame with no new action in the final second\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
+      "prompt": "FORMAT: 10s / 16:9 / one continuous shot\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Nim character reference\n- @Image 3: Saba character reference\n- @Image 4: Children group reference (the village children)\n- @Image 5: Saba's courtyard scene reference\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the small fox in @Image 2 as Nim\n- Define the elderly storyteller in @Image 3 as Saba\n- Define the group of village children in @Image 4 as the children (a group)\nSCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 5)\nSHOTS:\nShot 1: Saba Elior sits beneath a fig\n  Continuity: New scene: cut from Main Titles (clip-12) to Saba Elior’s Courtyard, late morning light; do not carry over the previous clip's framing\n  Camera: Wide shot, static\n  Action: SABA ELIOR (@Image 3) sits beneath a fig tree, surrounded by several village children (@Image 4). He is repairing a sandal with one hand and gesturing grandly with the other. A few children (@Image 4) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening. Nim (@Image 2) follows at Miri's heels.\n  Eyeline: Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba\n  Dialogue: Saba (@Image 3), thoughtfully, to the children: {And so the little sparrow said to the great camel, “If your knees bend, perhaps your pride may also.”}\nAUDIO:\n- Music: （the gentle storybook theme begins softly, under the dialogue）\n- Voices: Saba (@Image 3) warm, slow, gently gravelly elder; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Nim is a small fox, never a dog\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
       "asset_preparation": [
-        "@Image 1: Saba character reference",
-        "@Image 2: Children group reference (the village children)",
-        "@Image 3: Saba's courtyard scene reference"
+        "@Image 1: Miri character reference",
+        "@Image 2: Nim character reference",
+        "@Image 3: Saba character reference",
+        "@Image 4: Children group reference (the village children)",
+        "@Image 5: Saba's courtyard scene reference"
       ],
-      "image_reference": "Use @Image 1 as Saba, and @Image 3 as the scene reference. Use @Image 2 as the children (a group).",
+      "image_reference": "Use @Image 1 as Miri, @Image 2 as Nim, @Image 3 as Saba, and @Image 5 as the scene reference. Use @Image 4 as the children (a group).",
       "shots": [
-        "Saba Elior sits beneath a fig. New scene: cut from Main Titles (clip-12) to Saba Elior’s Courtyard, late morning light; do not carry over the previous clip's framing. Wide shot, static. SABA ELIOR (@Image 1) sits beneath a fig tree, surrounded by several village children (@Image 2). He is repairing a sandal with one hand and gesturing grandly with the other. Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba. Saba (@Image 1), thoughtfully, to the children: {And so the little sparrow said to the great camel, “If your knees bend, perhaps your pride may also.”}"
+        "Saba Elior sits beneath a fig. New scene: cut from Main Titles (clip-12) to Saba Elior’s Courtyard, late morning light; do not carry over the previous clip's framing. Wide shot, static. SABA ELIOR (@Image 3) sits beneath a fig tree, surrounded by several village children (@Image 4). He is repairing a sandal with one hand and gesturing grandly with the other. A few children (@Image 4) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening. Nim (@Image 2) follows at Miri's heels. Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba. Saba (@Image 3), thoughtfully, to the children: {And so the little sparrow said to the great camel, “If your knees bend, perhaps your pride may also.”}"
       ],
-      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme begins softly, under the dialogue）. Voices: Saba (@Image 1) warm, slow, gently gravelly elder; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. End on a calm, held frame with no new action in the final second. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
+      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme begins softly, under the dialogue）. Voices: Saba (@Image 3) warm, slow, gently gravelly elder; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Nim is a small fox, never a dog. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
       "continuity_transition": "New scene: cut from Main Titles (clip-12) to Saba Elior’s Courtyard, late morning light; do not carry over the previous clip's framing",
       "clip_fixes": [
         "transition: New scene: cut from Main Titles (clip-12) to Saba Elior’s Courtyard, late morning light; do not carry over the previous clip's framing",
-        "Prompt level: added the children (a group) (@Image 2) as subjects"
+        "Prompt level: added the children (a group) (@Image 2) as subjects",
+        "Copied clip-14 shot 1's action (children, Miri enters, Nim follows); added Miri and Nim as subjects"
       ]
     },
     {
