@@ -15,6 +15,10 @@ For each clip, a present character with no subject is carried into it:
           named in shot 1's Continuity line as "… still present", with their short description, so
           Seedance keeps them in the scene without another reference image
 
+Companions come first: wherever Miri is on screen, Nim (her fox) is too. A clip that shows Miri but not Nim
+gets Nim as an image right after Miri's (later images move down one number), or by text when the clip is full,
+named in shot 1's Continuity line as staying near Miri, with the "small fox, never a dog" constraint.
+
 Every carried character is recorded on the clip ("still_present", "continuity_fixes"), a backup is saved to
 data/backups/, and the camera report is rebuilt. Rebuild the curl commands for the changed clips afterwards.
 
@@ -45,6 +49,8 @@ FOLLOWS = re.compile(r"\bfollows\b", re.I)
 DEFINE = re.compile(r"^Define (.+?) in @Image (\d+) as (.+?)$")
 GROUP_WORD = {"the children": "children", "the crowd": "crowd", "the disciples": "disciples"}
 TAG = re.compile(r" \(@Image \d+\)")
+COMPANIONS = {"Miri": ("Nim", "the small fox", "Miri's small fox")}  # where the first is seen, so is the second
+FOX_RULE = "Nim is a small fox, never a dog"
 
 
 def subject_name(full):
@@ -123,7 +129,7 @@ def renumber(clip, start, by):
         return o
 
     for k in ("prompt", "references", "subjects", "scene_setting", "constraints", "audio", "shots",
-              "shot_details", "continuity"):
+              "shot_details", "continuity", "asset_preparation", "image_reference", "global_direction"):
         if k in clip:
             clip[k] = walk(clip[k])
 
@@ -156,6 +162,69 @@ def plan(clips):
             for name in exits(clip, present):
                 present.remove(name)
     return out
+
+
+def companions_missing(clips):
+    """[(clip, lead, companion)] for every clip where the lead is seen and the companion is not."""
+    out = []
+    for clip in clips:
+        have = set(subjects(clip)) | set(clip.get("still_present_names", []))
+        for lead, (comp, *_) in COMPANIONS.items():
+            if lead in have and comp not in have and not voice_only(clip, lead):
+                out.append((clip, lead, comp))
+    return out
+
+
+def add_companion(clip, lead, comp):
+    """Put the companion in the clip next to the lead: an image after the lead's when there is room, else text."""
+    _, desc, label = COMPANIONS[lead]
+    lead_ref = next((i for i, r in enumerate(clip["references"], 1) if r.endswith(f": {lead} character reference")), None)
+    how = "image" if lead_ref and len(character_images(clip)) < MAX_IMAGES else "text"
+    if how == "image":
+        n = lead_ref + 1
+        renumber(clip, n, 1)
+        ref, define = f"@Image {n}: {comp} character reference", f"Define {desc} in @Image {n} as {comp}"
+        lead_define = next(i for i, s in enumerate(clip["subjects"]) if s.endswith(f" in @Image {lead_ref} as {lead}"))
+        lead_ref_line, lead_define_line = clip["references"][lead_ref - 1], clip["subjects"][lead_define]
+        clip["references"].insert(n - 1, ref)
+        if "asset_preparation" in clip:
+            clip["asset_preparation"].insert(n - 1, ref)
+        clip["subjects"].insert(lead_define + 1, define)
+        p = clip["prompt"]
+        for line, new in ((lead_ref_line, ref), (lead_define_line, define)):
+            assert f"- {line}\n" in p, (clip["id"], line)
+            p = p.replace(f"- {line}\n", f"- {line}\n- {new}\n", 1)
+        clip["prompt"] = p
+        if "image_reference" in clip:
+            clip["image_reference"] = clip["image_reference"].replace(
+                f"@Image {lead_ref} as {lead}, ", f"@Image {lead_ref} as {lead}, @Image {n} as {comp}, ", 1)
+        who = f"{comp} (@Image {n}), {label},"
+    else:
+        who = f"{comp}, {label} (an orange fox with oversized ears and a cream-tipped tail),"
+    note = f"{who} stays near {lead}"
+
+    m = re.search(r"(?m)^  Continuity: (.*)$", clip["prompt"])
+    assert m, clip["id"]
+    old = m.group(1)
+    new = f"{old}; {note}"
+    clip["prompt"] = clip["prompt"].replace(f"  Continuity: {old}", f"  Continuity: {new}", 1)
+    if old in clip["shots"][0]:
+        clip["shots"][0] = clip["shots"][0].replace(old, new, 1)
+
+    if FOX_RULE not in clip["constraints"]:
+        before = "Each character appears only once; no duplicate or twin characters"
+        i = clip["constraints"].index(before) if before in clip["constraints"] else len(clip["constraints"])
+        clip["constraints"].insert(i, FOX_RULE)
+        anchor = f"- {before}\n" if before in clip["prompt"] else "- Keep it subtitle-free"
+        clip["prompt"] = clip["prompt"].replace(anchor, f"- {FOX_RULE}\n{anchor}", 1)
+        if "global_direction" in clip and before in clip["global_direction"]:
+            clip["global_direction"] = clip["global_direction"].replace(before, f"{FOX_RULE}. {before}", 1)
+
+    clip["still_present"] = clip.get("still_present", []) + [
+        {"name": comp, "how": how, "reason": f"goes everywhere with {lead}"}]
+    clip["still_present_names"] = [x["name"] for x in clip["still_present"]]
+    clip.setdefault("continuity_fixes", []).append(f"Companion of {lead} kept on screen: {comp} ({how})")
+    return how
 
 
 def apply(clip, carry):
@@ -204,18 +273,23 @@ def main():
     args = ap.parse_args()
 
     data = json.loads(PROMPTS.read_text(encoding="utf-8"), strict=False)
+    original = PROMPTS.read_text(encoding="utf-8")
+    pairs = companions_missing(data["clips"])
+    for clip, lead, comp in pairs:  # in memory only until saved, so the dry run's carries below see them too
+        print(f"{clip['id']}: {comp} with {lead} [{add_companion(clip, lead, comp)}]")
+    print(f"{len(pairs)} clips: companion added")
     todo = plan(data["clips"])
     for clip, carry in todo:
         print(f"{clip['id']}: " + ", ".join(f"{n} [{h}]" for n, h, *_ in carry))
     images = sum(h == "image" for _, carry in todo for _, h, *_ in carry)
     texts = sum(h == "text" for _, carry in todo for _, h, *_ in carry)
     print(f"{len(todo)} clips: {images} characters carried with an image, {texts} by text")
-    if args.dry_run or not todo:
+    if args.dry_run or not (todo or pairs):
         return
 
     backup = DATA / "backups" / f"prompt.{datetime.now():%Y%m%d-%H%M%S}.json"
     backup.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(PROMPTS, backup)
+    backup.write_text(original, encoding="utf-8")
     for clip, carry in todo:
         apply(clip, carry)
     PROMPTS.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

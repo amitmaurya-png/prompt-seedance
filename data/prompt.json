@@ -2013,23 +2013,25 @@
       "style": "Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy",
       "references": [
         "@Image 1: Miri character reference",
-        "@Image 2: Saba character reference",
-        "@Image 3: Children group reference (the village children)",
-        "@Image 4: Saba's courtyard scene reference",
-        "@Image 5: last frame of clip-13 (continuity reference)"
+        "@Image 2: Nim character reference",
+        "@Image 3: Saba character reference",
+        "@Image 4: Children group reference (the village children)",
+        "@Image 5: Saba's courtyard scene reference",
+        "@Image 6: last frame of clip-13 (continuity reference)"
       ],
       "subjects": [
         "Define the young village girl in @Image 1 as Miri",
-        "Define the elderly storyteller in @Image 2 as Saba",
-        "Define the group of village children in @Image 3 as the children (a group)",
-        "Define the curly-haired girl in plum from the children in @Image 3 as Girl"
+        "Define the small fox in @Image 2 as Nim",
+        "Define the elderly storyteller in @Image 3 as Saba",
+        "Define the group of village children in @Image 4 as the children (a group)",
+        "Define the curly-haired girl in plum from the children in @Image 4 as Girl"
       ],
-      "scene_setting": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)",
+      "scene_setting": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 5)",
       "shot_details": [
         {
           "title": "A few children giggle",
           "camera": "Medium shot, static on Saba",
-          "action": "A few children (@Image 3) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening.",
+          "action": "A few children (@Image 4) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening.",
           "visual": "",
           "dialogue": [
             {
@@ -2062,7 +2064,7 @@
         {
           "title": "Miri smiles despite herself",
           "camera": "Medium shot, gentle tracking on Miri",
-          "action": "Miri (@Image 1) smiles despite herself. A GIRL (@Image 3) spots a group of older children playing with a hoop in the lane.",
+          "action": "Miri (@Image 1) smiles despite herself. A GIRL (@Image 4) spots a group of older children playing with a hoop in the lane.",
           "visual": "",
           "dialogue": [
             {
@@ -2095,7 +2097,7 @@
         {
           "title": "The children scatter after her, laughing",
           "camera": "Medium two-shot, gentle tracking",
-          "action": "The children (@Image 3) scatter after her, laughing. Saba (@Image 2) watches them go, amused, not offended. Miri (@Image 1) remains.",
+          "action": "The children (@Image 4) scatter after her, laughing. Saba (@Image 3) watches them go, amused, not offended. Miri (@Image 1) remains.",
           "visual": "",
           "dialogue": [
             {
@@ -2138,40 +2140,55 @@
       ],
       "audio": [
         "Music: （the gentle storybook theme continues from the previous clip, under the dialogue）",
-        "Voices: Miri (@Image 1) bright, earnest young girl; Saba (@Image 2) warm, slow, gently gravelly elder; Girl (one of the children in @Image 3) bright, eager young girl; clear English dialogue"
+        "Voices: Miri (@Image 1) bright, earnest young girl; Saba (@Image 3) warm, slow, gently gravelly elder; Girl (one of the children in @Image 4) bright, eager young girl; clear English dialogue"
       ],
       "constraints": [
         "One camera move per shot",
         "Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style",
         "Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker",
+        "Nim is a small fox, never a dog",
         "Each character appears only once; no duplicate or twin characters",
         "End on a calm, held frame with no new action in the final second",
-        "Match lighting, positions, props, and character appearance to @Image 5",
+        "Match lighting, positions, props, and character appearance to @Image 6",
         "Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark"
       ],
       "continuity": {
         "previous_clip": "clip-13",
         "mode": "continue_scene",
-        "last_frame_reference": "@Image 5",
+        "last_frame_reference": "@Image 6",
         "scene_state": null
       },
-      "prompt": "FORMAT: 15s / 16:9 / 3 shots / soft cuts\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Saba character reference\n- @Image 3: Children group reference (the village children)\n- @Image 4: Saba's courtyard scene reference\n- @Image 5: last frame of clip-13 (continuity reference)\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the elderly storyteller in @Image 2 as Saba\n- Define the group of village children in @Image 3 as the children (a group)\n- Define the curly-haired girl in plum from the children in @Image 3 as Girl\nSCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)\nSHOTS:\nShot 1: A few children giggle\n  Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame\n  Camera: Medium shot, static on Saba\n  Action: A few children (@Image 3) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening.\n  Eyeline: Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba\n  Dialogue: Saba (@Image 2), thoughtfully, to the children: {But the camel did not listen, because camels are very good at chewing and very poor at hearing wisdom.}\nShot 2: Miri smiles despite herself\n  Camera: Medium shot, gentle tracking on Miri\n  Action: Miri (@Image 1) smiles despite herself. A GIRL (@Image 3) spots a group of older children playing with a hoop in the lane.\n  Eyeline: Girl looks around at the children while speaking, meeting their eyes one by one; the children look back at Girl\n  Dialogue: Girl who is also sitting around Saba within the group of children, excitedly, to the children: {Come on!}\nShot 3: The children scatter after her, laughing\n  Camera: Medium two-shot, gentle tracking\n  Action: The children (@Image 3) scatter after her, laughing. Saba (@Image 2) watches them go, amused, not offended. Miri (@Image 1) remains.\n  Eyeline: Saba and Miri turn toward each other and hold eye contact as they talk: Saba looks at Miri, Miri looks at Saba\n  Dialogue: Saba (@Image 2), playfully, to Miri: {Ah. One listener left. Either my story improved, or your feet forgot to follow the others.} Miri (@Image 1), curiously, to Saba: {What happened to the sparrow?}\nAUDIO:\n- Music: （the gentle storybook theme continues from the previous clip, under the dialogue）\n- Voices: Miri (@Image 1) bright, earnest young girl; Saba (@Image 2) warm, slow, gently gravelly elder; Girl (one of the children in @Image 3) bright, eager young girl; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Match lighting, positions, props, and character appearance to @Image 5\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
+      "prompt": "FORMAT: 15s / 16:9 / 3 shots / soft cuts\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Nim character reference\n- @Image 3: Saba character reference\n- @Image 4: Children group reference (the village children)\n- @Image 5: Saba's courtyard scene reference\n- @Image 6: last frame of clip-13 (continuity reference)\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the small fox in @Image 2 as Nim\n- Define the elderly storyteller in @Image 3 as Saba\n- Define the group of village children in @Image 4 as the children (a group)\n- Define the curly-haired girl in plum from the children in @Image 4 as Girl\nSCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 5)\nSHOTS:\nShot 1: A few children giggle\n  Continuity: Continue the same moment from @Image 6: keep the lighting, positions, props, and character appearance exactly as in that frame; Nim (@Image 2), Miri's small fox, stays near Miri\n  Camera: Medium shot, static on Saba\n  Action: A few children (@Image 4) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening.\n  Eyeline: Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba\n  Dialogue: Saba (@Image 3), thoughtfully, to the children: {But the camel did not listen, because camels are very good at chewing and very poor at hearing wisdom.}\nShot 2: Miri smiles despite herself\n  Camera: Medium shot, gentle tracking on Miri\n  Action: Miri (@Image 1) smiles despite herself. A GIRL (@Image 4) spots a group of older children playing with a hoop in the lane.\n  Eyeline: Girl looks around at the children while speaking, meeting their eyes one by one; the children look back at Girl\n  Dialogue: Girl who is also sitting around Saba within the group of children, excitedly, to the children: {Come on!}\nShot 3: The children scatter after her, laughing\n  Camera: Medium two-shot, gentle tracking\n  Action: The children (@Image 4) scatter after her, laughing. Saba (@Image 3) watches them go, amused, not offended. Miri (@Image 1) remains.\n  Eyeline: Saba and Miri turn toward each other and hold eye contact as they talk: Saba looks at Miri, Miri looks at Saba\n  Dialogue: Saba (@Image 3), playfully, to Miri: {Ah. One listener left. Either my story improved, or your feet forgot to follow the others.} Miri (@Image 1), curiously, to Saba: {What happened to the sparrow?}\nAUDIO:\n- Music: （the gentle storybook theme continues from the previous clip, under the dialogue）\n- Voices: Miri (@Image 1) bright, earnest young girl; Saba (@Image 3) warm, slow, gently gravelly elder; Girl (one of the children in @Image 4) bright, eager young girl; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Nim is a small fox, never a dog\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Match lighting, positions, props, and character appearance to @Image 6\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
       "asset_preparation": [
         "@Image 1: Miri character reference",
-        "@Image 2: Saba character reference",
-        "@Image 3: Children group reference (the village children)",
-        "@Image 4: Saba's courtyard scene reference",
-        "@Image 5: last frame of clip-13 (continuity reference)"
+        "@Image 2: Nim character reference",
+        "@Image 3: Saba character reference",
+        "@Image 4: Children group reference (the village children)",
+        "@Image 5: Saba's courtyard scene reference",
+        "@Image 6: last frame of clip-13 (continuity reference)"
       ],
-      "image_reference": "Use @Image 1 as Miri, @Image 2 as Saba, and @Image 4 as the scene reference; continue from the last frame of clip-13 in @Image 5. Use @Image 3 as the children (a group).",
+      "image_reference": "Use @Image 1 as Miri, @Image 2 as Nim, @Image 3 as Saba, and @Image 5 as the scene reference; continue from the last frame of clip-13 in @Image 6. Use @Image 4 as the children (a group).",
       "shots": [
-        "A few children giggle. Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame. Medium shot, static on Saba. A few children (@Image 3) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening. Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba. Saba (@Image 2), thoughtfully, to the children: {But the camel did not listen, because camels are very good at chewing and very poor at hearing wisdom.}",
-        "Miri smiles despite herself. Medium shot, gentle tracking on Miri. Miri (@Image 1) smiles despite herself. A GIRL (@Image 3) spots a group of older children playing with a hoop in the lane. Girl looks around at the children while speaking, meeting their eyes one by one; the children look back at Girl. Girl, excitedly, to the children: {Come on!}",
-        "The children scatter after her, laughing. Medium two-shot, gentle tracking. The children (@Image 3) scatter after her, laughing. Saba (@Image 2) watches them go, amused, not offended. Miri (@Image 1) remains. Saba and Miri turn toward each other and hold eye contact as they talk: Saba looks at Miri, Miri looks at Saba. Saba (@Image 2), playfully, to Miri: {Ah. One listener left. Either my story improved, or your feet forgot to follow the others.} Miri (@Image 1), curiously, to Saba: {What happened to the sparrow?}"
+        "A few children giggle. Continue the same moment from @Image 6: keep the lighting, positions, props, and character appearance exactly as in that frame; Nim (@Image 2), Miri's small fox, stays near Miri. Medium shot, static on Saba. A few children (@Image 4) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening. Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba. Saba (@Image 3), thoughtfully, to the children: {But the camel did not listen, because camels are very good at chewing and very poor at hearing wisdom.}",
+        "Miri smiles despite herself. Medium shot, gentle tracking on Miri. Miri (@Image 1) smiles despite herself. A GIRL (@Image 4) spots a group of older children playing with a hoop in the lane. Girl looks around at the children while speaking, meeting their eyes one by one; the children look back at Girl. Girl, excitedly, to the children: {Come on!}",
+        "The children scatter after her, laughing. Medium two-shot, gentle tracking. The children (@Image 4) scatter after her, laughing. Saba (@Image 3) watches them go, amused, not offended. Miri (@Image 1) remains. Saba and Miri turn toward each other and hold eye contact as they talk: Saba looks at Miri, Miri looks at Saba. Saba (@Image 3), playfully, to Miri: {Ah. One listener left. Either my story improved, or your feet forgot to follow the others.} Miri (@Image 1), curiously, to Saba: {What happened to the sparrow?}"
       ],
-      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme continues from the previous clip, under the dialogue）. Voices: Miri (@Image 1) bright, earnest young girl; Saba (@Image 2) warm, slow, gently gravelly elder; Girl (one of the children in @Image 3) bright, eager young girl; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Match lighting, positions, props, and character appearance to @Image 5. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
+      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme continues from the previous clip, under the dialogue）. Voices: Miri (@Image 1) bright, earnest young girl; Saba (@Image 3) warm, slow, gently gravelly elder; Girl (one of the children in @Image 4) bright, eager young girl; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Nim is a small fox, never a dog. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Match lighting, positions, props, and character appearance to @Image 6. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
       "clip_fixes": [
         "Prompt level: added the children (a group) (@Image 3), Girl (from the children (a group)) as subjects"
+      ],
+      "still_present": [
+        {
+          "name": "Nim",
+          "how": "image",
+          "reason": "goes everywhere with Miri"
+        }
+      ],
+      "still_present_names": [
+        "Nim"
+      ],
+      "continuity_fixes": [
+        "Companion of Miri kept on screen: Nim (image)"
       ]
     },
     {
@@ -2201,15 +2218,15 @@
       "style": "Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy",
       "references": [
         "@Image 1: Miri character reference",
-        "@Image 2: Saba character reference",
-        "@Image 3: Children group reference (the village children)",
+        "@Image 2: Nim character reference",
+        "@Image 3: Saba character reference",
         "@Image 4: Saba's courtyard scene reference",
         "@Image 5: last frame of clip-14 (continuity reference)"
       ],
       "subjects": [
         "Define the young village girl in @Image 1 as Miri",
-        "Define the elderly storyteller in @Image 2 as Saba",
-        "Define the group of village children in @Image 3 as the children (a group)"
+        "Define the small fox in @Image 2 as Nim",
+        "Define the elderly storyteller in @Image 3 as Saba"
       ],
       "scene_setting": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)",
       "shot_details": [
@@ -2246,12 +2263,13 @@
       ],
       "audio": [
         "Music: （the gentle storybook theme continues from the previous clip, under the dialogue）",
-        "Voices: Saba (@Image 2) warm, slow, gently gravelly elder; clear English dialogue"
+        "Voices: Saba (@Image 3) warm, slow, gently gravelly elder; clear English dialogue"
       ],
       "constraints": [
         "One camera move per shot",
         "Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style",
         "Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker",
+        "Nim is a small fox, never a dog",
         "Each character appears only once; no duplicate or twin characters",
         "End on a calm, held frame with no new action in the final second",
         "Match lighting, positions, props, and character appearance to @Image 5",
@@ -2263,21 +2281,31 @@
         "last_frame_reference": "@Image 5",
         "scene_state": null
       },
-      "prompt": "FORMAT: 5s / 16:9 / one continuous shot\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Saba character reference\n- @Image 3: Children group reference (the village children)\n- @Image 4: Saba's courtyard scene reference \n- @Image 5: last frame of clip-14 (continuity reference)\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the elderly storyteller in @Image 2 as Saba\n- Define the group of village children in @Image 3 as the children (a group)\nSCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)\nSHOTS:\nShot 1: Saba’s eyes brighten\n  Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame\n  Camera: Medium shot, gentle tracking on Saba\n  Action: Saba’s eyes brighten. He pats the ground beside him.\n  Eyeline: Saba and Miri face each other; Saba looks at Miri while speaking, and Miri looks at Saba\n  Dialogue: Saba (@Image 2), warmly, to Miri: {The right question.}\nAUDIO:\n- Music: （the gentle storybook theme continues from the previous clip, under the dialogue）\n- Voices: Saba (@Image 2) warm, slow, gently gravelly elder; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Match lighting, positions, props, and character appearance to @Image 5\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
+      "prompt": "FORMAT: 5s / 16:9 / one continuous shot\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Nim character reference\n- @Image 3: Saba character reference\n- @Image 4: Saba's courtyard scene reference\n- @Image 5: last frame of clip-14 (continuity reference)\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the small fox in @Image 2 as Nim\n- Define the elderly storyteller in @Image 3 as Saba\nSCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)\nSHOTS:\nShot 1: Saba’s eyes brighten\n  Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame; Nim (@Image 2), Miri's small fox, stays near Miri\n  Camera: Medium shot, gentle tracking on Saba\n  Action: Saba’s eyes brighten. He pats the ground beside him.\n  Eyeline: Saba and Miri face each other; Saba looks at Miri while speaking, and Miri looks at Saba\n  Dialogue: Saba (@Image 3), warmly, to Miri: {The right question.}\nAUDIO:\n- Music: （the gentle storybook theme continues from the previous clip, under the dialogue）\n- Voices: Saba (@Image 3) warm, slow, gently gravelly elder; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Nim is a small fox, never a dog\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Match lighting, positions, props, and character appearance to @Image 5\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
       "asset_preparation": [
         "@Image 1: Miri character reference",
-        "@Image 2: Saba character reference",
-        "@Image 3: Children group reference (the village children)",
+        "@Image 2: Nim character reference",
+        "@Image 3: Saba character reference",
         "@Image 4: Saba's courtyard scene reference",
         "@Image 5: last frame of clip-14 (continuity reference)"
       ],
-      "image_reference": "Use @Image 1 as Miri, @Image 2 as Saba, and @Image 4 as the scene reference; continue from the last frame of clip-14 in @Image 5. Use @Image 3 as the children (a group).",
+      "image_reference": "Use @Image 1 as Miri, @Image 2 as Nim, @Image 3 as Saba, and @Image 4 as the scene reference; continue from the last frame of clip-14 in @Image 5.",
       "shots": [
-        "Saba’s eyes brighten. Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame. Medium shot, gentle tracking on Saba. Saba’s eyes brighten. He pats the ground beside him. Saba and Miri face each other; Saba looks at Miri while speaking, and Miri looks at Saba. Saba (@Image 2), warmly, to Miri: {The right question.}"
+        "Saba’s eyes brighten. Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame; Nim (@Image 2), Miri's small fox, stays near Miri. Medium shot, gentle tracking on Saba. Saba’s eyes brighten. He pats the ground beside him. Saba and Miri face each other; Saba looks at Miri while speaking, and Miri looks at Saba. Saba (@Image 3), warmly, to Miri: {The right question.}"
       ],
-      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme continues from the previous clip, under the dialogue）. Voices: Saba (@Image 2) warm, slow, gently gravelly elder; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Match lighting, positions, props, and character appearance to @Image 5. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
-      "clip_fixes": [
-        "Prompt level: added the children (a group) (@Image 3) as subjects"
+      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme continues from the previous clip, under the dialogue）. Voices: Saba (@Image 3) warm, slow, gently gravelly elder; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Nim is a small fox, never a dog. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Match lighting, positions, props, and character appearance to @Image 5. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
+      "still_present": [
+        {
+          "name": "Nim",
+          "how": "image",
+          "reason": "goes everywhere with Miri"
+        }
+      ],
+      "still_present_names": [
+        "Nim"
+      ],
+      "continuity_fixes": [
+        "Companion of Miri kept on screen: Nim (image)"
       ]
     },
     {
@@ -3580,19 +3608,21 @@
       "style": "Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy",
       "references": [
         "@Image 1: Miri character reference",
-        "@Image 2: Saba character reference",
-        "@Image 3: Saba's house scene reference"
+        "@Image 2: Nim character reference",
+        "@Image 3: Saba character reference",
+        "@Image 4: Saba's house scene reference"
       ],
       "subjects": [
         "Define the young village girl in @Image 1 as Miri",
-        "Define the elderly storyteller in @Image 2 as Saba"
+        "Define the small fox in @Image 2 as Nim",
+        "Define the elderly storyteller in @Image 3 as Saba"
       ],
-      "scene_setting": "INT. SABA’S HOUSE — CONTINUOUS (@Image 3)",
+      "scene_setting": "INT. SABA’S HOUSE — CONTINUOUS (@Image 4)",
       "shot_details": [
         {
           "title": "Miri steps inside",
           "camera": "Wide shot, static",
-          "action": "Miri (@Image 1) steps inside. The room is warm and crowded with ordinary things: clay cups, woven mats, lamps, baskets, jars of ink, old maps, small tools, herbs drying by a window. Saba (@Image 2) pulls aside a faded hanging cloth. Behind it: THE SCROLL ROOM.",
+          "action": "Miri (@Image 1) steps inside. The room is warm and crowded with ordinary things: clay cups, woven mats, lamps, baskets, jars of ink, old maps, small tools, herbs drying by a window. Saba (@Image 3) pulls aside a faded hanging cloth. Behind it: THE SCROLL ROOM.",
           "visual": "",
           "dialogue": []
         }
@@ -3605,6 +3635,7 @@
         "One camera move per shot",
         "Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style",
         "Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker",
+        "Nim is a small fox, never a dog",
         "Each character appears only once; no duplicate or twin characters",
         "End on a calm, held frame with no new action in the final second",
         "Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark"
@@ -3615,20 +3646,34 @@
         "last_frame_reference": null,
         "scene_state": null
       },
-      "prompt": "FORMAT: 5s / 16:9 / one continuous shot\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Saba character reference\n- @Image 3: Saba's house scene reference\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the elderly storyteller in @Image 2 as Saba\nSCENE: INT. SABA’S HOUSE — CONTINUOUS (@Image 3)\nSHOTS:\nShot 1: Miri steps inside\n  Continuity: New scene: cut from Saba Elior’s Courtyard (clip-24) to Saba’s House; do not carry over the previous clip's framing\n  Camera: Wide shot, static\n  Action: Miri (@Image 1) steps inside. The room is warm and crowded with ordinary things: clay cups, woven mats, lamps, baskets, jars of ink, old maps, small tools, herbs drying by a window. Saba (@Image 2) pulls aside a faded hanging cloth. Behind it: THE SCROLL ROOM.\nAUDIO:\n- Music: （the gentle storybook theme begins softly）\n- No dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
+      "prompt": "FORMAT: 5s / 16:9 / one continuous shot\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Nim character reference\n- @Image 3: Saba character reference\n- @Image 4: Saba's house scene reference\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the small fox in @Image 2 as Nim\n- Define the elderly storyteller in @Image 3 as Saba\nSCENE: INT. SABA’S HOUSE — CONTINUOUS (@Image 4)\nSHOTS:\nShot 1: Miri steps inside\n  Continuity: New scene: cut from Saba Elior’s Courtyard (clip-24) to Saba’s House; do not carry over the previous clip's framing; Nim (@Image 2), Miri's small fox, stays near Miri\n  Camera: Wide shot, static\n  Action: Miri (@Image 1) steps inside. The room is warm and crowded with ordinary things: clay cups, woven mats, lamps, baskets, jars of ink, old maps, small tools, herbs drying by a window. Saba (@Image 3) pulls aside a faded hanging cloth. Behind it: THE SCROLL ROOM.\nAUDIO:\n- Music: （the gentle storybook theme begins softly）\n- No dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Nim is a small fox, never a dog\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
       "asset_preparation": [
         "@Image 1: Miri character reference",
-        "@Image 2: Saba character reference",
-        "@Image 3: Saba's house scene reference"
+        "@Image 2: Nim character reference",
+        "@Image 3: Saba character reference",
+        "@Image 4: Saba's house scene reference"
       ],
-      "image_reference": "Use @Image 1 as Miri, @Image 2 as Saba, and @Image 3 as the scene reference.",
+      "image_reference": "Use @Image 1 as Miri, @Image 2 as Nim, @Image 3 as Saba, and @Image 4 as the scene reference.",
       "shots": [
-        "Miri steps inside. New scene: cut from Saba Elior’s Courtyard (clip-24) to Saba’s House; do not carry over the previous clip's framing. Wide shot, static. Miri (@Image 1) steps inside. The room is warm and crowded with ordinary things: clay cups, woven mats, lamps, baskets, jars of ink, old maps, small tools, herbs drying by a window. Saba (@Image 2) pulls aside a faded hanging cloth. Behind it: THE SCROLL ROOM."
+        "Miri steps inside. New scene: cut from Saba Elior’s Courtyard (clip-24) to Saba’s House; do not carry over the previous clip's framing; Nim (@Image 2), Miri's small fox, stays near Miri. Wide shot, static. Miri (@Image 1) steps inside. The room is warm and crowded with ordinary things: clay cups, woven mats, lamps, baskets, jars of ink, old maps, small tools, herbs drying by a window. Saba (@Image 3) pulls aside a faded hanging cloth. Behind it: THE SCROLL ROOM."
       ],
-      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme begins softly）. No dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
+      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme begins softly）. No dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Nim is a small fox, never a dog. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
       "continuity_transition": "New scene: cut from Saba Elior’s Courtyard (clip-24) to Saba’s House; do not carry over the previous clip's framing",
       "clip_fixes": [
         "transition: New scene: cut from Saba Elior’s Courtyard (clip-24) to Saba’s House; do not carry over the previous clip's framing"
+      ],
+      "still_present": [
+        {
+          "name": "Nim",
+          "how": "image",
+          "reason": "goes everywhere with Miri"
+        }
+      ],
+      "still_present_names": [
+        "Nim"
+      ],
+      "continuity_fixes": [
+        "Companion of Miri kept on screen: Nim (image)"
       ]
     },
     {
@@ -5287,23 +5332,25 @@
       "style": "Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy",
       "references": [
         "@Image 1: Miri character reference",
-        "@Image 2: Yonah character reference",
-        "@Image 3: Crowd group reference (the hillside crowd: families with children)",
-        "@Image 4: hillside path scene reference"
+        "@Image 2: Nim character reference",
+        "@Image 3: Yonah character reference",
+        "@Image 4: Crowd group reference (the hillside crowd: families with children)",
+        "@Image 5: hillside path scene reference"
       ],
       "subjects": [
         "Define the young village girl in @Image 1 as Miri",
-        "Define the boy with the lunch bundle in @Image 2 as Yonah",
-        "Define the hillside crowd of families with children in @Image 3 as the crowd (a group)",
-        "Define the very small curly-haired girl in a rose tunic from the crowd in @Image 3 as Small Girl",
-        "Define the small girl's mother in a green headcover and ochre robe from the crowd in @Image 3 as Mother In Crowd"
+        "Define the small fox in @Image 2 as Nim",
+        "Define the boy with the lunch bundle in @Image 3 as Yonah",
+        "Define the hillside crowd of families with children in @Image 4 as the crowd (a group)",
+        "Define the very small curly-haired girl in a rose tunic from the crowd in @Image 4 as Small Girl",
+        "Define the small girl's mother in a green headcover and ochre robe from the crowd in @Image 4 as Mother In Crowd"
       ],
-      "scene_setting": "EXT. HILLSIDE PATH — CONTINUOUS (@Image 4)",
+      "scene_setting": "EXT. HILLSIDE PATH — CONTINUOUS (@Image 5)",
       "shot_details": [
         {
           "title": "Miri spots a boy, Yonah, about",
           "camera": "Wide shot, slow push-in",
-          "action": "Miri (@Image 1) spots a boy, YONAH (@Image 2), about her age, weaving through the crowd (@Image 3) with a small bundle tucked under his arm. He is careful, bright-eyed, slightly nervous. He stops when he sees a very small GIRL (@Image 3) crying beside her mother (@Image 3).",
+          "action": "Miri (@Image 1) spots a boy, YONAH (@Image 3), about her age, weaving through the crowd (@Image 4) with a small bundle tucked under his arm. He is careful, bright-eyed, slightly nervous. He stops when he sees a very small GIRL (@Image 4) crying beside her mother (@Image 4).",
           "visual": "",
           "dialogue": [
             {
@@ -5333,7 +5380,7 @@
         {
           "title": "The mother comforts her but has",
           "camera": "Medium close-up, static on Miri",
-          "action": "The mother (@Image 3) comforts her but has no food. Yonah (@Image 2) looks down at his bundle. He hesitates, then keeps walking, troubled. Miri (@Image 1) notices.",
+          "action": "The mother (@Image 4) comforts her but has no food. Yonah (@Image 3) looks down at his bundle. He hesitates, then keeps walking, troubled. Miri (@Image 1) notices.",
           "visual": "",
           "dialogue": [
             {
@@ -5363,7 +5410,7 @@
         {
           "title": "Yonah turns",
           "camera": "Medium shot, static on Yonah",
-          "action": "Yonah (@Image 2) turns.",
+          "action": "Yonah (@Image 3) turns.",
           "visual": "",
           "dialogue": [
             {
@@ -5393,12 +5440,13 @@
       ],
       "audio": [
         "Music: （the gentle storybook theme begins softly, under the dialogue）",
-        "Voices: Miri (@Image 1) bright, earnest young girl; Yonah (@Image 2) soft, sincere boy; Small Girl (one of the crowd in @Image 3) small, soft little girl; clear English dialogue"
+        "Voices: Miri (@Image 1) bright, earnest young girl; Yonah (@Image 3) soft, sincere boy; Small Girl (one of the crowd in @Image 4) small, soft little girl; clear English dialogue"
       ],
       "constraints": [
         "One camera move per shot",
         "Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style",
         "Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker",
+        "Nim is a small fox, never a dog",
         "Each character appears only once; no duplicate or twin characters",
         "End on a calm, held frame with no new action in the final second",
         "Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark"
@@ -5409,24 +5457,38 @@
         "last_frame_reference": null,
         "scene_state": null
       },
-      "prompt": "FORMAT: 10s / 16:9 / 3 shots / soft cuts\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Yonah character reference\n- @Image 3: Crowd group reference (the hillside crowd: families with children)\n- @Image 4: hillside path scene reference\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the boy with the lunch bundle in @Image 2 as Yonah\n- Define the hillside crowd of families with children in @Image 3 as the crowd (a group)\n- Define the very small curly-haired girl in a rose tunic from the crowd in @Image 3 as Small Girl\n- Define the small girl's mother in a green headcover and ochre robe from the crowd in @Image 3 as Mother In Crowd\nSCENE: EXT. HILLSIDE PATH — CONTINUOUS (@Image 4)\nSHOTS:\nShot 1: Miri spots a boy, Yonah, about\n  Continuity: New scene: cut from Galilean Hillside (clip-37) to Hillside Path; do not carry over the previous clip's framing\n  Camera: Wide shot, slow push-in\n  Action: Miri (@Image 1) spots a boy, YONAH (@Image 2), about her age, weaving through the crowd (@Image 3) with a small bundle tucked under his arm. He is careful, bright-eyed, slightly nervous. He stops when he sees a very small GIRL (@Image 3) crying beside her mother (@Image 3).\n  Eyeline: Small and Miri face each other; Small looks at Miri while speaking, and Miri looks at Small\n  Dialogue: Small Girl who is also crying beside her mother within the crowd, anxiously, to Miri: {I’m hungry.}\nShot 2: The mother comforts her but has\n  Camera: Medium close-up, static on Miri\n  Action: The mother (@Image 3) comforts her but has no food. Yonah (@Image 2) looks down at his bundle. He hesitates, then keeps walking, troubled. Miri (@Image 1) notices.\n  Eyeline: Miri and Yonah face each other; Miri looks at Yonah while speaking, and Yonah looks at Miri\n  Dialogue: Miri (@Image 1), earnestly, to Yonah: {You have food.}\nShot 3: Yonah turns\n  Camera: Medium shot, static on Yonah\n  Action: Yonah (@Image 2) turns.\n  Eyeline: Yonah and Miri face each other; Yonah looks at Miri while speaking, and Miri looks at Yonah\n  Dialogue: Yonah (@Image 2), earnestly, to Miri: {A little.}\nAUDIO:\n- Music: （the gentle storybook theme begins softly, under the dialogue）\n- Voices: Miri (@Image 1) bright, earnest young girl; Yonah (@Image 2) soft, sincere boy; Small Girl (one of the crowd in @Image 3) small, soft little girl; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
+      "prompt": "FORMAT: 10s / 16:9 / 3 shots / soft cuts\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Nim character reference\n- @Image 3: Yonah character reference\n- @Image 4: Crowd group reference (the hillside crowd: families with children)\n- @Image 5: hillside path scene reference\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the small fox in @Image 2 as Nim\n- Define the boy with the lunch bundle in @Image 3 as Yonah\n- Define the hillside crowd of families with children in @Image 4 as the crowd (a group)\n- Define the very small curly-haired girl in a rose tunic from the crowd in @Image 4 as Small Girl\n- Define the small girl's mother in a green headcover and ochre robe from the crowd in @Image 4 as Mother In Crowd\nSCENE: EXT. HILLSIDE PATH — CONTINUOUS (@Image 5)\nSHOTS:\nShot 1: Miri spots a boy, Yonah, about\n  Continuity: New scene: cut from Galilean Hillside (clip-37) to Hillside Path; do not carry over the previous clip's framing; Nim (@Image 2), Miri's small fox, stays near Miri\n  Camera: Wide shot, slow push-in\n  Action: Miri (@Image 1) spots a boy, YONAH (@Image 3), about her age, weaving through the crowd (@Image 4) with a small bundle tucked under his arm. He is careful, bright-eyed, slightly nervous. He stops when he sees a very small GIRL (@Image 4) crying beside her mother (@Image 4).\n  Eyeline: Small and Miri face each other; Small looks at Miri while speaking, and Miri looks at Small\n  Dialogue: Small Girl who is also crying beside her mother within the crowd, anxiously, to Miri: {I’m hungry.}\nShot 2: The mother comforts her but has\n  Camera: Medium close-up, static on Miri\n  Action: The mother (@Image 4) comforts her but has no food. Yonah (@Image 3) looks down at his bundle. He hesitates, then keeps walking, troubled. Miri (@Image 1) notices.\n  Eyeline: Miri and Yonah face each other; Miri looks at Yonah while speaking, and Yonah looks at Miri\n  Dialogue: Miri (@Image 1), earnestly, to Yonah: {You have food.}\nShot 3: Yonah turns\n  Camera: Medium shot, static on Yonah\n  Action: Yonah (@Image 3) turns.\n  Eyeline: Yonah and Miri face each other; Yonah looks at Miri while speaking, and Miri looks at Yonah\n  Dialogue: Yonah (@Image 3), earnestly, to Miri: {A little.}\nAUDIO:\n- Music: （the gentle storybook theme begins softly, under the dialogue）\n- Voices: Miri (@Image 1) bright, earnest young girl; Yonah (@Image 3) soft, sincere boy; Small Girl (one of the crowd in @Image 4) small, soft little girl; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Nim is a small fox, never a dog\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
       "asset_preparation": [
         "@Image 1: Miri character reference",
-        "@Image 2: Yonah character reference",
-        "@Image 3: Crowd group reference (the hillside crowd: families with children)",
-        "@Image 4: hillside path scene reference"
+        "@Image 2: Nim character reference",
+        "@Image 3: Yonah character reference",
+        "@Image 4: Crowd group reference (the hillside crowd: families with children)",
+        "@Image 5: hillside path scene reference"
       ],
-      "image_reference": "Use @Image 1 as Miri, @Image 2 as Yonah, and @Image 4 as the scene reference. Use @Image 3 as the crowd (a group).",
+      "image_reference": "Use @Image 1 as Miri, @Image 2 as Nim, @Image 3 as Yonah, and @Image 5 as the scene reference. Use @Image 4 as the crowd (a group).",
       "shots": [
-        "Miri spots a boy, Yonah, about. New scene: cut from Galilean Hillside (clip-37) to Hillside Path; do not carry over the previous clip's framing. Wide shot, slow push-in. Miri (@Image 1) spots a boy, YONAH (@Image 2), about her age, weaving through the crowd (@Image 3) with a small bundle tucked under his arm. He is careful, bright-eyed, slightly nervous. He stops when he sees a very small GIRL (@Image 3) crying beside her mother (@Image 3). Small and Miri face each other; Small looks at Miri while speaking, and Miri looks at Small. Small Girl, anxiously, to Miri: {I’m hungry.}",
-        "The mother comforts her but has. Medium close-up, static on Miri. The mother (@Image 3) comforts her but has no food. Yonah (@Image 2) looks down at his bundle. He hesitates, then keeps walking, troubled. Miri (@Image 1) notices. Miri and Yonah face each other; Miri looks at Yonah while speaking, and Yonah looks at Miri. Miri (@Image 1), earnestly, to Yonah: {You have food.}",
-        "Yonah turns. Medium shot, static on Yonah. Yonah (@Image 2) turns. Yonah and Miri face each other; Yonah looks at Miri while speaking, and Miri looks at Yonah. Yonah (@Image 2), earnestly, to Miri: {A little.}"
+        "Miri spots a boy, Yonah, about. New scene: cut from Galilean Hillside (clip-37) to Hillside Path; do not carry over the previous clip's framing; Nim (@Image 2), Miri's small fox, stays near Miri. Wide shot, slow push-in. Miri (@Image 1) spots a boy, YONAH (@Image 3), about her age, weaving through the crowd (@Image 4) with a small bundle tucked under his arm. He is careful, bright-eyed, slightly nervous. He stops when he sees a very small GIRL (@Image 4) crying beside her mother (@Image 4). Small and Miri face each other; Small looks at Miri while speaking, and Miri looks at Small. Small Girl, anxiously, to Miri: {I’m hungry.}",
+        "The mother comforts her but has. Medium close-up, static on Miri. The mother (@Image 4) comforts her but has no food. Yonah (@Image 3) looks down at his bundle. He hesitates, then keeps walking, troubled. Miri (@Image 1) notices. Miri and Yonah face each other; Miri looks at Yonah while speaking, and Yonah looks at Miri. Miri (@Image 1), earnestly, to Yonah: {You have food.}",
+        "Yonah turns. Medium shot, static on Yonah. Yonah (@Image 3) turns. Yonah and Miri face each other; Yonah looks at Miri while speaking, and Miri looks at Yonah. Yonah (@Image 3), earnestly, to Miri: {A little.}"
       ],
-      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme begins softly, under the dialogue）. Voices: Miri (@Image 1) bright, earnest young girl; Yonah (@Image 2) soft, sincere boy; Small Girl (one of the crowd in @Image 3) small, soft little girl; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
+      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme begins softly, under the dialogue）. Voices: Miri (@Image 1) bright, earnest young girl; Yonah (@Image 3) soft, sincere boy; Small Girl (one of the crowd in @Image 4) small, soft little girl; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Nim is a small fox, never a dog. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
       "continuity_transition": "New scene: cut from Galilean Hillside (clip-37) to Hillside Path; do not carry over the previous clip's framing",
       "clip_fixes": [
         "transition: New scene: cut from Galilean Hillside (clip-37) to Hillside Path; do not carry over the previous clip's framing",
         "Prompt level: added the crowd (a group) (@Image 3), Small Girl (from the crowd (a group)), Mother In Crowd (from the crowd (a group)) as subjects"
+      ],
+      "still_present": [
+        {
+          "name": "Nim",
+          "how": "image",
+          "reason": "goes everywhere with Miri"
+        }
+      ],
+      "still_present_names": [
+        "Nim"
+      ],
+      "continuity_fixes": [
+        "Companion of Miri kept on screen: Nim (image)"
       ]
     },
     {
@@ -8086,6 +8148,7 @@
         "One camera move per shot",
         "Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style",
         "Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker",
+        "Nim is a small fox, never a dog",
         "Each character appears only once; no duplicate or twin characters",
         "Jesus: show only his hands, robe, and silhouette; never show his face",
         "End on a calm, held frame with no new action in the final second",
@@ -8097,7 +8160,7 @@
         "last_frame_reference": null,
         "scene_state": null
       },
-      "prompt": "FORMAT: 6s / 16:9 / one continuous shot\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Yonah character reference\n- @Image 3: Andrew character reference\n- @Image 4: Jesus reference (robe, hands, silhouette only)\n- @Image 5: Crowd group reference (the hillside crowd: families with children)\n- @Image 6: Disciples group reference (the other disciples)\n- @Image 7: near Jesus scene reference\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the boy with the lunch bundle in @Image 2 as Yonah\n- Define the kind, steady disciple in @Image 3 as Andrew\n- Define the robed figure (hands, robe, and silhouette only) in @Image 4 as Jesus\n- Define the hillside crowd of families with children in @Image 5 as the crowd (a group)\n- Define the group of disciples in tunics and mantles in @Image 6 as the disciples (a group)\nSCENE: EXT. NEAR JESUS — CONTINUOUS (@Image 7)\nSHOTS:\nShot 1: The crowd noise softens\n  Continuity: New scene: cut from Edge Of Crowd (clip-51) to Near Jesus; do not carry over the previous clip's framing\n  Camera: Medium long shot over Jesus's shoulder from behind onto Andrew, Yonah, and the disciples, slow push-in\n  Action: The crowd (@Image 5) noise softens. Miri (@Image 1) slows as they near Jesus (@Image 4). The framing becomes reverent and restrained. We see Jesus’s hands receive the small lunch from Andrew (@Image 3). His robe. The disciples’ faces (@Image 6). Yonah (@Image 2) looking up, nervous and hopeful. Miri watching, guarded.\n  Eyeline: Jesus, seen only from behind, turns toward the disciples while speaking; the disciples look back at him\n  Dialogue: Jesus (@Image 4), calmly, to the disciples: {Have the people sit down.}\nAUDIO:\n- Music: （the gentle storybook theme begins softly, under the dialogue）\n- Voices: Jesus (@Image 4) calm, warm, unhurried man; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Each character appears only once; no duplicate or twin characters\n- Jesus: show only his hands, robe, and silhouette; never show his face\n- End on a calm, held frame with no new action in the final second\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
+      "prompt": "FORMAT: 6s / 16:9 / one continuous shot\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Yonah character reference\n- @Image 3: Andrew character reference\n- @Image 4: Jesus reference (robe, hands, silhouette only)\n- @Image 5: Crowd group reference (the hillside crowd: families with children)\n- @Image 6: Disciples group reference (the other disciples)\n- @Image 7: near Jesus scene reference\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the boy with the lunch bundle in @Image 2 as Yonah\n- Define the kind, steady disciple in @Image 3 as Andrew\n- Define the robed figure (hands, robe, and silhouette only) in @Image 4 as Jesus\n- Define the hillside crowd of families with children in @Image 5 as the crowd (a group)\n- Define the group of disciples in tunics and mantles in @Image 6 as the disciples (a group)\nSCENE: EXT. NEAR JESUS — CONTINUOUS (@Image 7)\nSHOTS:\nShot 1: The crowd noise softens\n  Continuity: New scene: cut from Edge Of Crowd (clip-51) to Near Jesus; do not carry over the previous clip's framing; Nim, Miri's small fox (an orange fox with oversized ears and a cream-tipped tail), stays near Miri\n  Camera: Medium long shot over Jesus's shoulder from behind onto Andrew, Yonah, and the disciples, slow push-in\n  Action: The crowd (@Image 5) noise softens. Miri (@Image 1) slows as they near Jesus (@Image 4). The framing becomes reverent and restrained. We see Jesus’s hands receive the small lunch from Andrew (@Image 3). His robe. The disciples’ faces (@Image 6). Yonah (@Image 2) looking up, nervous and hopeful. Miri watching, guarded.\n  Eyeline: Jesus, seen only from behind, turns toward the disciples while speaking; the disciples look back at him\n  Dialogue: Jesus (@Image 4), calmly, to the disciples: {Have the people sit down.}\nAUDIO:\n- Music: （the gentle storybook theme begins softly, under the dialogue）\n- Voices: Jesus (@Image 4) calm, warm, unhurried man; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Nim is a small fox, never a dog\n- Each character appears only once; no duplicate or twin characters\n- Jesus: show only his hands, robe, and silhouette; never show his face\n- End on a calm, held frame with no new action in the final second\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
       "asset_preparation": [
         "@Image 1: Miri character reference",
         "@Image 2: Yonah character reference",
@@ -8109,13 +8172,26 @@
       ],
       "image_reference": "Use @Image 1 as Miri, @Image 2 as Yonah, @Image 3 as Andrew, @Image 4 as Jesus, and @Image 7 as the scene reference. Use @Image 5 as the crowd (a group); @Image 6 as the disciples (a group).",
       "shots": [
-        "The crowd noise softens. New scene: cut from Edge Of Crowd (clip-51) to Near Jesus; do not carry over the previous clip's framing. Medium long shot over Jesus's shoulder from behind onto Andrew, Yonah, and the disciples, slow push-in. The crowd (@Image 5) noise softens. Miri (@Image 1) slows as they near Jesus (@Image 4). The framing becomes reverent and restrained. We see Jesus’s hands receive the small lunch from Andrew (@Image 3). His robe. The disciples’ faces (@Image 6). Yonah (@Image 2) looking up, nervous and hopeful. Miri watching, guarded. Jesus, seen only from behind, turns toward the disciples while speaking; the disciples look back at him. Jesus (@Image 4), calmly, to the disciples: {Have the people sit down.}"
+        "The crowd noise softens. New scene: cut from Edge Of Crowd (clip-51) to Near Jesus; do not carry over the previous clip's framing; Nim, Miri's small fox (an orange fox with oversized ears and a cream-tipped tail), stays near Miri. Medium long shot over Jesus's shoulder from behind onto Andrew, Yonah, and the disciples, slow push-in. The crowd (@Image 5) noise softens. Miri (@Image 1) slows as they near Jesus (@Image 4). The framing becomes reverent and restrained. We see Jesus’s hands receive the small lunch from Andrew (@Image 3). His robe. The disciples’ faces (@Image 6). Yonah (@Image 2) looking up, nervous and hopeful. Miri watching, guarded. Jesus, seen only from behind, turns toward the disciples while speaking; the disciples look back at him. Jesus (@Image 4), calmly, to the disciples: {Have the people sit down.}"
       ],
-      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme begins softly, under the dialogue）. Voices: Jesus (@Image 4) calm, warm, unhurried man; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Each character appears only once; no duplicate or twin characters. Jesus: show only his hands, robe, and silhouette; never show his face. End on a calm, held frame with no new action in the final second. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
+      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme begins softly, under the dialogue）. Voices: Jesus (@Image 4) calm, warm, unhurried man; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Nim is a small fox, never a dog. Each character appears only once; no duplicate or twin characters. Jesus: show only his hands, robe, and silhouette; never show his face. End on a calm, held frame with no new action in the final second. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
       "continuity_transition": "New scene: cut from Edge Of Crowd (clip-51) to Near Jesus; do not carry over the previous clip's framing",
       "clip_fixes": [
         "transition: New scene: cut from Edge Of Crowd (clip-51) to Near Jesus; do not carry over the previous clip's framing",
         "Prompt level: added the crowd (a group) (@Image 5), the disciples (a group) (@Image 6) as subjects"
+      ],
+      "still_present": [
+        {
+          "name": "Nim",
+          "how": "text",
+          "reason": "goes everywhere with Miri"
+        }
+      ],
+      "still_present_names": [
+        "Nim"
+      ],
+      "continuity_fixes": [
+        "Companion of Miri kept on screen: Nim (text)"
       ]
     },
     {
@@ -8285,6 +8361,7 @@
         "One camera move per shot",
         "Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style",
         "Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker",
+        "Nim is a small fox, never a dog",
         "Each character appears only once; no duplicate or twin characters",
         "Jesus: show only his hands, robe, and silhouette; never show his face",
         "End on a calm, held frame with no new action in the final second",
@@ -8297,7 +8374,7 @@
         "last_frame_reference": "@Image 8",
         "scene_state": null
       },
-      "prompt": "FORMAT: 12s / 16:9 / 3 shots / soft cuts\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Andrew character reference\n- @Image 3: Philip character reference\n- @Image 4: Jesus reference (robe, hands, silhouette only)\n- @Image 5: Crowd group reference (the hillside crowd: families with children)\n- @Image 6: Disciples group reference (the other disciples)\n- @Image 7: near Jesus scene reference\n- @Image 8: last frame of clip-52 (continuity reference)\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the kind, steady disciple in @Image 2 as Andrew\n- Define the worried, practical disciple in @Image 3 as Philip\n- Define the robed figure (hands, robe, and silhouette only) in @Image 4 as Jesus\n- Define the hillside crowd of families with children in @Image 5 as the crowd (a group)\n- Define the group of disciples in tunics and mantles in @Image 6 as the disciples (a group)\nSCENE: EXT. NEAR JESUS — CONTINUOUS (@Image 7)\nSHOTS:\nShot 1: A ripple moves through the disciples\n  Continuity: Continue the same moment from @Image 8: keep the lighting, positions, props, and character appearance exactly as in that frame, with Miri (@Image 1), Yonah (the boy with the lunch bundle) still present\n  Camera: Medium shot over Jesus's shoulder from behind onto Philip and the disciples, static\n  Action: A ripple moves through the disciples (@Image 6).\n  Eyeline: Philip and Jesus face each other; Philip looks at Jesus while speaking, and Jesus, seen only from behind, turns toward Philip\n  Dialogue: Philip (@Image 3), doubtfully, to Jesus: {All of them?}\nShot 2: Jesus’s hand rests briefly on the\n  Camera: Medium shot over Jesus's shoulder from behind onto Philip, Jesus's hand on the bread basket in the foreground, static\n  Action: Jesus’s hand rests briefly on the basket holding the bread.\n  Eyeline: Jesus and Philip face each other; Jesus, seen only from behind, turns toward Philip while speaking, and Philip looks at Jesus\n  Dialogue: Jesus (@Image 4), calmly, to Philip: {All of them.}\nShot 3: The disciples hurry to organize the\n  Camera: Medium long shot on Andrew and the disciples organizing the crowd, gentle tracking\n  Action: The disciples (@Image 6) hurry to organize the crowd (@Image 5).\n  Eyeline: Andrew looks around at the crowd while speaking, meeting their eyes one by one; the crowd look back at Andrew\n  Dialogue: Andrew (@Image 2), firmly, to the crowd: {In groups! Sit upon the grass. Make room for one another.}\nAUDIO:\n- Music: （the gentle storybook theme continues from the previous clip, under the dialogue）\n- Voices: Andrew (@Image 2) gentle, steady man; Philip (@Image 3) anxious, practical man; Jesus (@Image 4) calm, warm, unhurried man; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Each character appears only once; no duplicate or twin characters\n- Jesus: show only his hands, robe, and silhouette; never show his face\n- End on a calm, held frame with no new action in the final second\n- Match lighting, positions, props, and character appearance to @Image 8\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
+      "prompt": "FORMAT: 12s / 16:9 / 3 shots / soft cuts\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Andrew character reference\n- @Image 3: Philip character reference\n- @Image 4: Jesus reference (robe, hands, silhouette only)\n- @Image 5: Crowd group reference (the hillside crowd: families with children)\n- @Image 6: Disciples group reference (the other disciples)\n- @Image 7: near Jesus scene reference\n- @Image 8: last frame of clip-52 (continuity reference)\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the kind, steady disciple in @Image 2 as Andrew\n- Define the worried, practical disciple in @Image 3 as Philip\n- Define the robed figure (hands, robe, and silhouette only) in @Image 4 as Jesus\n- Define the hillside crowd of families with children in @Image 5 as the crowd (a group)\n- Define the group of disciples in tunics and mantles in @Image 6 as the disciples (a group)\nSCENE: EXT. NEAR JESUS — CONTINUOUS (@Image 7)\nSHOTS:\nShot 1: A ripple moves through the disciples\n  Continuity: Continue the same moment from @Image 8: keep the lighting, positions, props, and character appearance exactly as in that frame, with Miri (@Image 1), Yonah (the boy with the lunch bundle) still present; Nim, Miri's small fox (an orange fox with oversized ears and a cream-tipped tail), stays near Miri\n  Camera: Medium shot over Jesus's shoulder from behind onto Philip and the disciples, static\n  Action: A ripple moves through the disciples (@Image 6).\n  Eyeline: Philip and Jesus face each other; Philip looks at Jesus while speaking, and Jesus, seen only from behind, turns toward Philip\n  Dialogue: Philip (@Image 3), doubtfully, to Jesus: {All of them?}\nShot 2: Jesus’s hand rests briefly on the\n  Camera: Medium shot over Jesus's shoulder from behind onto Philip, Jesus's hand on the bread basket in the foreground, static\n  Action: Jesus’s hand rests briefly on the basket holding the bread.\n  Eyeline: Jesus and Philip face each other; Jesus, seen only from behind, turns toward Philip while speaking, and Philip looks at Jesus\n  Dialogue: Jesus (@Image 4), calmly, to Philip: {All of them.}\nShot 3: The disciples hurry to organize the\n  Camera: Medium long shot on Andrew and the disciples organizing the crowd, gentle tracking\n  Action: The disciples (@Image 6) hurry to organize the crowd (@Image 5).\n  Eyeline: Andrew looks around at the crowd while speaking, meeting their eyes one by one; the crowd look back at Andrew\n  Dialogue: Andrew (@Image 2), firmly, to the crowd: {In groups! Sit upon the grass. Make room for one another.}\nAUDIO:\n- Music: （the gentle storybook theme continues from the previous clip, under the dialogue）\n- Voices: Andrew (@Image 2) gentle, steady man; Philip (@Image 3) anxious, practical man; Jesus (@Image 4) calm, warm, unhurried man; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Nim is a small fox, never a dog\n- Each character appears only once; no duplicate or twin characters\n- Jesus: show only his hands, robe, and silhouette; never show his face\n- End on a calm, held frame with no new action in the final second\n- Match lighting, positions, props, and character appearance to @Image 8\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
       "asset_preparation": [
         "@Image 1: Miri character reference",
         "@Image 2: Andrew character reference",
@@ -8310,17 +8387,18 @@
       ],
       "image_reference": "Use @Image 1 as Miri, @Image 2 as Andrew, @Image 3 as Philip, @Image 4 as Jesus, and @Image 7 as the scene reference; continue from the last frame of clip-52 in @Image 8. Use @Image 5 as the crowd (a group); @Image 6 as the disciples (a group).",
       "shots": [
-        "A ripple moves through the disciples (@Image 6). Continue the same moment from @Image 8: keep the lighting, positions, props, and character appearance exactly as in that frame, with Miri (@Image 1), Yonah (the boy with the lunch bundle) still present. Medium shot over Jesus's shoulder from behind onto Philip and the disciples, static. A ripple moves through the disciples (@Image 6). Philip and Jesus face each other; Philip looks at Jesus while speaking, and Jesus, seen only from behind, turns toward Philip. Philip (@Image 3), doubtfully, to Jesus: {All of them?}",
+        "A ripple moves through the disciples (@Image 6). Continue the same moment from @Image 8: keep the lighting, positions, props, and character appearance exactly as in that frame, with Miri (@Image 1), Yonah (the boy with the lunch bundle) still present; Nim, Miri's small fox (an orange fox with oversized ears and a cream-tipped tail), stays near Miri. Medium shot over Jesus's shoulder from behind onto Philip and the disciples, static. A ripple moves through the disciples (@Image 6). Philip and Jesus face each other; Philip looks at Jesus while speaking, and Jesus, seen only from behind, turns toward Philip. Philip (@Image 3), doubtfully, to Jesus: {All of them?}",
         "Jesus’s hand rests briefly on the. Medium shot over Jesus's shoulder from behind onto Philip, Jesus's hand on the bread basket in the foreground, static. Jesus’s hand rests briefly on the basket holding the bread. Jesus and Philip face each other; Jesus, seen only from behind, turns toward Philip while speaking, and Philip looks at Jesus. Jesus (@Image 4), calmly, to Philip: {All of them.}",
         "The disciples hurry to organize the. Medium long shot on Andrew and the disciples organizing the crowd, gentle tracking. The disciples (@Image 6) hurry to organize the crowd (@Image 5). Andrew looks around at the crowd while speaking, meeting their eyes one by one; the crowd look back at Andrew. Andrew (@Image 2), firmly, to the crowd: {In groups! Sit upon the grass. Make room for one another.}"
       ],
-      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme continues from the previous clip, under the dialogue）. Voices: Andrew (@Image 2) gentle, steady man; Philip (@Image 3) anxious, practical man; Jesus (@Image 4) calm, warm, unhurried man; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Each character appears only once; no duplicate or twin characters. Jesus: show only his hands, robe, and silhouette; never show his face. End on a calm, held frame with no new action in the final second. Match lighting, positions, props, and character appearance to @Image 8. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
+      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme continues from the previous clip, under the dialogue）. Voices: Andrew (@Image 2) gentle, steady man; Philip (@Image 3) anxious, practical man; Jesus (@Image 4) calm, warm, unhurried man; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Nim is a small fox, never a dog. Each character appears only once; no duplicate or twin characters. Jesus: show only his hands, robe, and silhouette; never show his face. End on a calm, held frame with no new action in the final second. Match lighting, positions, props, and character appearance to @Image 8. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
       "continuity_added": [
         "Miri"
       ],
       "continuity_fixes": [
         "Added Miri: in the last shot of clip-52; keep them in the scene",
-        "Kept on screen (not yet exited): Yonah (text)"
+        "Kept on screen (not yet exited): Yonah (text)",
+        "Companion of Miri kept on screen: Nim (text)"
       ],
       "clip_fixes": [
         "Prompt level: added the crowd (a group) (@Image 5), the disciples (a group) (@Image 6) as subjects"
@@ -8330,10 +8408,16 @@
           "name": "Yonah",
           "how": "text",
           "reason": "in the scene and has not left yet"
+        },
+        {
+          "name": "Nim",
+          "how": "text",
+          "reason": "goes everywhere with Miri"
         }
       ],
       "still_present_names": [
-        "Yonah"
+        "Yonah",
+        "Nim"
       ]
     },
     {
@@ -9761,6 +9845,7 @@
         "One camera move per shot",
         "Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style",
         "Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker",
+        "Nim is a small fox, never a dog",
         "Each character appears only once; no duplicate or twin characters",
         "End on a calm, held frame with no new action in the final second",
         "Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark"
@@ -9771,7 +9856,7 @@
         "last_frame_reference": null,
         "scene_state": null
       },
-      "prompt": "FORMAT: 13s / 16:9 / 3 shots / soft cuts\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Yonah character reference\n- @Image 3: Andrew character reference\n- @Image 4: Crowd group reference (the hillside crowd: families with children)\n- @Image 5: Disciples group reference (the other disciples)\n- @Image 6: Galilean hillside scene reference\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the boy with the lunch bundle in @Image 2 as Yonah\n- Define the kind, steady disciple in @Image 3 as Andrew\n- Define the hillside crowd of families with children in @Image 4 as the crowd (a group)\n- Define the group of disciples in tunics and mantles in @Image 5 as the disciples (a group)\nSCENE: EXT. HILLSIDE — LATE AFTERNOON (@Image 6)\nSHOTS:\nShot 1: The crowd has eaten\n  Continuity: New scene: cut from Hillside (clip-59) to Hillside, late afternoon light; do not carry over the previous clip's framing\n  Camera: Wide shot, static\n  Action: The crowd (@Image 4) has eaten. Families sit together, satisfied. The light is golden. Children lie on the grass, sleepy and content. Disciples (@Image 5) move through the crowd with empty baskets.\n  Eyeline: Andrew looks around at the disciples while speaking, meeting their eyes one by one; the disciples look back at Andrew\n  Dialogue: Andrew (@Image 3), warmly, to the disciples: {Gather the pieces left over, that nothing may be lost.}\nShot 2: Miri hears this and looks up\n  Camera: Medium three-shot, static\n  Action: Miri (@Image 1) hears this and looks up.\n  Eyeline: Miri and Andrew face each other; Miri looks at Andrew while speaking, and Andrew looks at Miri\n  Dialogue: Miri (@Image 1), thoughtfully, to Andrew: {Nothing lost.}\nShot 3: Yonah approaches, carrying a half-filled basket\n  Camera: Medium shot, low-angle, slow crane up on Yonah\n  Action: Yonah (@Image 2) approaches, carrying a half-filled basket of leftover pieces. His face still shines with wonder.\n  Eyeline: Yonah and Miri face each other; Yonah looks at Miri while speaking, and Miri looks at Yonah\n  Dialogue: Yonah (@Image 2), curiously, to Miri: {Miri, help me?}\nAUDIO:\n- Music: （the gentle storybook theme begins softly, under the dialogue）\n- Voices: Miri (@Image 1) bright, earnest young girl; Yonah (@Image 2) soft, sincere boy; Andrew (@Image 3) gentle, steady man; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
+      "prompt": "FORMAT: 13s / 16:9 / 3 shots / soft cuts\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Yonah character reference\n- @Image 3: Andrew character reference\n- @Image 4: Crowd group reference (the hillside crowd: families with children)\n- @Image 5: Disciples group reference (the other disciples)\n- @Image 6: Galilean hillside scene reference\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the boy with the lunch bundle in @Image 2 as Yonah\n- Define the kind, steady disciple in @Image 3 as Andrew\n- Define the hillside crowd of families with children in @Image 4 as the crowd (a group)\n- Define the group of disciples in tunics and mantles in @Image 5 as the disciples (a group)\nSCENE: EXT. HILLSIDE — LATE AFTERNOON (@Image 6)\nSHOTS:\nShot 1: The crowd has eaten\n  Continuity: New scene: cut from Hillside (clip-59) to Hillside, late afternoon light; do not carry over the previous clip's framing; Nim, Miri's small fox (an orange fox with oversized ears and a cream-tipped tail), stays near Miri\n  Camera: Wide shot, static\n  Action: The crowd (@Image 4) has eaten. Families sit together, satisfied. The light is golden. Children lie on the grass, sleepy and content. Disciples (@Image 5) move through the crowd with empty baskets.\n  Eyeline: Andrew looks around at the disciples while speaking, meeting their eyes one by one; the disciples look back at Andrew\n  Dialogue: Andrew (@Image 3), warmly, to the disciples: {Gather the pieces left over, that nothing may be lost.}\nShot 2: Miri hears this and looks up\n  Camera: Medium three-shot, static\n  Action: Miri (@Image 1) hears this and looks up.\n  Eyeline: Miri and Andrew face each other; Miri looks at Andrew while speaking, and Andrew looks at Miri\n  Dialogue: Miri (@Image 1), thoughtfully, to Andrew: {Nothing lost.}\nShot 3: Yonah approaches, carrying a half-filled basket\n  Camera: Medium shot, low-angle, slow crane up on Yonah\n  Action: Yonah (@Image 2) approaches, carrying a half-filled basket of leftover pieces. His face still shines with wonder.\n  Eyeline: Yonah and Miri face each other; Yonah looks at Miri while speaking, and Miri looks at Yonah\n  Dialogue: Yonah (@Image 2), curiously, to Miri: {Miri, help me?}\nAUDIO:\n- Music: （the gentle storybook theme begins softly, under the dialogue）\n- Voices: Miri (@Image 1) bright, earnest young girl; Yonah (@Image 2) soft, sincere boy; Andrew (@Image 3) gentle, steady man; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Nim is a small fox, never a dog\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
       "asset_preparation": [
         "@Image 1: Miri character reference",
         "@Image 2: Yonah character reference",
@@ -9782,15 +9867,28 @@
       ],
       "image_reference": "Use @Image 1 as Miri, @Image 2 as Yonah, @Image 3 as Andrew, and @Image 6 as the scene reference. Use @Image 4 as the crowd (a group); @Image 5 as the disciples (a group).",
       "shots": [
-        "The crowd has eaten. New scene: cut from Hillside (clip-59) to Hillside, late afternoon light; do not carry over the previous clip's framing. Wide shot, static. The crowd (@Image 4) has eaten. Families sit together, satisfied. The light is golden. Children lie on the grass, sleepy and content. Disciples (@Image 5) move through the crowd with empty baskets. Andrew looks around at the disciples while speaking, meeting their eyes one by one; the disciples look back at Andrew. Andrew (@Image 3), warmly, to the disciples: {Gather the pieces left over, that nothing may be lost.}",
+        "The crowd has eaten. New scene: cut from Hillside (clip-59) to Hillside, late afternoon light; do not carry over the previous clip's framing; Nim, Miri's small fox (an orange fox with oversized ears and a cream-tipped tail), stays near Miri. Wide shot, static. The crowd (@Image 4) has eaten. Families sit together, satisfied. The light is golden. Children lie on the grass, sleepy and content. Disciples (@Image 5) move through the crowd with empty baskets. Andrew looks around at the disciples while speaking, meeting their eyes one by one; the disciples look back at Andrew. Andrew (@Image 3), warmly, to the disciples: {Gather the pieces left over, that nothing may be lost.}",
         "Miri hears this and looks up. Medium three-shot, static. Miri (@Image 1) hears this and looks up. Miri and Andrew face each other; Miri looks at Andrew while speaking, and Andrew looks at Miri. Miri (@Image 1), thoughtfully, to Andrew: {Nothing lost.}",
         "Yonah approaches, carrying a half-filled basket. Medium shot, low-angle, slow crane up on Yonah. Yonah (@Image 2) approaches, carrying a half-filled basket of leftover pieces. His face still shines with wonder. Yonah and Miri face each other; Yonah looks at Miri while speaking, and Miri looks at Yonah. Yonah (@Image 2), curiously, to Miri: {Miri, help me?}"
       ],
-      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme begins softly, under the dialogue）. Voices: Miri (@Image 1) bright, earnest young girl; Yonah (@Image 2) soft, sincere boy; Andrew (@Image 3) gentle, steady man; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
+      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme begins softly, under the dialogue）. Voices: Miri (@Image 1) bright, earnest young girl; Yonah (@Image 2) soft, sincere boy; Andrew (@Image 3) gentle, steady man; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Nim is a small fox, never a dog. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
       "continuity_transition": "New scene: cut from Hillside (clip-59) to Hillside, late afternoon light; do not carry over the previous clip's framing",
       "clip_fixes": [
         "transition: New scene: cut from Hillside (clip-59) to Hillside, late afternoon light; do not carry over the previous clip's framing",
         "Prompt level: added the crowd (a group) (@Image 4), the disciples (a group) (@Image 5) as subjects"
+      ],
+      "still_present": [
+        {
+          "name": "Nim",
+          "how": "text",
+          "reason": "goes everywhere with Miri"
+        }
+      ],
+      "still_present_names": [
+        "Nim"
+      ],
+      "continuity_fixes": [
+        "Companion of Miri kept on screen: Nim (text)"
       ]
     },
     {
@@ -9818,17 +9916,19 @@
       "style": "Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy",
       "references": [
         "@Image 1: Miri character reference",
-        "@Image 2: Yonah character reference",
-        "@Image 3: Andrew character reference",
-        "@Image 4: Galilean hillside scene reference",
-        "@Image 5: last frame of clip-60 (continuity reference)"
+        "@Image 2: Nim character reference",
+        "@Image 3: Yonah character reference",
+        "@Image 4: Andrew character reference",
+        "@Image 5: Galilean hillside scene reference",
+        "@Image 6: last frame of clip-60 (continuity reference)"
       ],
       "subjects": [
         "Define the young village girl in @Image 1 as Miri",
-        "Define the boy with the lunch bundle in @Image 2 as Yonah",
-        "Define the kind, steady disciple in @Image 3 as Andrew"
+        "Define the small fox in @Image 2 as Nim",
+        "Define the boy with the lunch bundle in @Image 3 as Yonah",
+        "Define the kind, steady disciple in @Image 4 as Andrew"
       ],
-      "scene_setting": "EXT. HILLSIDE — LATE AFTERNOON (@Image 4)",
+      "scene_setting": "EXT. HILLSIDE — LATE AFTERNOON (@Image 5)",
       "shot_details": [
         {
           "title": "Miri nods",
@@ -9847,33 +9947,36 @@
         "Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style",
         "Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker",
         "End on a calm, held frame with no new action in the final second",
-        "Match lighting, positions, props, and character appearance to @Image 5",
-        "Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark"
+        "Match lighting, positions, props, and character appearance to @Image 6",
+        "Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark",
+        "Nim is a small fox, never a dog"
       ],
       "continuity": {
         "previous_clip": "clip-60",
         "mode": "continue_scene",
-        "last_frame_reference": "@Image 5",
+        "last_frame_reference": "@Image 6",
         "scene_state": null
       },
-      "prompt": "FORMAT: 5s / 16:9 / one continuous shot\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Yonah character reference\n- @Image 3: Andrew character reference\n- @Image 4: Galilean hillside scene reference\n- @Image 5: last frame of clip-60 (continuity reference)\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the boy with the lunch bundle in @Image 2 as Yonah\n- Define the kind, steady disciple in @Image 3 as Andrew\nSCENE: EXT. HILLSIDE — LATE AFTERNOON (@Image 4)\nSHOTS:\nShot 1: Miri nods\n  Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame, with Yonah (@Image 2), Andrew (@Image 3), the hillside crowd of families with children and the group of disciples in tunics and mantles still present\n  Camera: Medium shot, static on Miri\n  Action: Miri (@Image 1) nods.\nAUDIO:\n- Music: （the gentle storybook theme continues from the previous clip）\n- No dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- End on a calm, held frame with no new action in the final second\n- Match lighting, positions, props, and character appearance to @Image 5\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
+      "prompt": "FORMAT: 5s / 16:9 / one continuous shot\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Nim character reference\n- @Image 3: Yonah character reference\n- @Image 4: Andrew character reference\n- @Image 5: Galilean hillside scene reference\n- @Image 6: last frame of clip-60 (continuity reference)\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the small fox in @Image 2 as Nim\n- Define the boy with the lunch bundle in @Image 3 as Yonah\n- Define the kind, steady disciple in @Image 4 as Andrew\nSCENE: EXT. HILLSIDE — LATE AFTERNOON (@Image 5)\nSHOTS:\nShot 1: Miri nods\n  Continuity: Continue the same moment from @Image 6: keep the lighting, positions, props, and character appearance exactly as in that frame, with Yonah (@Image 3), Andrew (@Image 4), the hillside crowd of families with children and the group of disciples in tunics and mantles still present; Nim (@Image 2), Miri's small fox, stays near Miri\n  Camera: Medium shot, static on Miri\n  Action: Miri (@Image 1) nods.\nAUDIO:\n- Music: （the gentle storybook theme continues from the previous clip）\n- No dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- End on a calm, held frame with no new action in the final second\n- Match lighting, positions, props, and character appearance to @Image 6\n- Nim is a small fox, never a dog\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
       "asset_preparation": [
         "@Image 1: Miri character reference",
-        "@Image 2: Yonah character reference",
-        "@Image 3: Galilean hillside scene reference",
-        "@Image 4: last frame of clip-60 (continuity reference)"
+        "@Image 2: Nim character reference",
+        "@Image 3: Yonah character reference",
+        "@Image 4: Galilean hillside scene reference",
+        "@Image 5: last frame of clip-60 (continuity reference)"
       ],
-      "image_reference": "Use @Image 1 as Miri, @Image 2 as Yonah, and @Image 3 as the scene reference; continue from the last frame of clip-60 in @Image 4.",
+      "image_reference": "Use @Image 1 as Miri, @Image 2 as Nim, @Image 3 as Yonah, and @Image 4 as the scene reference; continue from the last frame of clip-60 in @Image 5.",
       "shots": [
-        "Miri nods. Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame, with Yonah (@Image 2), Andrew (@Image 3), the hillside crowd of families with children and the group of disciples in tunics and mantles still present. Medium shot, static on Miri. Miri (@Image 1) nods."
+        "Miri nods. Continue the same moment from @Image 6: keep the lighting, positions, props, and character appearance exactly as in that frame, with Yonah (@Image 3), Andrew (@Image 4), the hillside crowd of families with children and the group of disciples in tunics and mantles still present; Nim (@Image 2), Miri's small fox, stays near Miri. Medium shot, static on Miri. Miri (@Image 1) nods."
       ],
-      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme continues from the previous clip）. No dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. End on a calm, held frame with no new action in the final second. Match lighting, positions, props, and character appearance to @Image 4. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
+      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme continues from the previous clip）. No dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. End on a calm, held frame with no new action in the final second. Match lighting, positions, props, and character appearance to @Image 5. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
       "continuity_added": [
         "Yonah"
       ],
       "continuity_fixes": [
         "Added Yonah: in the last shot of clip-60; keep them in the scene",
-        "Kept on screen (not yet exited): Andrew (image), the crowd (text), the disciples (text)"
+        "Kept on screen (not yet exited): Andrew (image), the crowd (text), the disciples (text)",
+        "Companion of Miri kept on screen: Nim (image)"
       ],
       "still_present": [
         {
@@ -9890,12 +9993,18 @@
           "name": "the disciples",
           "how": "text",
           "reason": "in the scene and has not left yet"
+        },
+        {
+          "name": "Nim",
+          "how": "image",
+          "reason": "goes everywhere with Miri"
         }
       ],
       "still_present_names": [
         "Andrew",
         "the crowd",
-        "the disciples"
+        "the disciples",
+        "Nim"
       ]
     },
     {
