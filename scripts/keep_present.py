@@ -50,6 +50,7 @@ DEFINE = re.compile(r"^Define (.+?) in @Image (\d+) as (.+?)$")
 GROUP_WORD = {"the children": "children", "the crowd": "crowd", "the disciples": "disciples"}
 TAG = re.compile(r" \(@Image \d+\)")
 COMPANIONS = {"Miri": ("Nim", "the small fox", "Miri's small fox")}  # where the first is seen, so is the second
+FOLLOW = "follows at {lead}'s heels"  # what the companion does when the lead first comes into a scene
 FOX_RULE = "Nim is a small fox, never a dog"
 
 
@@ -227,6 +228,37 @@ def add_companion(clip, lead, comp):
     return how
 
 
+def follows_missing(clips):
+    """[(clip, shot index, lead, companion)]: the lead's first shot in each scene, when its action leaves out the companion."""
+    out = []
+    for scene in group_scenes(clips):
+        for lead, (comp, *_) in COMPANIONS.items():
+            first = next(((clip, i) for clip in scene["clips"] for i, s in enumerate(clip["shot_details"])
+                          if re.search(rf"\b{lead}\b", s["action"])), None)
+            if first and not re.search(rf"\b{comp}\b", first[0]["shot_details"][first[1]]["action"]):
+                out.append((*first, lead, comp))
+    return out
+
+
+def add_follow(clip, i, lead, comp):
+    """Insert '<companion> follows at <lead>'s heels.' after the lead's first sentence in the shot's action (and after
+    any sentences that go on with a pronoun, so 'He …' still means who it meant)."""
+    shot = clip["shot_details"][i]
+    old = shot["action"]
+    sentences = re.split(r"(?<=[.!?])\s+", old)
+    k = next(j for j, s in enumerate(sentences) if re.search(rf"\b{lead}\b", s))
+    while k + 1 < len(sentences) and re.match(r"(He|She|It|They|His|Her|Its|Their)\b", sentences[k + 1]):
+        k += 1
+    n = next((m.group(1) for s in clip["subjects"] if (m := re.match(rf"^Define .+ in @Image (\d+) as {comp}$", s))), None)
+    sentences.insert(k + 1, f"{comp}{f' (@Image {n})' if n else ''} {FOLLOW.format(lead=lead)}.")
+    new = shot["action"] = " ".join(sentences)
+    assert f"  Action: {old}\n" in clip["prompt"], clip["id"]
+    clip["prompt"] = clip["prompt"].replace(f"  Action: {old}\n", f"  Action: {new}\n", 1)
+    if old in clip["shots"][i]:
+        clip["shots"][i] = clip["shots"][i].replace(old, new, 1)
+    clip.setdefault("continuity_fixes", []).append(f"{comp} {FOLLOW.format(lead=lead)} as {lead} comes into the scene (shot {i + 1})")
+
+
 def apply(clip, carry):
     scene_ref = next(i for i, r in enumerate(clip["references"], 1)
                      if not re.search(r"(character|group) reference|Jesus reference", r))
@@ -278,6 +310,12 @@ def main():
     for clip, lead, comp in pairs:  # in memory only until saved, so the dry run's carries below see them too
         print(f"{clip['id']}: {comp} with {lead} [{add_companion(clip, lead, comp)}]")
     print(f"{len(pairs)} clips: companion added")
+    follows = follows_missing(data["clips"])
+    for clip, i, lead, comp in follows:
+        add_follow(clip, i, lead, comp)
+        print(f"{clip['id']} shot {i + 1}: {comp} {FOLLOW.format(lead=lead)} as {lead} comes in")
+    print(f"{len(follows)} scenes: companion follows the lead in")
+    pairs += follows
     todo = plan(data["clips"])
     for clip, carry in todo:
         print(f"{clip['id']}: " + ", ".join(f"{n} [{h}]" for n, h, *_ in carry))
