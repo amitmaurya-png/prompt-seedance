@@ -4,7 +4,7 @@
   "skill": "seedance-prompting",
   "syntax": ".github/skills/seedance-prompting/references/prompt_syntax.md",
   "clip_count": 91,
-  "total_seconds": 991,
+  "total_seconds": 983,
   "clips": [
     {
       "id": "clip-01",
@@ -1989,18 +1989,27 @@
           "lines": [
             1
           ]
+        },
+        {
+          "scene": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING",
+          "shot": 4,
+          "part": 1,
+          "lines": [
+            1,
+            2
+          ]
         }
       ],
-      "duration_seconds": 14,
+      "duration_seconds": 15,
       "api_params": {
         "model": "dreamina-seedance-2-0-260128",
         "ratio": "16:9",
-        "duration": 14,
+        "duration": 15,
         "generate_audio": true,
         "watermark": false,
         "return_last_frame": true
       },
-      "format": "14s / 16:9 / 2 shots / soft cuts",
+      "format": "15s / 16:9 / 3 shots / soft cuts",
       "style": "Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy",
       "references": [
         "@Image 1: Miri character reference",
@@ -2082,93 +2091,7 @@
             ],
             "direction": "Girl looks around at the children while speaking, meeting their eyes one by one; the children look back at Girl"
           }
-        }
-      ],
-      "audio": [
-        "Music: （the gentle storybook theme continues from the previous clip, under the dialogue）",
-        "Voices: Saba (@Image 2) warm, slow, gently gravelly elder; Girl (one of the children in @Image 3) bright, eager young girl; clear English dialogue"
-      ],
-      "constraints": [
-        "One camera move per shot",
-        "Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style",
-        "Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker",
-        "Each character appears only once; no duplicate or twin characters",
-        "End on a calm, held frame with no new action in the final second",
-        "Match lighting, positions, props, and character appearance to @Image 5",
-        "Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark"
-      ],
-      "continuity": {
-        "previous_clip": "clip-13",
-        "mode": "continue_scene",
-        "last_frame_reference": "@Image 5",
-        "scene_state": null
-      },
-      "prompt": "FORMAT: 14s / 16:9 / 2 shots / soft cuts\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Saba character reference\n- @Image 3: Children group reference (the village children)\n- @Image 4: Saba's courtyard scene reference\n- @Image 5: last frame of clip-13 (continuity reference)\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the elderly storyteller in @Image 2 as Saba\n- Define the group of village children in @Image 3 as the children (a group)\n- Define the curly-haired girl in plum from the children in @Image 3 as Girl\nSCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)\nSHOTS:\nShot 1: A few children giggle\n  Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame\n  Camera: Medium shot, static on Saba\n  Action: A few children (@Image 3) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening.\n  Eyeline: Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba\n  Dialogue: Saba (@Image 2), thoughtfully, to the children: {But the camel did not listen, because camels are very good at chewing and very poor at hearing wisdom.}\nShot 2: Miri smiles despite herself\n  Camera: Medium shot, gentle tracking on Miri\n  Action: Miri (@Image 1) smiles despite herself. A GIRL (@Image 3) spots a group of older children playing with a hoop in the lane.\n  Eyeline: Girl looks around at the children while speaking, meeting their eyes one by one; the children look back at Girl\n  Dialogue: Girl who is also sitting around Saba within the group of children, excitedly, to the children: {Come on!}\nAUDIO:\n- Music: （the gentle storybook theme continues from the previous clip, under the dialogue）\n- Voices: Saba (@Image 2) warm, slow, gently gravelly elder; Girl (one of the children in @Image 3) bright, eager young girl; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Match lighting, positions, props, and character appearance to @Image 5\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
-      "asset_preparation": [
-        "@Image 1: Miri character reference",
-        "@Image 2: Saba character reference",
-        "@Image 3: Children group reference (the village children)",
-        "@Image 4: Saba's courtyard scene reference",
-        "@Image 5: last frame of clip-13 (continuity reference)"
-      ],
-      "image_reference": "Use @Image 1 as Miri, @Image 2 as Saba, and @Image 4 as the scene reference; continue from the last frame of clip-13 in @Image 5. Use @Image 3 as the children (a group).",
-      "shots": [
-        "A few children giggle. Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame. Medium shot, static on Saba. A few children (@Image 3) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening. Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba. Saba (@Image 2), thoughtfully, to the children: {But the camel did not listen, because camels are very good at chewing and very poor at hearing wisdom.}",
-        "Miri smiles despite herself. Medium shot, gentle tracking on Miri. Miri (@Image 1) smiles despite herself. A GIRL (@Image 3) spots a group of older children playing with a hoop in the lane. Girl looks around at the children while speaking, meeting their eyes one by one; the children look back at Girl. Girl, excitedly, to the children: {Come on!}"
-      ],
-      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme continues from the previous clip, under the dialogue）. Voices: Saba (@Image 2) warm, slow, gently gravelly elder; Girl (one of the children in @Image 3) bright, eager young girl; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Match lighting, positions, props, and character appearance to @Image 5. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
-      "clip_fixes": [
-        "Prompt level: added the children (a group) (@Image 3), Girl (from the children (a group)) as subjects"
-      ]
-    },
-    {
-      "id": "clip-15",
-      "act": "ACT ONE",
-      "scene": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING",
-      "source": [
-        {
-          "scene": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING",
-          "shot": 4,
-          "part": 1,
-          "lines": [
-            1,
-            2
-          ]
         },
-        {
-          "scene": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING",
-          "shot": 5,
-          "part": 1,
-          "lines": [
-            1
-          ]
-        }
-      ],
-      "duration_seconds": 14,
-      "api_params": {
-        "model": "dreamina-seedance-2-0-260128",
-        "ratio": "16:9",
-        "duration": 14,
-        "generate_audio": true,
-        "watermark": false,
-        "return_last_frame": true
-      },
-      "format": "14s / 16:9 / 2 shots / soft cuts",
-      "style": "Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy",
-      "references": [
-        "@Image 1: Miri character reference",
-        "@Image 2: Saba character reference",
-        "@Image 3: Children group reference (the village children)",
-        "@Image 4: Saba's courtyard scene reference",
-        "@Image 5: last frame of clip-14 (continuity reference)"
-      ],
-      "subjects": [
-        "Define the young village girl in @Image 1 as Miri",
-        "Define the elderly storyteller in @Image 2 as Saba",
-        "Define the group of village children in @Image 3 as the children (a group)"
-      ],
-      "scene_setting": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)",
-      "shot_details": [
         {
           "title": "The children scatter after her, laughing",
           "camera": "Medium two-shot, gentle tracking",
@@ -2211,7 +2134,85 @@
             "listeners": [],
             "direction": "Saba and Miri turn toward each other and hold eye contact as they talk: Saba looks at Miri, Miri looks at Saba"
           }
-        },
+        }
+      ],
+      "audio": [
+        "Music: （the gentle storybook theme continues from the previous clip, under the dialogue）",
+        "Voices: Miri (@Image 1) bright, earnest young girl; Saba (@Image 2) warm, slow, gently gravelly elder; Girl (one of the children in @Image 3) bright, eager young girl; clear English dialogue"
+      ],
+      "constraints": [
+        "One camera move per shot",
+        "Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style",
+        "Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker",
+        "Each character appears only once; no duplicate or twin characters",
+        "End on a calm, held frame with no new action in the final second",
+        "Match lighting, positions, props, and character appearance to @Image 5",
+        "Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark"
+      ],
+      "continuity": {
+        "previous_clip": "clip-13",
+        "mode": "continue_scene",
+        "last_frame_reference": "@Image 5",
+        "scene_state": null
+      },
+      "prompt": "FORMAT: 15s / 16:9 / 3 shots / soft cuts\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Saba character reference\n- @Image 3: Children group reference (the village children)\n- @Image 4: Saba's courtyard scene reference\n- @Image 5: last frame of clip-13 (continuity reference)\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the elderly storyteller in @Image 2 as Saba\n- Define the group of village children in @Image 3 as the children (a group)\n- Define the curly-haired girl in plum from the children in @Image 3 as Girl\nSCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)\nSHOTS:\nShot 1: A few children giggle\n  Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame\n  Camera: Medium shot, static on Saba\n  Action: A few children (@Image 3) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening.\n  Eyeline: Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba\n  Dialogue: Saba (@Image 2), thoughtfully, to the children: {But the camel did not listen, because camels are very good at chewing and very poor at hearing wisdom.}\nShot 2: Miri smiles despite herself\n  Camera: Medium shot, gentle tracking on Miri\n  Action: Miri (@Image 1) smiles despite herself. A GIRL (@Image 3) spots a group of older children playing with a hoop in the lane.\n  Eyeline: Girl looks around at the children while speaking, meeting their eyes one by one; the children look back at Girl\n  Dialogue: Girl who is also sitting around Saba within the group of children, excitedly, to the children: {Come on!}\nShot 3: The children scatter after her, laughing\n  Camera: Medium two-shot, gentle tracking\n  Action: The children (@Image 3) scatter after her, laughing. Saba (@Image 2) watches them go, amused, not offended. Miri (@Image 1) remains.\n  Eyeline: Saba and Miri turn toward each other and hold eye contact as they talk: Saba looks at Miri, Miri looks at Saba\n  Dialogue: Saba (@Image 2), playfully, to Miri: {Ah. One listener left. Either my story improved, or your feet forgot to follow the others.} Miri (@Image 1), curiously, to Saba: {What happened to the sparrow?}\nAUDIO:\n- Music: （the gentle storybook theme continues from the previous clip, under the dialogue）\n- Voices: Miri (@Image 1) bright, earnest young girl; Saba (@Image 2) warm, slow, gently gravelly elder; Girl (one of the children in @Image 3) bright, eager young girl; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Match lighting, positions, props, and character appearance to @Image 5\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
+      "asset_preparation": [
+        "@Image 1: Miri character reference",
+        "@Image 2: Saba character reference",
+        "@Image 3: Children group reference (the village children)",
+        "@Image 4: Saba's courtyard scene reference",
+        "@Image 5: last frame of clip-13 (continuity reference)"
+      ],
+      "image_reference": "Use @Image 1 as Miri, @Image 2 as Saba, and @Image 4 as the scene reference; continue from the last frame of clip-13 in @Image 5. Use @Image 3 as the children (a group).",
+      "shots": [
+        "A few children giggle. Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame. Medium shot, static on Saba. A few children (@Image 3) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening. Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba. Saba (@Image 2), thoughtfully, to the children: {But the camel did not listen, because camels are very good at chewing and very poor at hearing wisdom.}",
+        "Miri smiles despite herself. Medium shot, gentle tracking on Miri. Miri (@Image 1) smiles despite herself. A GIRL (@Image 3) spots a group of older children playing with a hoop in the lane. Girl looks around at the children while speaking, meeting their eyes one by one; the children look back at Girl. Girl, excitedly, to the children: {Come on!}",
+        "The children scatter after her, laughing. Medium two-shot, gentle tracking. The children (@Image 3) scatter after her, laughing. Saba (@Image 2) watches them go, amused, not offended. Miri (@Image 1) remains. Saba and Miri turn toward each other and hold eye contact as they talk: Saba looks at Miri, Miri looks at Saba. Saba (@Image 2), playfully, to Miri: {Ah. One listener left. Either my story improved, or your feet forgot to follow the others.} Miri (@Image 1), curiously, to Saba: {What happened to the sparrow?}"
+      ],
+      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme continues from the previous clip, under the dialogue）. Voices: Miri (@Image 1) bright, earnest young girl; Saba (@Image 2) warm, slow, gently gravelly elder; Girl (one of the children in @Image 3) bright, eager young girl; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Match lighting, positions, props, and character appearance to @Image 5. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
+      "clip_fixes": [
+        "Prompt level: added the children (a group) (@Image 3), Girl (from the children (a group)) as subjects"
+      ]
+    },
+    {
+      "id": "clip-15",
+      "act": "ACT ONE",
+      "scene": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING",
+      "source": [
+        {
+          "scene": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING",
+          "shot": 5,
+          "part": 1,
+          "lines": [
+            1
+          ]
+        }
+      ],
+      "duration_seconds": 5,
+      "api_params": {
+        "model": "dreamina-seedance-2-0-260128",
+        "ratio": "16:9",
+        "duration": 5,
+        "generate_audio": true,
+        "watermark": false,
+        "return_last_frame": true
+      },
+      "format": "5s / 16:9 / one continuous shot",
+      "style": "Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy",
+      "references": [
+        "@Image 1: Miri character reference",
+        "@Image 2: Saba character reference",
+        "@Image 3: Children group reference (the village children)",
+        "@Image 4: Saba's courtyard scene reference",
+        "@Image 5: last frame of clip-14 (continuity reference)"
+      ],
+      "subjects": [
+        "Define the young village girl in @Image 1 as Miri",
+        "Define the elderly storyteller in @Image 2 as Saba",
+        "Define the group of village children in @Image 3 as the children (a group)"
+      ],
+      "scene_setting": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)",
+      "shot_details": [
         {
           "title": "Saba’s eyes brighten",
           "camera": "Medium shot, gentle tracking on Saba",
@@ -2245,7 +2246,7 @@
       ],
       "audio": [
         "Music: （the gentle storybook theme continues from the previous clip, under the dialogue）",
-        "Voices: Miri (@Image 1) bright, earnest young girl; Saba (@Image 2) warm, slow, gently gravelly elder; clear English dialogue"
+        "Voices: Saba (@Image 2) warm, slow, gently gravelly elder; clear English dialogue"
       ],
       "constraints": [
         "One camera move per shot",
@@ -2262,7 +2263,7 @@
         "last_frame_reference": "@Image 5",
         "scene_state": null
       },
-      "prompt": "FORMAT: 14s / 16:9 / 2 shots / soft cuts\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Saba character reference\n- @Image 3: Children group reference (the village children)\n- @Image 4: Saba's courtyard scene reference \n- @Image 5: last frame of clip-14 (continuity reference)\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the elderly storyteller in @Image 2 as Saba\n- Define the group of village children in @Image 3 as the children (a group)\nSCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)\nSHOTS:\nShot 1: The children scatter after her, laughing\n  Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame, with Girl (the curly-haired girl in plum) still present\n  Camera: Medium two-shot, gentle tracking\n  Action: The children (@Image 3) scatter after her, laughing. Saba (@Image 2) watches them go, amused, not offended. Miri (@Image 1) remains.\n  Eyeline: Saba and Miri turn toward each other and hold eye contact as they talk: Saba looks at Miri, Miri looks at Saba\n  Dialogue: Saba (@Image 2), playfully, to Miri: {Ah. One listener left. Either my story improved, or your feet forgot to follow the others.} Miri (@Image 1), curiously, to Saba: {What happened to the sparrow?}\nShot 2: Saba’s eyes brighten\n  Camera: Medium shot, gentle tracking on Saba\n  Action: Saba’s eyes brighten. He pats the ground beside him.\n  Eyeline: Saba and Miri face each other; Saba looks at Miri while speaking, and Miri looks at Saba\n  Dialogue: Saba (@Image 2), warmly, to Miri: {The right question.}\nAUDIO:\n- Music: （the gentle storybook theme continues from the previous clip, under the dialogue）\n- Voices: Miri (@Image 1) bright, earnest young girl; Saba (@Image 2) warm, slow, gently gravelly elder; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Match lighting, positions, props, and character appearance to @Image 5\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
+      "prompt": "FORMAT: 5s / 16:9 / one continuous shot\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Saba character reference\n- @Image 3: Children group reference (the village children)\n- @Image 4: Saba's courtyard scene reference \n- @Image 5: last frame of clip-14 (continuity reference)\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the elderly storyteller in @Image 2 as Saba\n- Define the group of village children in @Image 3 as the children (a group)\nSCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)\nSHOTS:\nShot 1: Saba’s eyes brighten\n  Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame\n  Camera: Medium shot, gentle tracking on Saba\n  Action: Saba’s eyes brighten. He pats the ground beside him.\n  Eyeline: Saba and Miri face each other; Saba looks at Miri while speaking, and Miri looks at Saba\n  Dialogue: Saba (@Image 2), warmly, to Miri: {The right question.}\nAUDIO:\n- Music: （the gentle storybook theme continues from the previous clip, under the dialogue）\n- Voices: Saba (@Image 2) warm, slow, gently gravelly elder; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Match lighting, positions, props, and character appearance to @Image 5\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
       "asset_preparation": [
         "@Image 1: Miri character reference",
         "@Image 2: Saba character reference",
@@ -2272,25 +2273,11 @@
       ],
       "image_reference": "Use @Image 1 as Miri, @Image 2 as Saba, and @Image 4 as the scene reference; continue from the last frame of clip-14 in @Image 5. Use @Image 3 as the children (a group).",
       "shots": [
-        "The children scatter after her, laughing. Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame, with Girl (the curly-haired girl in plum) still present. Medium two-shot, gentle tracking. The children (@Image 3) scatter after her, laughing. Saba (@Image 2) watches them go, amused, not offended. Miri (@Image 1) remains. Saba and Miri turn toward each other and hold eye contact as they talk: Saba looks at Miri, Miri looks at Saba. Saba (@Image 2), playfully, to Miri: {Ah. One listener left. Either my story improved, or your feet forgot to follow the others.} Miri (@Image 1), curiously, to Saba: {What happened to the sparrow?}",
-        "Saba’s eyes brighten. Medium shot, gentle tracking on Saba. Saba’s eyes brighten. He pats the ground beside him. Saba and Miri face each other; Saba looks at Miri while speaking, and Miri looks at Saba. Saba (@Image 2), warmly, to Miri: {The right question.}"
+        "Saba’s eyes brighten. Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame. Medium shot, gentle tracking on Saba. Saba’s eyes brighten. He pats the ground beside him. Saba and Miri face each other; Saba looks at Miri while speaking, and Miri looks at Saba. Saba (@Image 2), warmly, to Miri: {The right question.}"
       ],
-      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme continues from the previous clip, under the dialogue）. Voices: Miri (@Image 1) bright, earnest young girl; Saba (@Image 2) warm, slow, gently gravelly elder; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Match lighting, positions, props, and character appearance to @Image 5. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
+      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme continues from the previous clip, under the dialogue）. Voices: Saba (@Image 2) warm, slow, gently gravelly elder; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Match lighting, positions, props, and character appearance to @Image 5. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
       "clip_fixes": [
         "Prompt level: added the children (a group) (@Image 3) as subjects"
-      ],
-      "still_present": [
-        {
-          "name": "Girl",
-          "how": "text",
-          "reason": "in the scene and has not left yet"
-        }
-      ],
-      "still_present_names": [
-        "Girl"
-      ],
-      "continuity_fixes": [
-        "Kept on screen (not yet exited): Girl (text)"
       ]
     },
     {
