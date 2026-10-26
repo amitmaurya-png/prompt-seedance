@@ -92,14 +92,18 @@ def speakers(clip):
     return seen
 
 
-EXTEND_LINE = ("Extend @Video 1 forward: generate the content after @Video 1, continuing the same moment"
-               " without a cut, as described below.")
+EXTEND_LINE = ("This clip begins exactly where @Video 1, the previous shot's clip, ends: the same camera position,"
+               " distance, height, angle and framing, the same people in the same places and poses at the same"
+               " scale, moving as they were. From that moment it continues without any cut — the camera moves"
+               " smoothly and gradually into this shot's framing, never jumping there in the opening instant,"
+               " reaching it only at the point the beats below call for it, while the action below begins")
 
 
 def as_extension(text, frame_ref=None):
-    """Turn a continuing clip's prompt into an extend task on @Video 1 (official Seedance 2.0 wording).
+    """Turn a continuing clip's prompt into one that continues from the end of @Video 1.
 
-    The prompt opens with EXTEND_LINE, and @Video 1 is not listed under REFERENCES: an extend task names
+    The prompt opens with EXTEND_LINE (start on @Video 1's last frame, then ease into this shot's framing),
+    and @Video 1 is not listed under REFERENCES: an extend task names
     the video directly, or the model treats it as a style/motion reference. The previous clip's last-frame
     image (frame_ref, e.g. '@Image 4', always the last image) is dropped with its REFERENCES line. Its
     Continuity lines go (the model blends the join itself), keeping only who is still present, and its
@@ -113,7 +117,7 @@ def as_extension(text, frame_ref=None):
         text = re.sub(r"^- " + tok + r":.*\n", "", text, flags=re.M)
     src += ")"
     text = re.sub(r"^- @Video 1:.*\n", "", text, flags=re.M)
-    text = re.sub(r"^Extend @Video 1 forward:.*\n", "", text, flags=re.M)
+    text = re.sub(r"^(?:Extend @Video 1 forward:|This clip begins exactly where @Video 1).*\n", "", text, flags=re.M)
 
     def continuity(m):
         present = m.group(2)
