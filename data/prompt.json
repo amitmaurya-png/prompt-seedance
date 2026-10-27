@@ -2685,23 +2685,23 @@
       "format": "10s / 16:9 / 2 shots / soft cuts",
       "style": "Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy",
       "references": [
-        "@Image 1: Nim character reference",
-        "@Image 2: Saba character reference",
-        "@Image 3: Miri character reference",
+        "@Image 1: Miri character reference",
+        "@Image 2: Nim character reference",
+        "@Image 3: Saba character reference",
         "@Image 4: Saba's courtyard scene reference",
         "@Image 5: last frame of clip-17 (continuity reference)"
       ],
       "subjects": [
-        "Define the small fox in @Image 1 as Nim",
-        "Define the elderly storyteller in @Image 2 as Saba",
-        "Define the young village girl in @Image 3 as Miri"
+        "Define the young village girl in @Image 1 as Miri",
+        "Define the small fox in @Image 2 as Nim",
+        "Define the elderly storyteller in @Image 3 as Saba"
       ],
       "scene_setting": "EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)",
       "shot_details": [
         {
           "title": "Nim hops up and sniffs the",
           "camera": "Medium close-up, static on Saba",
-          "action": "Nim (@Image 1) hops up and sniffs the basket. Saba (@Image 2) sees the movement but not the intention.",
+          "action": "Nim (@Image 2) hops up and sniffs the basket. Saba (@Image 3) sees the movement but not the intention.",
           "visual": "",
           "dialogue": [
             {
@@ -2732,7 +2732,7 @@
         {
           "title": "Nim freezes, one paw in the",
           "camera": "Medium close-up, low-angle, static on Nim",
-          "action": "Nim (@Image 1) freezes, one paw in the basket.",
+          "action": "Nim (@Image 2) freezes, one paw in the basket.",
           "visual": "",
           "dialogue": [
             {
@@ -2763,7 +2763,7 @@
       ],
       "audio": [
         "Music: （the gentle storybook theme continues from the previous clip, under the dialogue）",
-        "Voices: Nim (@Image 1) quick, light, playful; Saba (@Image 2) warm, slow, gently gravelly elder; clear English dialogue"
+        "Voices: Nim (@Image 2) quick, light, playful; Saba (@Image 3) warm, slow, gently gravelly elder; clear English dialogue"
       ],
       "constraints": [
         "One camera move per shot",
@@ -2781,19 +2781,20 @@
         "last_frame_reference": "@Image 5",
         "scene_state": null
       },
-      "prompt": "FORMAT: 10s / 16:9 / 2 shots / soft cuts\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Nim character reference\n- @Image 2: Saba character reference\n- @Image 3: Miri character reference\n- @Image 4: Saba's courtyard scene reference\n- @Image 5: last frame of clip-17 (continuity reference)\nSUBJECT:\n- Define the small fox in @Image 1 as Nim\n- Define the elderly storyteller in @Image 2 as Saba\n- Define the young village girl in @Image 3 as Miri\nSCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)\nSHOTS:\nShot 1: Nim hops up and sniffs the\n  Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame, with Miri (@Image 3) still present\n  Camera: Medium close-up, static on Saba\n  Action: Nim (@Image 1) hops up and sniffs the basket. Saba (@Image 2) sees the movement but not the intention.\n  Eyeline: Saba and Nim face each other; Saba looks down at Nim while speaking, and Nim looks up at Saba\n  Dialogue: Saba (@Image 2), thoughtfully, to Nim: {And perhaps one little hunter should not climb inside my clean linen.}\nShot 2: Nim freezes, one paw in the\n  Camera: Medium close-up, low-angle, static on Nim\n  Action: Nim (@Image 1) freezes, one paw in the basket.\n  Eyeline: Nim and Saba face each other; Nim looks up at Saba while speaking, and Saba looks down at Nim\n  Dialogue: Nim (@Image 1), playfully, to Saba: {He suspects nothing.}\nAUDIO:\n- Music: （the gentle storybook theme continues from the previous clip, under the dialogue）\n- Voices: Nim (@Image 1) quick, light, playful; Saba (@Image 2) warm, slow, gently gravelly elder; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Nim is a small fox, never a dog\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Match lighting, positions, props, and character appearance to @Image 5\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
+      "prompt": "FORMAT: 10s / 16:9 / 2 shots / soft cuts\nSTYLE: Warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy\nREFERENCES:\n- @Image 1: Miri character reference\n- @Image 2: Nim character reference\n- @Image 3: Saba character reference\n- @Image 4: Saba's courtyard scene reference\n- @Image 5: last frame of clip-17 (continuity reference)\nSUBJECT:\n- Define the young village girl in @Image 1 as Miri\n- Define the small fox in @Image 2 as Nim\n- Define the elderly storyteller in @Image 3 as Saba\nSCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)\nSHOTS:\nShot 1: Nim hops up and sniffs the\n  Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame, with Miri (@Image 1) still present\n  Camera: Medium close-up, static on Saba\n  Action: Nim (@Image 2) hops up and sniffs the basket. Saba (@Image 3) sees the movement but not the intention.\n  Eyeline: Saba and Nim face each other; Saba looks down at Nim while speaking, and Nim looks up at Saba\n  Dialogue: Saba (@Image 3), thoughtfully, to Nim: {And perhaps one little hunter should not climb inside my clean linen.}\nShot 2: Nim freezes, one paw in the\n  Camera: Medium close-up, low-angle, static on Nim\n  Action: Nim (@Image 2) freezes, one paw in the basket.\n  Eyeline: Nim and Saba face each other; Nim looks up at Saba while speaking, and Saba looks down at Nim\n  Dialogue: Nim (@Image 2), playfully, to Saba: {He suspects nothing.}\nAUDIO:\n- Music: （the gentle storybook theme continues from the previous clip, under the dialogue）\n- Voices: Nim (@Image 2) quick, light, playful; Saba (@Image 3) warm, slow, gently gravelly elder; clear English dialogue\nCONSTRAINTS:\n- One camera move per shot\n- Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style\n- Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker\n- Nim is a small fox, never a dog\n- Each character appears only once; no duplicate or twin characters\n- End on a calm, held frame with no new action in the final second\n- Match lighting, positions, props, and character appearance to @Image 5\n- Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark\n",
       "asset_preparation": [
-        "@Image 1: Nim character reference",
-        "@Image 2: Saba character reference",
-        "@Image 3: Saba's courtyard scene reference",
-        "@Image 4: last frame of clip-17 (continuity reference)"
+        "@Image 1: Miri character reference",
+        "@Image 2: Nim character reference",
+        "@Image 3: Saba character reference",
+        "@Image 4: Saba's courtyard scene reference",
+        "@Image 5: last frame of clip-17 (continuity reference)"
       ],
-      "image_reference": "Use @Image 1 as Nim, @Image 2 as Saba, and @Image 3 as the scene reference; continue from the last frame of clip-17 in @Image 4.",
+      "image_reference": "Use @Image 1 as Miri, @Image 2 as Nim, @Image 3 as Saba, and @Image 4 as the scene reference; continue from the last frame of clip-17 in @Image 5.",
       "shots": [
-        "Nim hops up and sniffs the. Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame, with Miri (@Image 3) still present. Medium close-up, static on Saba. Nim (@Image 1) hops up and sniffs the basket. Saba (@Image 2) sees the movement but not the intention. Saba and Nim face each other; Saba looks down at Nim while speaking, and Nim looks up at Saba. Saba (@Image 2), thoughtfully, to Nim: {And perhaps one little hunter should not climb inside my clean linen.}",
-        "Nim freezes, one paw in the. Medium close-up, low-angle, static on Nim. Nim (@Image 1) freezes, one paw in the basket. Nim and Saba face each other; Nim looks up at Saba while speaking, and Saba looks down at Nim. Nim (@Image 1), playfully, to Saba: {He suspects nothing.}"
+        "Nim hops up and sniffs the. Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame, with Miri (@Image 1) still present. Medium close-up, static on Saba. Nim (@Image 2) hops up and sniffs the basket. Saba (@Image 3) sees the movement but not the intention. Saba and Nim face each other; Saba looks down at Nim while speaking, and Nim looks up at Saba. Saba (@Image 3), thoughtfully, to Nim: {And perhaps one little hunter should not climb inside my clean linen.}",
+        "Nim freezes, one paw in the. Medium close-up, low-angle, static on Nim. Nim (@Image 2) freezes, one paw in the basket. Nim and Saba face each other; Nim looks up at Saba while speaking, and Saba looks down at Nim. Nim (@Image 2), playfully, to Saba: {He suspects nothing.}"
       ],
-      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme continues from the previous clip, under the dialogue）. Voices: Nim (@Image 1) quick, light, playful; Saba (@Image 2) warm, slow, gently gravelly elder; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Nim is a small fox, never a dog. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Match lighting, positions, props, and character appearance to @Image 4. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
+      "global_direction": "The entire video should be warm, stylized 3D storybook animation (feature-film CG), soft global illumination, gentle natural light, rich hand-crafted textures, HD, rich details, heartfelt tone with light comedy. Music: （the gentle storybook theme continues from the previous clip, under the dialogue）. Voices: Nim (@Image 2) quick, light, playful; Saba (@Image 3) warm, slow, gently gravelly elder; clear English dialogue. One camera move per shot. Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style. Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker. Nim is a small fox, never a dog. Each character appears only once; no duplicate or twin characters. End on a calm, held frame with no new action in the final second. Match lighting, positions, props, and character appearance to @Image 4. Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark.",
       "still_present": [
         {
           "name": "Miri",
