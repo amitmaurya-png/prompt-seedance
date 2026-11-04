@@ -42,7 +42,6 @@ def eyes(cx, cy, r, iris="#5a3a22", worried=False, wide=False, brow="#3a2a1f", b
     dx, ey = r * 0.38, cy + r * 0.05
     er = r * (0.17 if wide else 0.15)
     bw = brow_w or r * 0.07
-    tilt = -r * 0.06 if worried else r * 0.02
     out = []
     for s in (-1, 1):
         x = cx + s * dx
@@ -50,7 +49,6 @@ def eyes(cx, cy, r, iris="#5a3a22", worried=False, wide=False, brow="#3a2a1f", b
                    f'<circle cx="{x}" cy="{ey+er*0.1}" r="{er*0.72}" fill="{iris}"/>'
                    f'<circle cx="{x}" cy="{ey+er*0.12}" r="{er*0.38}" fill="#1c1410"/>'
                    f'<circle cx="{x-er*0.28}" cy="{ey-er*0.25}" r="{er*0.22}" fill="#fff"/>')
-        inner_y = ey - er * 1.9 + (tilt if s == 1 else tilt) * (-1 if worried else 1)
         bx1, bx2 = x - s * er * 1.3, x + s * er * 1.3
         y1 = ey - er * 1.7 - (r * 0.08 if worried else 0)
         y2 = ey - er * 1.9 + (r * 0.05 if worried else 0)

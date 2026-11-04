@@ -6,7 +6,6 @@ image (a relative path or a full URL) and check_camera.py will use it.
 """
 
 import json
-from pathlib import Path
 
 from paths import ASSETS, DATA, ROOT
 
@@ -145,8 +144,8 @@ def images():
         f'<ellipse cx="60" cy="185" rx="38" ry="26" fill="{SKIN}"/><ellipse cx="260" cy="185" rx="38" ry="26" fill="{SKIN}"/>'
         f'<rect width="320" height="180" fill="url(#vig)"/>')
     img["Insert shot"] = svg(
-        f'<rect width="320" height="180" fill="#e9dcc6"/>'
-        f'<ellipse cx="160" cy="98" rx="70" ry="44" fill="#e8e1d2" stroke="#b9a98c" stroke-width="3"/>'
+        '<rect width="320" height="180" fill="#e9dcc6"/>'
+        '<ellipse cx="160" cy="98" rx="70" ry="44" fill="#e8e1d2" stroke="#b9a98c" stroke-width="3"/>'
         + "".join(f'<circle cx="{x}" cy="{y}" r="15" fill="#c98d4a"/><circle cx="{x}" cy="{y}" r="5" fill="#a46a2f"/>'
                   for x, y in [(132, 96), (164, 84), (190, 104)])
         + f'<ellipse cx="78" cy="132" rx="40" ry="24" fill="{SKIN}"/><ellipse cx="242" cy="132" rx="40" ry="24" fill="{SKIN}"/>')

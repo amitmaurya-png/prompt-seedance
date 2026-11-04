@@ -81,8 +81,6 @@ LOCATIONS = {
                                         "crickets, rustling leaves"),
 }
 NAME_RE = re.compile(r"\b(" + "|".join(ROSTER) + r")\b", re.I)
-PERSON_RE = re.compile(r"\b(" + "|".join(ROSTER) + r"|he|she|they|his|her|children|child|girl|boy|mother|"
-                       r"disciples?|crowd|people|families|everyone|someone)\b", re.I)
 
 
 def words(dialogue):
@@ -127,7 +125,6 @@ def shot_units(scene):
             cur.append(d)
         parts.append(cur)
         for i, part in enumerate(parts):
-            speakers = list(dict.fromkeys(d["character"].split()[0].title() for d in part))
             # the screenplay's action belongs to the first part only; later parts are dialogue only (nothing invented)
             action_text = sh["action"] if i == 0 else ""
             units.append({"order": sh["order"], "part": i + 1, "of": len(parts), "action_text": action_text, "dialogue": part,

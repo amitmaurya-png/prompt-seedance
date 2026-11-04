@@ -308,7 +308,6 @@ def main():
 
     if args.all:
         data = json.loads((DATA / "prompt.json").read_text(), strict=False)
-        prev_scene = None
         for c in data["clips"]:
             new_scene = c.get("continuity", {}).get("mode") == "new_scene"
             for i, sh in enumerate(c["shot_details"], 1):

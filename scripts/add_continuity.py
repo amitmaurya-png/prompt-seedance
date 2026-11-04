@@ -13,7 +13,6 @@ Safe to run more than once: prompts are rebuilt from the structured fields every
 
 import json
 import re
-from pathlib import Path
 
 from paths import DATA
 

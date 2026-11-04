@@ -226,7 +226,7 @@ def main():
         rgb = lambda st: "/".join(f"{m:.0f}" for m, _ in st)
         print(f"  color balance to R/G/B {rgb(target)} ({args.reference or 'average of all clips'}); before:")
         print("   " + ", ".join(f"{p.stem} {rgb(line[0])}->{rgb(line[-1])}" for p, line in zip(clips, lines)))
-    look = lambda i, k: (f",colorlevels=" + ":".join(f"{o}={v:.5f}" for o, v in balance[i][k].items())
+    look = lambda i, k: (",colorlevels=" + ":".join(f"{o}={v:.5f}" for o, v in balance[i][k].items())
                          if balance else "")
 
     with tempfile.TemporaryDirectory() as tmp:
@@ -254,7 +254,7 @@ def main():
             return
 
         inputs, parts, video, audio = [], [], [], []
-        for i, (p, length) in enumerate(zip(clips, lengths)):
+        for p in clips:
             inputs += ["-i", str(p)]
         extra = len(clips)
         for i, (p, length) in enumerate(zip(clips, lengths)):

@@ -9,5 +9,4 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 ASSETS = ROOT / "assets"
 REPORTS = ROOT / "reports"
-DOCS = ROOT / "docs"
 ENV_PATH = ROOT / ".env"
