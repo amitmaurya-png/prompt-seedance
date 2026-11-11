@@ -209,8 +209,12 @@ def build(breakdown):
                                     "natural, and smooth, with no stutter or flicker"]
                     if "Nim" in chars:
                         constraints.append("Nim is a small fox, never a dog")
-                    if len(chars) > 1:
-                        constraints.append("Each character appears only once; no duplicate or twin characters")
+                    if chars:
+                        # character images are multi-view model sheets: even a one-character clip can get copies
+                        constraints.append("Each character appears only once; no duplicate or twin characters. "
+                                           "The character reference images are model sheets showing several poses "
+                                           "and expressions of one person: draw each character exactly once, "
+                                           "never several copies")
                     if "Jesus" in chars:
                         constraints.append("Jesus: show only his hands, robe, and silhouette; never show his face")
                 clips.append({

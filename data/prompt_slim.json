@@ -33,7 +33,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
@@ -68,7 +68,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 4
            - Opening frame: only the characters visible in @Image 4, in the same screen positions
@@ -107,11 +107,11 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
-           - The linen basket matches @Image 5 (a woven basket of folded linen)
+           - The linen basket matches @Image 5 (a woven basket of folded linen); @Image 5 shows several views of the same single basket: there is only one linen basket
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -144,6 +144,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -182,7 +183,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -220,7 +221,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -263,7 +264,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -311,11 +312,11 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
-           - The linen basket matches @Image 5 (a woven basket of folded linen)
+           - The linen basket matches @Image 5 (a woven basket of folded linen); @Image 5 shows several views of the same single basket: there is only one linen basket
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -361,9 +362,9 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
-           - The linen basket matches @Image 5 (a woven basket of folded linen)
+           - The linen basket matches @Image 5 (a woven basket of folded linen); @Image 5 shows several views of the same single basket: there is only one linen basket
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -404,11 +405,11 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
-           - The linen basket matches @Image 5 (a woven basket of folded linen)
+           - The linen basket matches @Image 5 (a woven basket of folded linen); @Image 5 shows several views of the same single basket: there is only one linen basket
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -447,7 +448,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -513,9 +514,9 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
-           - The linen basket matches @Image 6 (a woven basket of folded linen)
+           - The linen basket matches @Image 6 (a woven basket of folded linen); @Image 6 shows several views of the same single basket: there is only one linen basket
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -555,11 +556,11 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 7
            - Opening frame: only the characters visible in @Image 7, in the same screen positions
-           - The linen basket matches @Image 6 (a woven basket of folded linen)
+           - The linen basket matches @Image 6 (a woven basket of folded linen); @Image 6 shows several views of the same single basket: there is only one linen basket
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -603,7 +604,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -647,7 +648,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -695,11 +696,11 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
-           - The linen basket matches @Image 5 (a woven basket of folded linen)
+           - The linen basket matches @Image 5 (a woven basket of folded linen); @Image 5 shows several views of the same single basket: there is only one linen basket
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -741,11 +742,11 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
-           - The linen basket matches @Image 5 (a woven basket of folded linen)
+           - The linen basket matches @Image 5 (a woven basket of folded linen); @Image 5 shows several views of the same single basket: there is only one linen basket
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -782,11 +783,11 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
-           - The linen basket matches @Image 5 (a woven basket of folded linen)
+           - The linen basket matches @Image 5 (a woven basket of folded linen); @Image 5 shows several views of the same single basket: there is only one linen basket
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -821,7 +822,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -860,7 +861,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -898,7 +899,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -942,7 +943,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -979,6 +980,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1014,7 +1016,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
@@ -1051,7 +1053,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1088,6 +1090,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1125,7 +1128,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1162,6 +1165,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1200,7 +1204,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1237,7 +1241,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1276,7 +1280,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1313,6 +1317,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1359,7 +1364,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1401,7 +1406,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - Jesus: show only his hands, robe, and silhouette; never show his face
            - End on a calm, held frame with no new action in the final second
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
@@ -1444,7 +1449,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1487,7 +1492,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1539,7 +1544,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
@@ -1581,7 +1586,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1632,7 +1637,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -1676,7 +1681,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1716,7 +1721,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -1755,6 +1760,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -1797,7 +1803,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - Jesus: show only his hands, robe, and silhouette; never show his face
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
@@ -1848,7 +1854,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
@@ -1890,7 +1896,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -1942,7 +1948,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - Jesus: show only his hands, robe, and silhouette; never show his face
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 7
@@ -1993,7 +1999,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -2043,7 +2049,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -2083,7 +2089,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - Jesus: show only his hands, robe, and silhouette; never show his face
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
@@ -2133,7 +2139,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -2177,7 +2183,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - Jesus: show only his hands, robe, and silhouette; never show his face
            - End on a calm, held frame with no new action in the final second
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
@@ -2231,7 +2237,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - Jesus: show only his hands, robe, and silhouette; never show his face
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 8
@@ -2278,7 +2284,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -2329,7 +2335,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - Jesus: show only his hands, robe, and silhouette; never show his face
            - End on a calm, held frame with no new action in the final second
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
@@ -2381,7 +2387,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 7
            - Opening frame: only the characters visible in @Image 7, in the same screen positions
@@ -2431,6 +2437,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -2482,7 +2489,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -2526,7 +2533,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - Jesus: show only his hands, robe, and silhouette; never show his face
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
@@ -2579,7 +2586,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
@@ -2619,6 +2626,7 @@
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
            - Nim is a small fox, never a dog
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -2661,7 +2669,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -2701,7 +2709,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -2746,7 +2754,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -2796,7 +2804,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -2849,7 +2857,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 7
            - Opening frame: only the characters visible in @Image 7, in the same screen positions
@@ -2899,7 +2907,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - Jesus: show only his hands, robe, and silhouette; never show his face
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
@@ -2938,6 +2946,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -2975,7 +2984,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
@@ -3010,7 +3019,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 4
            - Opening frame: only the characters visible in @Image 4, in the same screen positions
@@ -3060,7 +3069,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - Jesus: show only his hands, robe, and silhouette; never show his face
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
@@ -3103,7 +3112,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 4
            - Opening frame: only the characters visible in @Image 4, in the same screen positions
@@ -3155,7 +3164,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 7
            - Opening frame: only the characters visible in @Image 7, in the same screen positions
@@ -3191,6 +3200,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -3233,7 +3243,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
@@ -3268,6 +3278,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -3311,7 +3322,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -3360,7 +3371,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -3398,7 +3409,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -3447,7 +3458,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -3497,7 +3508,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
@@ -3543,7 +3554,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -3592,7 +3603,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -3636,7 +3647,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -3676,7 +3687,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -3715,7 +3726,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
@@ -3753,7 +3764,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
@@ -3789,7 +3800,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -3832,7 +3843,7 @@
            - One camera move per shot
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions
@@ -3882,11 +3893,11 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 6
            - Opening frame: only the characters visible in @Image 6, in the same screen positions
-           - The linen basket matches @Image 5 (a woven basket of folded linen)
+           - The linen basket matches @Image 5 (a woven basket of folded linen); @Image 5 shows several views of the same single basket: there is only one linen basket
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -3925,7 +3936,7 @@
            - Render everything in stylized 3D animation; use the reference images for character design only, not for their 2D drawing style
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Nim is a small fox, never a dog
-           - Each character appears only once; no duplicate or twin characters
+           - Each character appears only once; no duplicate or twin characters. The character reference images are model sheets showing several poses and expressions of one person: draw each character exactly once, never several copies
            - End on a calm, held frame with no new action in the final second
            - Match lighting, positions, props, and character appearance to @Image 5
            - Opening frame: only the characters visible in @Image 5, in the same screen positions

@@ -213,9 +213,9 @@ def add_companion(clip, lead, comp):
 
     if FOX_RULE not in clip["constraints"]:
         before = "Each character appears only once; no duplicate or twin characters"
-        i = clip["constraints"].index(before) if before in clip["constraints"] else len(clip["constraints"])
+        i = next((j for j, c in enumerate(clip["constraints"]) if c.startswith(before)), len(clip["constraints"]))
         clip["constraints"].insert(i, FOX_RULE)
-        anchor = f"- {before}\n" if before in clip["prompt"] else "- Keep it subtitle-free"
+        anchor = f"- {before}" if f"- {before}" in clip["prompt"] else "- Keep it subtitle-free"
         clip["prompt"] = clip["prompt"].replace(anchor, f"- {FOX_RULE}\n{anchor}", 1)
         if "global_direction" in clip and before in clip["global_direction"]:
             clip["global_direction"] = clip["global_direction"].replace(before, f"{FOX_RULE}. {before}", 1)
