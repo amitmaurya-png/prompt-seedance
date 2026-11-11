@@ -31,6 +31,7 @@ Run from the repository root.
 | [scripts/apply_camera.py](../../../scripts/apply_camera.py) `--fit differs --dry-run` | Preview suggested camera changes for chosen shots (`--fit`, `--clips`, `--scene`, `--shot clip-37:2`) |
 | `python3 scripts/apply_camera.py --set "clip-39:3=<camera line>" --why "<reason>"` | Write reviewed camera lines into `data/prompt.json` (backup saved, old line kept in `camera_previous`), then rebuild prompts and the report |
 | `python3 scripts/apply_camera.py --undo clip-39:3` | Restore a shot's previous camera line |
+| [scripts/add_placement.py](../../../scripts/add_placement.py) `[--dry-run] [--clip …]` | Write each shot's `Placement:` line (main character and where they sit in the frame) under its `Camera:` line; run after `add_continuity.py` or any camera change |
 | [scripts/make_camera_images.py](../../../scripts/make_camera_images.py) | Redraw the camera diagrams and reset `data/camera_angles.json` |
 
 ## Workflow
@@ -38,7 +39,7 @@ Run from the repository root.
 1. Identify the task: explain a term, choose camera for a shot, review existing camera lines, or match a scene to a genre or mood.
 2. For terms and how to write them, read `camera_language.md`. For genre fit, read `camera_genres.md`. For mood, read `camera_moods.md`.
 3. To choose the camera for a shot, detect its **genre** (from the scene) and **mood** (from title, action, and dialogue), then apply `camera_moods.md`: mood defaults → coverage → genre → talking characters → children → continuity. Run `scripts/camera_suggest.py --describe "<shot>"` for a quick suggestion, and explain or override it with reasons.
-4. Write each `Camera:` line as `<shot size>[, <angle>][, <one movement>]`, e.g. `Medium close-up, low angle, slow push-in`. Use `static` when the camera holds.
+4. Write each `Camera:` line as `<shot size>[, <angle>][, <one movement>]`, e.g. `Medium close-up, low angle, slow push-in`. Use `static` when the camera holds. Under it, always add a `Placement:` line naming the shot's main character and where they sit in the frame (which third, which way they face, who else is where); see "Placing the main character" in `camera_language.md`, and run `scripts/add_placement.py`.
 5. Check the shot against its neighbours: open a new scene with an establishing or wide shot, step shot sizes gradually (WS → MS → MCU → CU), and keep each character on the same side of the frame within a scene (180° rule; see the scene's `CONTINUITY` block in `data/prompt.json`).
 6. To review many shots, run `scripts/check_camera.py`: each shot card shows the detected genre and mood, a suggested camera, and whether the current line fits, is close, or differs. Work through "differs" first, then warnings and notes. After editing prompts, run `scripts/add_continuity.py`, then `scripts/check_camera.py` again.
 7. To change camera lines in `data/prompt.json`:
@@ -51,6 +52,7 @@ Run from the repository root.
 
 ## Rules
 
+- Every shot's camera direction says where the main character is placed (`Placement:` line), on the same side as the scene's screen positions.
 - One camera movement per shot (Seedance rule). Shot size, angle, and focus are framing choices and can be combined.
 - Prefer standard terms from `camera_language.md` over invented wording, so Seedance and `check_camera.py` both recognise them.
 - Treat genre and mood conventions as defaults; break them on purpose and say why. Suggestions from `camera_suggest.py` are rule-based starting points, not final answers.

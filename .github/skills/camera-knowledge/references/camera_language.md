@@ -168,6 +168,42 @@ Phrasings from AI-video prompt guides. In this project's prompts, the camera par
 
 ---
 
+## Placing the main character (the `Placement:` line)
+
+Every shot names its **main character** and where they sit in the frame, on a `Placement:` line directly under
+`Camera:`. The camera line says how the shot is taken; the placement line says where the person the shot is about
+stands in it. `scripts/add_placement.py` writes it for every shot.
+
+```
+Camera: Medium close-up, static on Saba
+Placement: Saba is the main subject, on the left third of the frame, facing right, with open space on the right
+```
+
+**Who is the main character** (first that applies):
+1. The person the camera is aimed at: `on Saba`, `onto Miri`, `tracking with Miri`, `toward the small girl`, `from behind Miri`.
+   In an over-the-shoulder shot it is the person facing the camera, never the shoulder's owner.
+2. In a wide shot, Miri when she is in the action (she is the heroine the audience follows).
+3. The first speaker in the shot, then the first character named in the action, then Miri.
+
+**Where they go.** Use the scene's fixed screen positions (`SCENE_POSITIONS` in `scripts/add_placement.py`, the same
+sides as the `CONTINUITY` notes), so each character stays on one side for the whole scene (180° rule). Place people
+on the **rule-of-thirds** lines, not dead centre, unless they are alone with no one placed opposite.
+
+| Shot | Placement |
+|---|---|
+| Single (CU, MCU on one person) | Main on their side's third, **facing the other side**, with open space (lead room) on the side they look toward |
+| Over-the-shoulder onto X | X in focus on their third, facing the other way; the other person's shoulder soft in the opposite foreground |
+| Two-/three-shot, medium | Main on their third; the others on theirs, or "beside" the person they stand with |
+| Wide / establishing | Main on their third, small but clear against the setting; the others in their places |
+| Tracking a walk | Main moving in the scene's travel direction (e.g. left to right) with open space ahead |
+| Nim | Low in the frame, at the characters' feet, on the side of the person he is with |
+| Jesus | Only from behind, as hands, robe or silhouette, centre-right |
+
+Keep `Placement:` consistent with `Eyeline:`: a character on the left third looks right toward someone on the right.
+To fix one shot by hand, set its `placement` to `{"main": ..., "line": ..., "source": "manual"}`; the script keeps it.
+
+---
+
 ## Quick checklist for a shot's Camera line
 
 - [ ] One shot size is named
@@ -177,6 +213,7 @@ Phrasings from AI-video prompt guides. In this project's prompts, the camera par
 - [ ] OTS lines say whose shoulder and who the camera looks at
 - [ ] The shot size steps sensibly from the previous shot
 - [ ] Dialogue shots keep each character on their established side (180° rule)
+- [ ] A `Placement:` line names the main character and their third of the frame, matching the scene's screen positions
 - [ ] The first shot of a new scene is establishing or wide
 - [ ] The camera choices fit the scene's genre and mood (see [camera_genres.md](./camera_genres.md) and [camera_moods.md](./camera_moods.md)), or break them on purpose
 

@@ -41,7 +41,7 @@ def parse_shots(values):
 
 
 def rebuild():
-    for script in ("add_continuity.py", "check_camera.py"):
+    for script in ("add_continuity.py", "add_placement.py", "check_camera.py"):
         subprocess.run([sys.executable, str(HERE / script)], check=True)
 
 

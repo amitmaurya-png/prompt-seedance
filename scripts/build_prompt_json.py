@@ -296,10 +296,10 @@ def main():
     print(f"Saved {PROMPTS.relative_to(DATA.parent)} (backup: {backup.relative_to(DATA.parent)}); "
           f"carried over {carried} hand-reviewed emotions")
 
-    steps = ["add_continuity.py"]
+    steps = ["add_continuity.py", "add_placement.py"]
     if args.all:
         steps = [["detect_emotions.py", "--no-rebuild"], "add_continuity.py", ["add_eyelines.py", "--no-rebuild"], ["fix_continuity.py", "--no-rebuild"],
-                 ["check_clips.py", "--fix", "--no-rebuild"], "add_continuity.py", "check_continuity.py", "check_camera.py"]
+                 ["check_clips.py", "--fix", "--no-rebuild"], "add_continuity.py", "add_placement.py", "check_continuity.py", "check_camera.py"]
     for step in steps:
         cmd = step if isinstance(step, list) else [step]
         subprocess.run([sys.executable, str(HERE / cmd[0]), *cmd[1:]], check=True)
