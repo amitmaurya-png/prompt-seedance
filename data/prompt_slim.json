@@ -86,7 +86,8 @@
            - @Image 2: Nim character reference
            - @Image 3: Ima character reference
            - @Image 4: Miri's village scene reference
-           - @Image 5: last frame of clip-02 (continuity reference)
+           - @Image 5: linen basket prop reference
+           - @Image 6: last frame of clip-02 (continuity reference)
            SUBJECT:
            - Define the young village girl in @Image 1 as Miri
            - Define the small fox in @Image 2 as Nim
@@ -94,9 +95,9 @@
            SCENE: EXT. MIRI’S VILLAGE — MORNING (@Image 4)
            SHOTS:
            Shot 1: Miri smiles and folds the cloth
-             Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame, with Nim (@Image 2), the group of village children still present; open on exactly the characters visible in @Image 5, each in the same screen position, and add no one who is not in @Image 5 to the opening frame; Ima is not in @Image 5: keep Ima out of the opening frame until the action brings them in
+             Continuity: Continue the same moment from @Image 6: keep the lighting, positions, props, and character appearance exactly as in that frame, with Nim (@Image 2), the group of village children still present; open on exactly the characters visible in @Image 6, each in the same screen position, and add no one who is not in @Image 6 to the opening frame; Ima is not in @Image 6: keep Ima out of the opening frame until the action brings them in
              Camera: Medium two-shot, gentle tracking
-             Action: Miri (@Image 1) smiles and folds the cloth shut just as IMA (@Image 3) appears from the doorway with a basket of folded linen.
+             Action: Miri (@Image 1) smiles and folds the cloth shut just as IMA (@Image 3) appears from the doorway with a basket of folded linen (@Image 5).
              Eyeline: Ima and Miri turn toward each other and hold eye contact as they talk: Ima looks at Miri, Miri looks at Ima
              Dialogue: Ima (@Image 3), warmly, to Miri: {Miri, take these to Saba Elior, please. His old sleeves are more patch than sleeve.} Miri (@Image 1), reluctantly, to Ima: {Again?}
            AUDIO:
@@ -108,8 +109,9 @@
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Each character appears only once; no duplicate or twin characters
            - End on a calm, held frame with no new action in the final second
-           - Match lighting, positions, props, and character appearance to @Image 5
-           - Opening frame: only the characters visible in @Image 5, in the same screen positions
+           - Match lighting, positions, props, and character appearance to @Image 6
+           - Opening frame: only the characters visible in @Image 6, in the same screen positions
+           - The linen basket matches @Image 5 (a woven basket of folded linen)
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -279,7 +281,8 @@
            - @Image 2: Nim character reference
            - @Image 3: Ima character reference
            - @Image 4: Miri's village scene reference
-           - @Image 5: last frame of clip-07 (continuity reference)
+           - @Image 5: linen basket prop reference
+           - @Image 6: last frame of clip-07 (continuity reference)
            SUBJECT:
            - Define the young village girl in @Image 1 as Miri
            - Define the small fox in @Image 2 as Nim
@@ -287,7 +290,7 @@
            SCENE: EXT. MIRI’S VILLAGE — MORNING (@Image 4)
            SHOTS:
            Shot 1: Miri exhales, not satisfied
-             Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame, with the group of village children still present; open on exactly the characters visible in @Image 5, each in the same screen position, and add no one who is not in @Image 5 to the opening frame
+             Continuity: Continue the same moment from @Image 6: keep the lighting, positions, props, and character appearance exactly as in that frame, with the group of village children still present; open on exactly the characters visible in @Image 6, each in the same screen position, and add no one who is not in @Image 6 to the opening frame
              Camera: Close-up, static on Miri
              Action: Miri (@Image 1) exhales, not satisfied.
              Eyeline: Miri and Ima face each other; Miri looks at Ima while speaking, and Ima looks at Miri
@@ -299,7 +302,7 @@
              Dialogue: Nim (@Image 2), playfully, to Miri: {At last, wisdom.}
            Shot 3: Ima hands Miri the linen basket
              Camera: Medium close-up, static on Miri
-             Action: Ima (@Image 3) hands Miri (@Image 1) the linen basket. Miri tucks the honey cakes deeper inside the cloth.
+             Action: Ima (@Image 3) hands Miri (@Image 1) the linen basket (@Image 5). Miri tucks the honey cakes deeper inside the cloth.
            AUDIO:
            - Music: （the gentle storybook theme continues from the previous clip, under the dialogue）
            - Voices: Miri (@Image 1) bright, earnest young girl; Nim (@Image 2) quick, light, playful; clear English dialogue
@@ -310,8 +313,9 @@
            - Nim is a small fox, never a dog
            - Each character appears only once; no duplicate or twin characters
            - End on a calm, held frame with no new action in the final second
-           - Match lighting, positions, props, and character appearance to @Image 5
-           - Opening frame: only the characters visible in @Image 5, in the same screen positions
+           - Match lighting, positions, props, and character appearance to @Image 6
+           - Opening frame: only the characters visible in @Image 6, in the same screen positions
+           - The linen basket matches @Image 5 (a woven basket of folded linen)
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -326,6 +330,7 @@
            - @Image 2: Nim character reference
            - @Image 3: Tav character reference
            - @Image 4: village lane scene reference
+           - @Image 5: linen basket prop reference
            SUBJECT:
            - Define the young village girl in @Image 1 as Miri
            - Define the small fox in @Image 2 as Nim
@@ -335,7 +340,7 @@
            Shot 1: Miri walks with the linen basket
              Continuity: New scene: cut from Miri’s Village (clip-08) to Village Lane; do not carry over the previous clip's framing
              Camera: Wide shot, static
-             Action: Miri (@Image 1) walks with the linen basket. Nim (@Image 2) trots beside her, eyes glued to the hidden cakes. TAV (@Image 3), a small boy with dust on his cheeks, sits beside a broken toy cart. One wooden wheel has popped off.
+             Action: Miri (@Image 1) walks with the linen basket (@Image 5). Nim (@Image 2) trots beside her, eyes glued to the hidden cakes. TAV (@Image 3), a small boy with dust on his cheeks, sits beside a broken toy cart. One wooden wheel has popped off.
              Eyeline: Tav and Miri face each other; Tav looks at Miri while speaking, and Miri looks at Tav; Nim watches them
              Dialogue: Tav (@Image 3), excitedly, to Miri: {Miri! Did your mother make cakes?}
            Shot 2: Miri instinctively shields the basket
@@ -358,6 +363,7 @@
            - Nim is a small fox, never a dog
            - Each character appears only once; no duplicate or twin characters
            - End on a calm, held frame with no new action in the final second
+           - The linen basket matches @Image 5 (a woven basket of folded linen)
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -372,7 +378,8 @@
            - @Image 2: Tav character reference
            - @Image 3: Nim character reference
            - @Image 4: village lane scene reference
-           - @Image 5: last frame of clip-09 (continuity reference)
+           - @Image 5: linen basket prop reference
+           - @Image 6: last frame of clip-09 (continuity reference)
            SUBJECT:
            - Define the young village girl in @Image 1 as Miri
            - Define the small village boy in @Image 2 as Tav
@@ -380,7 +387,7 @@
            SCENE: EXT. VILLAGE LANE — MOMENTS LATER (@Image 4)
            SHOTS:
            Shot 1: Miri hesitates
-             Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame, with Nim (@Image 3) still present; open on exactly the characters visible in @Image 5, each in the same screen position, and add no one who is not in @Image 5 to the opening frame
+             Continuity: Continue the same moment from @Image 6: keep the lighting, positions, props, and character appearance exactly as in that frame, with Nim (@Image 3) still present; open on exactly the characters visible in @Image 6, each in the same screen position, and add no one who is not in @Image 6 to the opening frame
              Camera: Medium close-up over Tav's shoulder onto Miri, static
              Action: Miri (@Image 1) hesitates. Her hand goes to the cloth. She imagines the three cakes becoming two. Two becoming one. One becoming none.
              Eyeline: Miri and Tav turn toward each other and hold eye contact as they talk: Miri looks at Tav, Tav looks at Miri
@@ -399,8 +406,9 @@
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Each character appears only once; no duplicate or twin characters
            - End on a calm, held frame with no new action in the final second
-           - Match lighting, positions, props, and character appearance to @Image 5
-           - Opening frame: only the characters visible in @Image 5, in the same screen positions
+           - Match lighting, positions, props, and character appearance to @Image 6
+           - Opening frame: only the characters visible in @Image 6, in the same screen positions
+           - The linen basket matches @Image 5 (a woven basket of folded linen)
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -483,6 +491,7 @@
            - @Image 3: Saba character reference
            - @Image 4: Children group reference (the village children)
            - @Image 5: Saba's courtyard scene reference
+           - @Image 6: linen basket prop reference
            SUBJECT:
            - Define the young village girl in @Image 1 as Miri
            - Define the small fox in @Image 2 as Nim
@@ -493,7 +502,7 @@
            Shot 1: Saba Elior sits beneath a fig
              Continuity: New scene: cut from Main Titles (clip-12) to Saba Elior’s Courtyard, late morning light; do not carry over the previous clip's framing
              Camera: Wide shot, static
-             Action: SABA ELIOR (@Image 3) sits beneath a fig tree, surrounded by several village children (@Image 4). He is repairing a sandal with one hand and gesturing grandly with the other. A few children (@Image 4) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket. She slows, listening. Nim (@Image 2) follows at Miri's heels.
+             Action: SABA ELIOR (@Image 3) sits beneath a fig tree, surrounded by several village children (@Image 4). He is repairing a sandal with one hand and gesturing grandly with the other. A few children (@Image 4) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) enters with the linen basket (@Image 6). She slows, listening. Nim (@Image 2) follows at Miri's heels.
              Eyeline: Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba
              Dialogue: Saba (@Image 3), thoughtfully, to the children: {And so the little sparrow said to the great camel, “If your knees bend, perhaps your pride may also.”}
            AUDIO:
@@ -506,6 +515,7 @@
            - Nim is a small fox, never a dog
            - Each character appears only once; no duplicate or twin characters
            - End on a calm, held frame with no new action in the final second
+           - The linen basket matches @Image 6 (a woven basket of folded linen)
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -521,7 +531,8 @@
            - @Image 3: Saba character reference
            - @Image 4: Children group reference (the village children)
            - @Image 5: Saba's courtyard scene reference
-           - @Image 6: last frame of clip-13 (continuity reference)
+           - @Image 6: linen basket prop reference
+           - @Image 7: last frame of clip-13 (continuity reference)
            SUBJECT:
            - Define the young village girl in @Image 1 as Miri
            - Define the small fox in @Image 2 as Nim
@@ -531,9 +542,9 @@
            SCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 5)
            SHOTS:
            Shot 1: A few children giggle
-             Continuity: Continue the same moment from @Image 6: keep the lighting, positions, props, and character appearance exactly as in that frame; Nim (@Image 2), Miri's small fox, stays near Miri; open on exactly the characters visible in @Image 6, each in the same screen position, and add no one who is not in @Image 6 to the opening frame
+             Continuity: Continue the same moment from @Image 7: keep the lighting, positions, props, and character appearance exactly as in that frame; Nim (@Image 2), Miri's small fox, stays near Miri; open on exactly the characters visible in @Image 7, each in the same screen position, and add no one who is not in @Image 7 to the opening frame
              Camera: Medium close-up, static on Saba
-             Action: A few children (@Image 4) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) is already standing at the edge of the group with the linen basket, listening, Nim (@Image 2) at her heels.
+             Action: A few children (@Image 4) giggle. Others are distracted. One pokes a beetle with a reed. Another tries to balance a fig on his nose. Miri (@Image 1) is already standing at the edge of the group with the linen basket (@Image 6), listening, Nim (@Image 2) at her heels.
              Eyeline: Saba looks around at the children while speaking, meeting their eyes one by one; the children look back at Saba
              Dialogue: Saba (@Image 3), thoughtfully, to the children: {But the camel did not listen, because camels are very good at chewing and very poor at hearing wisdom.}
            AUDIO:
@@ -546,8 +557,9 @@
            - Nim is a small fox, never a dog
            - Each character appears only once; no duplicate or twin characters
            - End on a calm, held frame with no new action in the final second
-           - Match lighting, positions, props, and character appearance to @Image 6
-           - Opening frame: only the characters visible in @Image 6, in the same screen positions
+           - Match lighting, positions, props, and character appearance to @Image 7
+           - Opening frame: only the characters visible in @Image 7, in the same screen positions
+           - The linen basket matches @Image 6 (a woven basket of folded linen)
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -653,7 +665,8 @@
            - @Image 2: Nim character reference
            - @Image 3: Saba character reference
            - @Image 4: Saba's courtyard scene reference
-           - @Image 5: last frame of clip-16 (continuity reference)
+           - @Image 5: linen basket prop reference
+           - @Image 6: last frame of clip-16 (continuity reference)
            SUBJECT:
            - Define the young village girl in @Image 1 as Miri
            - Define the small fox in @Image 2 as Nim
@@ -661,13 +674,13 @@
            SCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)
            SHOTS:
            Shot 1: Because it was willing to look (dialogue continues, part 2 of 2)
-             Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame, with Nim (@Image 2) still present; open on exactly the characters visible in @Image 5, each in the same screen position, and add no one who is not in @Image 5 to the opening frame
+             Continuity: Continue the same moment from @Image 6: keep the lighting, positions, props, and character appearance exactly as in that frame, with Nim (@Image 2) still present; open on exactly the characters visible in @Image 6, each in the same screen position, and add no one who is not in @Image 6 to the opening frame
              Camera: Medium close-up, static on Saba
              Eyeline: Saba and Miri face each other; Saba looks at Miri while speaking, and Miri looks at Saba
              Dialogue: Saba (@Image 3), thoughtfully, to Miri: {Because it was willing to look where large eyes had stopped looking.}
            Shot 2: Miri considers this
              Camera: Close-up, slow pull back on Miri
-             Action: Miri (@Image 1) considers this. Then remembers why she came and pushes the linen basket toward him.
+             Action: Miri (@Image 1) considers this. Then remembers why she came and pushes the linen basket (@Image 5) toward him.
              Eyeline: Miri and Saba face each other; Miri looks at Saba while speaking, and Saba looks at Miri
              Dialogue: Miri (@Image 1), earnestly, to Saba: {Ima sent sleeves.}
            Shot 3: Saba takes the linen and inspects
@@ -684,8 +697,9 @@
            - Faces and body proportions stay stable without deformation; movements are slow, natural, and smooth, with no stutter or flicker
            - Each character appears only once; no duplicate or twin characters
            - End on a calm, held frame with no new action in the final second
-           - Match lighting, positions, props, and character appearance to @Image 5
-           - Opening frame: only the characters visible in @Image 5, in the same screen positions
+           - Match lighting, positions, props, and character appearance to @Image 6
+           - Opening frame: only the characters visible in @Image 6, in the same screen positions
+           - The linen basket matches @Image 5 (a woven basket of folded linen)
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -700,7 +714,8 @@
            - @Image 2: Nim character reference
            - @Image 3: Saba character reference
            - @Image 4: Saba's courtyard scene reference
-           - @Image 5: last frame of clip-17 (continuity reference)
+           - @Image 5: linen basket prop reference
+           - @Image 6: last frame of clip-17 (continuity reference)
            SUBJECT:
            - Define the young village girl in @Image 1 as Miri
            - Define the small fox in @Image 2 as Nim
@@ -708,7 +723,7 @@
            SCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)
            SHOTS:
            Shot 1: Nim hops up and sniffs the
-             Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame, with Miri (@Image 1) still present; open on exactly the characters visible in @Image 5, each in the same screen position, and add no one who is not in @Image 5 to the opening frame
+             Continuity: Continue the same moment from @Image 6: keep the lighting, positions, props, and character appearance exactly as in that frame, with Miri (@Image 1) still present; open on exactly the characters visible in @Image 6, each in the same screen position, and add no one who is not in @Image 6 to the opening frame
              Camera: Medium close-up, static on Saba
              Action: Nim (@Image 2) hops up and sniffs the basket. Saba (@Image 3) sees the movement but not the intention.
              Eyeline: Saba and Nim face each other; Saba looks down at Nim while speaking, and Nim looks up at Saba
@@ -728,8 +743,9 @@
            - Nim is a small fox, never a dog
            - Each character appears only once; no duplicate or twin characters
            - End on a calm, held frame with no new action in the final second
-           - Match lighting, positions, props, and character appearance to @Image 5
-           - Opening frame: only the characters visible in @Image 5, in the same screen positions
+           - Match lighting, positions, props, and character appearance to @Image 6
+           - Opening frame: only the characters visible in @Image 6, in the same screen positions
+           - The linen basket matches @Image 5 (a woven basket of folded linen)
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -744,7 +760,8 @@
            - @Image 2: Nim character reference
            - @Image 3: Saba character reference
            - @Image 4: Saba's courtyard scene reference
-           - @Image 5: last frame of clip-18 (continuity reference)
+           - @Image 5: linen basket prop reference
+           - @Image 6: last frame of clip-18 (continuity reference)
            SUBJECT:
            - Define the young village girl in @Image 1 as Miri
            - Define the small fox in @Image 2 as Nim
@@ -752,9 +769,9 @@
            SCENE: EXT. SABA ELIOR’S COURTYARD — LATE MORNING (@Image 4)
            SHOTS:
            Shot 1: Miri pulls Nim back
-             Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame; open on exactly the characters visible in @Image 5, each in the same screen position, and add no one who is not in @Image 5 to the opening frame
+             Continuity: Continue the same moment from @Image 6: keep the lighting, positions, props, and character appearance exactly as in that frame; open on exactly the characters visible in @Image 6, each in the same screen position, and add no one who is not in @Image 6 to the opening frame
              Camera: Medium close-up two-shot, slow pull back
-             Action: Miri (@Image 1) pulls Nim (@Image 2) back. SABA (@Image 3) notices the cloth bundle tucked beneath the linen.
+             Action: Miri (@Image 1) pulls Nim (@Image 2) back. SABA (@Image 3) notices the cloth bundle tucked beneath the linen basket (@Image 5).
              Eyeline: Saba and Miri turn toward each other and hold eye contact as they talk: Saba looks at Miri, Miri looks at Saba; Nim watches them
              Dialogue: Saba (@Image 3), thoughtfully, to Nim: {You have brought something sweet.} Miri (@Image 1), earnestly, to Saba: {For after chores.} Saba, thoughtfully, to Miri: {A wise time for sweetness.} Miri, guiltily, to Saba: {Ima said I should give one to Tav.}
            AUDIO:
@@ -767,8 +784,9 @@
            - Nim is a small fox, never a dog
            - Each character appears only once; no duplicate or twin characters
            - End on a calm, held frame with no new action in the final second
-           - Match lighting, positions, props, and character appearance to @Image 5
-           - Opening frame: only the characters visible in @Image 5, in the same screen positions
+           - Match lighting, positions, props, and character appearance to @Image 6
+           - Opening frame: only the characters visible in @Image 6, in the same screen positions
+           - The linen basket matches @Image 5 (a woven basket of folded linen)
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },
@@ -3832,7 +3850,8 @@
            - @Image 2: Nim character reference
            - @Image 3: Saba character reference
            - @Image 4: Saba's courtyard scene reference
-           - @Image 5: last frame of clip-89 (continuity reference)
+           - @Image 5: linen basket prop reference
+           - @Image 6: last frame of clip-89 (continuity reference)
            SUBJECT:
            - Define the young village girl in @Image 1 as Miri
            - Define the small fox in @Image 2 as Nim
@@ -3840,9 +3859,9 @@
            SCENE: EXT. SABA’S COURTYARD — EVENING (@Image 4)
            SHOTS:
            Shot 1: Nim climbs into the linen basket
-             Continuity: Continue the same moment from @Image 5: keep the lighting, positions, props, and character appearance exactly as in that frame; open on exactly the characters visible in @Image 5, each in the same screen position, and add no one who is not in @Image 5 to the opening frame
+             Continuity: Continue the same moment from @Image 6: keep the lighting, positions, props, and character appearance exactly as in that frame; open on exactly the characters visible in @Image 6, each in the same screen position, and add no one who is not in @Image 6 to the opening frame
              Camera: Medium three-shot, low-angle, static
-             Action: Nim (@Image 2) climbs into the linen basket and circles twice before curling up.
+             Action: Nim (@Image 2) climbs into the linen basket (@Image 5) and circles twice before curling up.
              Eyeline: Nim and Saba face each other; Nim looks up at Saba while speaking, and Saba looks down at Nim
              Dialogue: Nim (@Image 2), playfully, to Saba: {For future generosity, I recommend we begin with six cakes.}
            Shot 2: Miri gives him a look
@@ -3865,8 +3884,9 @@
            - Nim is a small fox, never a dog
            - Each character appears only once; no duplicate or twin characters
            - End on a calm, held frame with no new action in the final second
-           - Match lighting, positions, props, and character appearance to @Image 5
-           - Opening frame: only the characters visible in @Image 5, in the same screen positions
+           - Match lighting, positions, props, and character appearance to @Image 6
+           - Opening frame: only the characters visible in @Image 6, in the same screen positions
+           - The linen basket matches @Image 5 (a woven basket of folded linen)
            - Keep it subtitle-free; avoid generating any text or subtitles; do not generate a logo; do not generate a watermark
            "
     },

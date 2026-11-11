@@ -46,7 +46,7 @@ MAX_AUDIO = 3
 
 REF_RE = re.compile(r"^@Image (\d+):\s*(.+)$")
 LAST_FRAME_RE = re.compile(r"last frame of (clip-\d+)")
-KIND_RE = re.compile(r"\s+(character|group|scene|style)?\s*reference\b.*$", re.I)
+KIND_RE = re.compile(r"\s+(character|group|scene|style|prop)?\s*reference\b.*$", re.I)
 
 
 def norm(name):
