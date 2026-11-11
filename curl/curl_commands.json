@@ -1049,7 +1049,7 @@
           {
             "type": "image_url",
             "image_url": {
-              "url": "<missing: last frame of clip-15 (continuity reference)>"
+              "url": "https://ark-acg-ap-southeast-1.tos-ap-southeast-1.volces.com/dreamina-seedance-2-0-mini/02179440118743800000000000000000000ffffc0a8bb66ee77df_last-frame.png?X-Tos-Algorithm=TOS4-HMAC-SHA256&X-Tos-Credential=AKLTYWJkZTExNjA1ZDUyNDc3YzhjNTM5OGIyNjBhNDcyOTQ%2F20261111%2Fap-southeast-1%2Ftos%2Frequest&X-Tos-Date=20261111T124927Z&X-Tos-Expires=86400&X-Tos-Signature=99dfa05f61a61b2f02513e03b30de46854128e451058c512042a88b7ce8837ba&X-Tos-SignedHeaders=host"
             },
             "role": "reference_image"
           },
@@ -1129,7 +1129,7 @@
           {
             "type": "image_url",
             "image_url": {
-              "url": "<missing: last frame of clip-16 (continuity reference)>"
+              "url": "https://ark-acg-ap-southeast-1.tos-ap-southeast-1.volces.com/dreamina-seedance-2-0-mini/02179440188169500000000000000000000ffffc0a8bb61589c64_last-frame.png?X-Tos-Algorithm=TOS4-HMAC-SHA256&X-Tos-Credential=AKLTYWJkZTExNjA1ZDUyNDc3YzhjNTM5OGIyNjBhNDcyOTQ%2F20261111%2Fap-southeast-1%2Ftos%2Frequest&X-Tos-Date=20261111T130047Z&X-Tos-Expires=86400&X-Tos-Signature=fe2dbe19c0ad033ee1b5cd1649e47bd4e96d5fdd2c37023a4981b5d3413b1dc5&X-Tos-SignedHeaders=host"
             },
             "role": "reference_image"
           },
